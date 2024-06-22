@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex relative flex-col lg:flex-row h-full min-h-screen w-full ${inter.className}`}
+        className={`flex relative flex-col lg:flex-row h-full min-h-screen w-full ${inter.className} antialiased`}
       >
         <ProviderRedux>{children}</ProviderRedux>
       </body>
