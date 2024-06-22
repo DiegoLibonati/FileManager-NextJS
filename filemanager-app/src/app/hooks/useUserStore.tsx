@@ -21,6 +21,7 @@ export const useUserStore = (): UseUserStore => {
         username: session?.username,
         email: session?.email,
         plan: session?.plan,
+        emailVerified: session.emailVerified,
       });
     }
   }, [session, user.user]);

@@ -6,11 +6,8 @@ services:
       dockerfile: Dockerfile.dev
       context: ./filemanager-app
     restart: always
-    environment:
-      - WATCHPACK_POLLING=true
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
-      - MONGODB_URI=mongodb://root:pass@host.docker.internal:27017/filemanager?authSource=admin
-      - SECRET_KEY_AUTH=MO1GlDj3f88CzE294KePeWiT9GLG3qIoE9inxNYBadkBwfCUo1
+    env_file:
+      - ./filemanager-app/.env
     volumes:
       - ./filemanager-app/src:/home/app/src
       - ./filemanager-app/tailwind.config.ts:/home/app/tailwind.config.ts

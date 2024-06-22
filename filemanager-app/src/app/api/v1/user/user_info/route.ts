@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
     username: user.username,
     email: user.email,
     plan: user.plan,
+    emailVerified: user.emailVerified,
   };
 
   return NextResponse.json(

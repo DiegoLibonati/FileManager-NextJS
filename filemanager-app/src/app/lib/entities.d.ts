@@ -43,6 +43,7 @@ export type User = {
   username: string;
   email: string;
   plan: Plan;
+  emailVerified: Boolean;
 };
 
 export type Plan = "0" | "1";
@@ -256,6 +257,7 @@ export interface IUser {
   email: string;
   password: string;
   plan: Plan;
+  emailVerified: Boolean;
 }
 
 export interface IFile extends CategoryShared, ColorsShared {

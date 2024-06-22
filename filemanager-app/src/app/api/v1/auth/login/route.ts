@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
     username: accountExists.username,
     email: accountExists.email,
     plan: accountExists.plan,
+    emailVerified: accountExists.emailVerified,
   };
 
   const jwt = new Jwt({ cookieName: "token", payload: data });
