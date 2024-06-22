@@ -12,8 +12,8 @@ export default function AuthLayout({
         <section className="flex flex-col items-center justify-center w-full bg-primary lg:flex-row lg:h-[30rem] lg:shadow-md lg:w-[60rem] lg:rounded-lg">
           <article className="hidden items-center justify-center w-[50%] h-full bg-white p-4 rounded-tl-lg rounded-bl-lg lg:flex">
             <Image
-              src="https://cdn3d.iconscout.com/3d/premium/thumb/file-search-9359631-7656394.png"
-              alt="image filemanager"
+              src="/authImage.png"
+              alt="Auth FileManager"
               width={300}
               height={300}
             ></Image>
