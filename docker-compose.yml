@@ -1,0 +1,34 @@
+version: "3.9"
+name: "filemanager-die"
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./filemanager-app
+    restart: always
+    environment:
+      - WATCHPACK_POLLING=true
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - MONGODB_URI=mongodb://root:pass@host.docker.internal:27017/filemanager?authSource=admin
+      - SECRET_KEY_AUTH=MO1GlDj3f88CzE294KePeWiT9GLG3qIoE9inxNYBadkBwfCUo1
+    volumes:
+      - ./filemanager-app/src:/home/app/src
+      - ./filemanager-app/tailwind.config.ts:/home/app/tailwind.config.ts
+    ports:
+      - 3000:3000
+    networks:
+      - filemanager-net
+
+  mongo:
+    image: mongo:7
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    volumes:
+      - ./volumes/mongo:/data/db
+
+networks:
+  filemanager-net:
