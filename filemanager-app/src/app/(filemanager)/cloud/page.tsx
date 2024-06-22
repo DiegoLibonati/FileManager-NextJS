@@ -1,7 +1,7 @@
 import { SectionCloudStorages } from "@/containers/cloud/SectionCloudStorages/SectionCloudStorages";
 import { SectionFolders } from "@/containers/cloud/SectionFolders/SectionFolders";
 import { SectionUpgradePlan } from "@/containers/cloud/SectionUpgradePlan/SectionUpgradePlan";
-import { getSession } from "@/helpers/session";
+import { getSession } from "@/app/lib/session";
 
 export default async function Cloud(): Promise<JSX.Element> {
   const session = await getSession();

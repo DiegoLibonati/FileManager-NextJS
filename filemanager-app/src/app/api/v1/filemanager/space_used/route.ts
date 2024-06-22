@@ -1,9 +1,9 @@
 import User from "@/models/user";
-import connectMongo from "@/helpers/connectMongo";
-import { FileManager } from "@/libs/fileManager";
+import connectMongo from "@/app/lib/connectMongo";
+import { FileManager } from "@/app/lib/fileManager";
 import { exec } from "child_process";
 import { NextRequest, NextResponse } from "next/server";
-import { roundToOneDecimal } from "@/helpers/utils";
+import { roundToOneDecimal } from "@/app/lib/utils";
 import path from "path";
 
 export async function GET(req: NextRequest) {

@@ -1,4 +1,4 @@
-import { categories } from "@/helpers/constants";
+import { categories } from "@/app/lib/constants";
 import { NextResponse } from "next/server";
 
 export async function GET() {

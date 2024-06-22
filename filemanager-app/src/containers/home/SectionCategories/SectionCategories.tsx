@@ -1,5 +1,5 @@
-import { CardCategory } from "@/components/Cards/CardCategory/CardCategory";
-import { Heading } from "@/components/Headers/Heading/Heading";
+import { CardCategory } from "@/app/components/Cards/CardCategory/CardCategory";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { getCategories } from "@/services/filemanager/get/getCategories/getCategories";
 
 export const SectionCategories = async (): Promise<JSX.Element> => {

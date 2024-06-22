@@ -1,5 +1,5 @@
-import { Heading } from "@/components/Headers/Heading/Heading";
-import { FormRegister } from "@/components/Forms/FormRegister/FormRegister";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { FormRegister } from "@/app/components/Forms/FormRegister/FormRegister";
 import Link from "next/link";
 
 export default function Register(): JSX.Element {

@@ -1,5 +1,5 @@
-import { categoriesExtension } from "@/helpers/constants";
-import { FileManager } from "@/libs/fileManager";
+import { categoriesExtension } from "@/app/lib/constants";
+import { FileManager } from "@/app/lib/fileManager";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 

@@ -1,7 +1,7 @@
-import { CardItem } from "@/components/Cards/CardItem/CardItem";
-import { CardNotFound } from "@/components/Cards/CardNotFound/CardNotFound";
-import { Heading } from "@/components/Headers/Heading/Heading";
-import { bytesToMB } from "@/helpers/utils";
+import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
+import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { bytesToMB } from "@/app/lib/utils";
 import { getRecentUploaded } from "@/services/filemanager/get/getRecentUploaded/getRecentUploaded";
 
 export const SectionRecentUploaded = async (): Promise<JSX.Element> => {

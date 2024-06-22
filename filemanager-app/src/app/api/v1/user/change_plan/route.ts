@@ -1,7 +1,7 @@
 import User from "@/models/user";
-import connectMongo from "@/helpers/connectMongo";
+import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
-import { Jwt } from "@/libs/jwt";
+import { Jwt } from "@/app/lib/jwt";
 
 export async function GET(req: NextRequest) {
   await connectMongo();

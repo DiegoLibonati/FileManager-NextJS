@@ -1,6 +1,6 @@
-import { NavBar } from "@/components/NavBar/NavBar";
-import { HeaderTitle } from "@/components/Headers/HeaderTitle/HeaderTitle";
-import { Alert } from "@/components/Alerts/Alert/Alert";
+import { NavBar } from "@/app/components/NavBar/NavBar";
+import { HeaderTitle } from "@/app/components/Headers/HeaderTitle/HeaderTitle";
+import { Alert } from "@/app/components/Alerts/Alert/Alert";
 
 export default function FileManagerLayout({
   children,

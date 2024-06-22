@@ -1,4 +1,4 @@
-import { FileManager } from "@/libs/fileManager";
+import { FileManager } from "@/app/lib/fileManager";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 

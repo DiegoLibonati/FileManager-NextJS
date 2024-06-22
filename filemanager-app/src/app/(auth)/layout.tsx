@@ -1,4 +1,4 @@
-import { Alert } from "@/components/Alerts/Alert/Alert";
+import { Alert } from "@/app/components/Alerts/Alert/Alert";
 import Image from "next/image";
 
 export default function AuthLayout({

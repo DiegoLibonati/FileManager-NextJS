@@ -1,5 +1,5 @@
 import User from "@/models/user";
-import connectMongo from "@/helpers/connectMongo";
+import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

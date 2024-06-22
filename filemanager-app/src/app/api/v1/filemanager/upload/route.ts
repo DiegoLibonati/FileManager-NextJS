@@ -1,13 +1,13 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { FileManager } from "@/libs/fileManager";
-import connectMongo from "@/helpers/connectMongo";
+import { FileManager } from "@/app/lib/fileManager";
+import connectMongo from "@/app/lib/connectMongo";
 import {
   getCategoryByExtension,
   getExtension,
   validExtensions,
-} from "@/helpers/utils";
-import { categories, categoriesExtension } from "@/helpers/constants";
+} from "@/app/lib/utils";
+import { categories, categoriesExtension } from "@/app/lib/constants";
 import RecentFile from "@/models/recentFile";
 import pathLib from "path";
 

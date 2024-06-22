@@ -1,5 +1,5 @@
-import { CardNotFound } from "@/components/Cards/CardNotFound/CardNotFound";
-import { FileList } from "@/components/Lists/FileList/FileList";
+import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
+import { FileList } from "@/app/components/Lists/FileList/FileList";
 import { SectionFilesProps } from "../../../../next-env";
 import { getCategoryFiles } from "@/services/filemanager/get/getCategoryFiles/getCategoryFiles";
 

@@ -1,5 +1,5 @@
-import { ButtonUpgrade } from "@/components/Buttons/ButtonUpgrade/ButtonUpgrade";
-import { Paragraph } from "@/components/Paragraph/Paragraph";
+import { ButtonUpgrade } from "@/app/components/Buttons/ButtonUpgrade/ButtonUpgrade";
+import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { GiUpgrade } from "react-icons/gi";
 
 export const SectionUpgradePlan = (): JSX.Element => {

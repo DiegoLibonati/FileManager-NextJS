@@ -1,6 +1,6 @@
-import { CircleProgress } from "@/components/Charts/CircleProgress/CircleProgress";
-import { Heading } from "@/components/Headers/Heading/Heading";
-import { Paragraph } from "@/components/Paragraph/Paragraph";
+import { CircleProgress } from "@/app/components/Charts/CircleProgress/CircleProgress";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { getSpaceUsed } from "@/services/filemanager/get/getSpaceUsed/getSpaceUsed";
 
 export const SectionChart = async (): Promise<JSX.Element> => {

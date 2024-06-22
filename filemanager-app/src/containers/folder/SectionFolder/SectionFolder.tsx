@@ -1,8 +1,8 @@
-import { CardNotFound } from "@/components/Cards/CardNotFound/CardNotFound";
-import { FileList } from "@/components/Lists/FileList/FileList";
-import { FolderList } from "@/components/Lists/FolderList/FolderList";
+import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
+import { FileList } from "@/app/components/Lists/FileList/FileList";
+import { FolderList } from "@/app/components/Lists/FolderList/FolderList";
 import { SectionFolderProps } from "../../../../next-env";
-import { parseEscapeString } from "@/helpers/utils";
+import { parseEscapeString } from "@/app/lib/utils";
 import { getFilesAndDirectories } from "@/services/filemanager/get/getFilesAndDirectories/getFilesAndDirectories";
 
 export const SectionFolder = async ({

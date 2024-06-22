@@ -1,6 +1,6 @@
-import { LinealProgress } from "@/components/Charts/LinealProgress/LinealProgress";
-import { Heading } from "@/components/Headers/Heading/Heading";
-import { Paragraph } from "@/components/Paragraph/Paragraph";
+import { LinealProgress } from "@/app/components/Charts/LinealProgress/LinealProgress";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { getSpaceUsed } from "@/services/filemanager/get/getSpaceUsed/getSpaceUsed";
 import React from "react";
 import { FaCloud } from "react-icons/fa";

@@ -1,10 +1,9 @@
-import connectMongo from "@/helpers/connectMongo";
+import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
-import { Encrpyt } from "@/libs/encrypt";
+import { Encrpyt } from "@/app/lib/encrypt";
 import { IUser } from "../../../../../../next-env";
-import { Jwt } from "@/libs/jwt";
-import { error } from "console";
+import { Jwt } from "@/app/lib/jwt";
 
 export async function POST(req: NextRequest) {
   await connectMongo();

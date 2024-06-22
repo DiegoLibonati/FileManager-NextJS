@@ -1,5 +1,5 @@
-import { Heading } from "@/components/Headers/Heading/Heading";
-import { FormLogin } from "@/components/Forms/FormLogin/FormLogin";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { FormLogin } from "@/app/components/Forms/FormLogin/FormLogin";
 import Link from "next/link";
 
 export default function Login(): JSX.Element {

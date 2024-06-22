@@ -1,6 +1,6 @@
-import connectMongo from "@/helpers/connectMongo";
+import connectMongo from "@/app/lib/connectMongo";
 import { NextResponse } from "next/server";
-import { Jwt } from "@/libs/jwt";
+import { Jwt } from "@/app/lib/jwt";
 
 export async function GET() {
   await connectMongo();

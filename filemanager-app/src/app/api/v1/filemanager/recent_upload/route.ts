@@ -1,4 +1,4 @@
-import connectMongo from "@/helpers/connectMongo";
+import connectMongo from "@/app/lib/connectMongo";
 import RecentFile from "@/models/recentFile";
 import { NextRequest, NextResponse } from "next/server";
 
