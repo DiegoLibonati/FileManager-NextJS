@@ -1,7 +1,7 @@
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import Link from "next/link";
-import { CardCategoryProps } from "../../../../../next-env";
-import { CardIcon } from "../CardIcon/CardIcon";
+import { CardCategoryProps } from "@/app/lib/entities";
+import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
 
 export const CardCategory = ({
   href,

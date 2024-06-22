@@ -1,4 +1,4 @@
-import { LinealProgressProps } from "../../../../../next-env";
+import { LinealProgressProps } from "@/app/lib/entities";
 
 export const LinealProgress = ({
   percentage,

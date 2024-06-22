@@ -1,10 +1,10 @@
 "use client";
 
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Card } from "../Card/Card";
+import { Card } from "@/app/components/Cards/Card/Card";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { CardIcon } from "../CardIcon/CardIcon";
-import { CardSimpleProps } from "../../../../../next-env";
+import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
+import { CardSimpleProps } from "@/app/lib/entities";
 import { useRouter } from "next/navigation";
 
 export const CardSimple = ({

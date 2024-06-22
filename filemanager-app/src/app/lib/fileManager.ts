@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { File, Folder } from "../../../next-env";
+import { File, Folder } from "@/app/lib/entities";
 import { getCategoryByExtension, getExtension } from "@/app/lib/utils";
 import { categories } from "@/app/lib/constants";
 

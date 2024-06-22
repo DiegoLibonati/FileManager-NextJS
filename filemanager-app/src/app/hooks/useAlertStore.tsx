@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { TypeAlert, UseAlertStore } from "../../next-env";
+import { TypeAlert, UseAlertStore } from "@/app/lib/entities";
 import { setAlert } from "@/redux/features/alert/alertSlice";
 import { useEffect } from "react";
 

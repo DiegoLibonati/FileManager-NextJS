@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Session, UseUserStore, User } from "../../next-env";
+
 import { setUser } from "@/redux/features/user/userSlice";
 import { useEffect } from "react";
-import { useSession } from "./useSession";
+import { useSession } from "@/app/hooks/useSession";
+import { UseUserStore, User, Session } from "@/app/lib/entities";
 
 export const useUserStore = (): UseUserStore => {
   const { session } = useSession<Session>();

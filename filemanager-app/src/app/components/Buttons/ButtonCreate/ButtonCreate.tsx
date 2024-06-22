@@ -1,4 +1,4 @@
-import { ButtonCreateProps } from "../../../../../next-env";
+import { ButtonCreateProps } from "@/app/lib/entities";
 
 export const ButtonCreate = ({
   children,

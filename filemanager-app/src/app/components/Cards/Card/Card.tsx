@@ -1,4 +1,4 @@
-import { CardProps } from "../../../../../next-env";
+import { CardProps } from "@/app/lib/entities";
 
 export const Card = ({
   className,

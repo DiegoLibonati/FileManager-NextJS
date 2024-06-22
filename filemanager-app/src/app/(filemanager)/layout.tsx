@@ -1,6 +1,15 @@
 import { NavBar } from "@/app/components/NavBar/NavBar";
-import { HeaderTitle } from "@/app/components/Headers/HeaderTitle/HeaderTitle";
 import { Alert } from "@/app/components/Alerts/Alert/Alert";
+import { HeaderTitleSkeleton } from "@/app/components/Skeletons/HeaderTitleSkeleton/HeaderTitleSkeleton";
+import dynamic from "next/dynamic";
+
+const LazyHeaderTitle = dynamic(
+  () =>
+    import("@/app/components/Headers/HeaderTitle/HeaderTitle").then(
+      (mod) => mod.HeaderTitle
+    ),
+  { ssr: false, loading: () => <HeaderTitleSkeleton></HeaderTitleSkeleton> }
+);
 
 export default function FileManagerLayout({
   children,
@@ -14,7 +23,7 @@ export default function FileManagerLayout({
       </header>
       <main className="flex flex-col w-full min-h-screen h-full relative bg-bodyBackground p-4 mb-16 lg:mb-0 lg:ml-16">
         <section className="flex items-center justify-start w-full h-16">
-          <HeaderTitle></HeaderTitle>
+          <LazyHeaderTitle></LazyHeaderTitle>
         </section>
         {children}
       </main>

@@ -2,8 +2,8 @@ import { BiSolidVideos } from "react-icons/bi";
 import { FaFolder, FaMusic } from "react-icons/fa";
 import { LuImage } from "react-icons/lu";
 import { SiGoogledocs } from "react-icons/si";
-import { CardIconProps } from "../../../../../next-env";
-import { Card } from "../Card/Card";
+import { CardIconProps } from "@/app/lib/entities";
+import { Card } from "@/app/components/Cards/Card/Card";
 
 export const CardIcon = ({
   idCategory,

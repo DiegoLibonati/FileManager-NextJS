@@ -1,5 +1,5 @@
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { DropdownActionsProps } from "../../../../../next-env";
+import { DropdownActionsProps } from "@/app/lib/entities";
 
 export const DropdownActions = ({
   offsetLeft,

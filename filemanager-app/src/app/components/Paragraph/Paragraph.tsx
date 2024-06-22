@@ -1,4 +1,4 @@
-import { ParagraphProps } from "../../../../next-env";
+import { ParagraphProps } from "@/app/lib/entities";
 
 export const Paragraph = ({
   className,

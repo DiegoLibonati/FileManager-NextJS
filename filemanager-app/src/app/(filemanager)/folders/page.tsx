@@ -1,5 +1,19 @@
-import { SectionFolders } from "@/containers/folders/SectionFolders/SectionFolders";
+import { FolderListWithActionsSkeleton } from "@/app/components/Skeletons/FolderListWithActionsSkeleton/FolderListWithActionsSkeleton";
+import dynamic from "next/dynamic";
+
+const LazySectionFolders = dynamic(
+  () =>
+    import("@/containers/folders/SectionFolders/SectionFolders").then(
+      (mod) => mod.SectionFolders
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <FolderListWithActionsSkeleton></FolderListWithActionsSkeleton>
+    ),
+  }
+);
 
 export default function Folders(): JSX.Element {
-  return <SectionFolders></SectionFolders>;
+  return <LazySectionFolders></LazySectionFolders>;
 }

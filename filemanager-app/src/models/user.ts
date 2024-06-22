@@ -1,5 +1,5 @@
 import { model, models, Schema } from "mongoose";
-import { IUser } from "../../next-env";
+import { IUser } from "@/app/lib/entities";
 
 const UserSchema = new Schema<IUser>(
   {

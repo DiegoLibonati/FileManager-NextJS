@@ -1,5 +1,5 @@
 import { TbDotsVertical } from "react-icons/tb";
-import { ButtonActionsProps } from "../../../../../next-env";
+import { ButtonActionsProps } from "@/app/lib/entities";
 
 export const ButtonActions = ({
   onClick,

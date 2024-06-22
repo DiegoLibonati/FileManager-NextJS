@@ -2,7 +2,7 @@ import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 import { Encrpyt } from "@/app/lib/encrypt";
-import { IUser } from "../../../../../../next-env";
+import { IUser } from "@/app/lib/entities";
 import { Jwt } from "@/app/lib/jwt";
 
 export async function POST(req: NextRequest) {

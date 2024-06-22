@@ -1,4 +1,4 @@
-import { Category } from "../../../next-env";
+import { Category } from "@/app/lib/entities";
 
 export const categoriesExtension: Record<string, string[]> = {
   documents: ["txt"],

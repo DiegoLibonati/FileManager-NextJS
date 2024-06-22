@@ -1,10 +1,10 @@
 "use client";
 
-import { CardItemProps } from "../../../../../next-env";
-import { Card } from "../Card/Card";
+import { CardItemProps } from "@/app/lib/entities";
+import { Card } from "@/app/components/Cards/Card/Card";
 import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { CardIcon } from "../CardIcon/CardIcon";
+import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
 import { MouseEventHandler, useRef, useState } from "react";
 import { ButtonActions } from "@/app/components/Buttons/ButtonActions/ButtonActions";
 import { DropdownActions } from "@/app/components/Dropdown/DropdownActions/DropdownActions";

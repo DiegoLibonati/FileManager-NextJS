@@ -1,5 +1,5 @@
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { CircleProgressProps } from "../../../../../next-env";
+import { CircleProgressProps } from "@/app/lib/entities";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 
 export const CircleProgress = ({

@@ -5,7 +5,7 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import {
   FormUpload as FormUploadT,
   FormUploadProps,
-} from "../../../../../next-env";
+} from "@/app/lib/entities";
 import { useForm } from "@/app/hooks/useForm";
 import { useRouter } from "next/navigation";
 import { parseEscapeString } from "@/app/lib/utils";

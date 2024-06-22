@@ -2,7 +2,7 @@
 
 import { MouseEventHandler } from "react";
 import { useForm } from "@/app/hooks/useForm";
-import { FormAuth } from "../../../../../next-env";
+import { FormAuth } from "@/app/lib/entities";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { postLogin } from "@/services/auth/post/postLogin/postLogin";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useParams, usePathname } from "next/navigation";
-import { Heading } from "../Heading/Heading";
+import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { useMemo } from "react";
-import { HeaderTitleProps } from "../../../../../next-env";
+import { HeaderTitleProps } from "@/app/lib/entities";
 import { getTitleByParams } from "@/app/lib/utils";
 import { useUserStore } from "@/app/hooks/useUserStore";
 

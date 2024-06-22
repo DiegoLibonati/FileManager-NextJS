@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 import { useForm } from "@/app/hooks/useForm";
-import { FormAuth } from "../../../../../next-env";
+import { FormAuth } from "@/app/lib/entities";
 import { postRegister } from "@/services/auth/post/postRegister/postRegister";
 import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { AxiosError } from "axios";

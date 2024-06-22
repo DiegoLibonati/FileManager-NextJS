@@ -1,6 +1,6 @@
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Card } from "../Card/Card";
-import { CardNotFoundProps } from "../../../../../next-env";
+import { Card } from "@/app/components/Cards/Card/Card";
+import { CardNotFoundProps } from "@/app/lib/entities";
 
 export const CardNotFound = ({
   children,

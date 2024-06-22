@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { UseForm } from "../../next-env";
+import { UseForm } from "@/app/lib/entities";
 
 export const useForm = <T,>(initialValue: T): UseForm<T> => {
   const [formState, setFormState] = useState<T>(initialValue);

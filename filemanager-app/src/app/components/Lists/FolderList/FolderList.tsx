@@ -1,5 +1,5 @@
 import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
-import { FolderListProps } from "../../../../../next-env";
+import { FolderListProps } from "@/app/lib/entities";
 import { CardSimple } from "@/app/components/Cards/CardSimple/CardSimple";
 import { bytesToMB } from "@/app/lib/utils";
 

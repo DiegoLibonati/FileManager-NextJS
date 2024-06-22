@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UseSession } from "../../next-env";
+import { UseSession } from "@/app/lib/entities";
 import { usePathname } from "next/navigation";
 import { getSession } from "@/services/user/get/getSession/getSession";
 

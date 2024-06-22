@@ -12,7 +12,7 @@ export const SectionRecentUploaded = async (): Promise<JSX.Element> => {
         Recent Uploaded
       </Heading>
 
-      <article className="flex items-center justify-center w-full h-auto">
+      <article className="flex items-center justify-center w-full h-auto mt-2">
         {recentUpload ? (
           <CardItem
             bgColor={recentUpload.bgColor}

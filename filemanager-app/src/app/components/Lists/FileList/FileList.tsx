@@ -1,5 +1,5 @@
 import { bytesToMB } from "@/app/lib/utils";
-import { FileListProps } from "../../../../../next-env";
+import { FileListProps } from "@/app/lib/entities";
 import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
 
 export const FileList = ({ files }: FileListProps): JSX.Element => {

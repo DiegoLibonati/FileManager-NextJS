@@ -1,5 +1,5 @@
 import axiosInstance from "@/services/axios";
-import { SpaceUsed } from "../../../../../next-env";
+import { SpaceUsed } from "@/app/lib/entities";
 
 export const getSpaceUsed = async (): Promise<SpaceUsed> => {
   const response = await axiosInstance.get(`/filemanager/space_used`);

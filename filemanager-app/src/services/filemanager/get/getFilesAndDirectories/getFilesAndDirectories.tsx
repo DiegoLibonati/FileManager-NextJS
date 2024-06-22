@@ -1,5 +1,5 @@
 import axiosInstance from "@/services/axios";
-import { File, Folder } from "../../../../../next-env";
+import { File, Folder } from "@/app/lib/entities";
 
 export const getFilesAndDirectories = async (
   path: string

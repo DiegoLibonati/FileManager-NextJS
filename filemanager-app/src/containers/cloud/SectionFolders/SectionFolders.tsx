@@ -6,7 +6,7 @@ export const SectionFolders = async (): Promise<JSX.Element> => {
   const folders = await getAllFolders();
   return (
     <section className="flex flex-col items-start justify-center w-full h-auto mt-8">
-      <Heading className="font-semibold text-base lg:text-xl" element="h2">
+      <Heading className="font-semibold text-base mb-2 lg:text-xl" element="h2">
         Folders
       </Heading>
 

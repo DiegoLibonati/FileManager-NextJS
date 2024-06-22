@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ButtonUpgradeProps } from "../../../../../next-env";
+import { ButtonUpgradeProps } from "@/app/lib/entities";
 import { useRouter } from "next/navigation";
 import { getUpgradePlan } from "@/services/user/get/getUpgradePlan/getUpgradePlan";
 

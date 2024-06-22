@@ -11,7 +11,7 @@ import {
 import { VscRootFolder } from "react-icons/vsc";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ButtonLogout } from "../Buttons/ButtonLogout/ButtonLogout";
+import { ButtonLogout } from "@/app/components/Buttons/ButtonLogout/ButtonLogout";
 
 export const NavBar = (): JSX.Element => {
   const pathname = usePathname();

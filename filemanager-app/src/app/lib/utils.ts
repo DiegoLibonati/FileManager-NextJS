@@ -1,5 +1,5 @@
-import { Category } from "../../../next-env";
-import { categoriesExtension } from "./constants";
+import { Category } from "@/app/lib/entities";
+import { categoriesExtension } from "@/app/lib/constants";
 
 export const roundToOneDecimal = (num: number): number => {
   if (num % 1 !== 0) {

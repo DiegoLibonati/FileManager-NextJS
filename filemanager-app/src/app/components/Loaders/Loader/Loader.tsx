@@ -1,6 +1,6 @@
 import React from "react";
-import "./Loader.css";
-import { LoaderProps } from "../../../../../next-env";
+import "@/app/components/Loaders/Loader/Loader.css";
+import { LoaderProps } from "@/app/lib/entities";
 
 export const Loader = ({
   color,

@@ -1,5 +1,5 @@
 import { FormUpload } from "@/app/components/Forms/FormUpload/FormUpload";
-import { UploadPageProps } from "../../../../../next-env";
+import { UploadPageProps } from "@/app/lib/entities";
 
 export default function Upload({ params }: UploadPageProps): JSX.Element {
   return (

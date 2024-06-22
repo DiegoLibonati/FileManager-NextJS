@@ -1,4 +1,4 @@
-import { HeadingProps } from "../../../../../next-env";
+import { HeadingProps } from "@/app/lib/entities";
 
 export const Heading = ({
   element,
