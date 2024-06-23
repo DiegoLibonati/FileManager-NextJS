@@ -24,12 +24,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const accountExists = await User.findOne({ username: username });
+  const accountExists = await User.findOne({
+    $or: [{ email: email }, { username: username }],
+  });
 
   if (accountExists) {
     return NextResponse.json(
       {
-        error: `An account already exists with this username: ${username}.`,
+        error: `An account already exists with this username: ${username} or this email: ${email}.`,
       },
       { status: 400 }
     );
