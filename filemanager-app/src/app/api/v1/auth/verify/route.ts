@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
   }
 
   const encrypt = new Encrpyt();
-  const compareIds = encrypt.compareString(accountExists._id, hashedId);
+  const compareIds = await encrypt.compareString(accountExists._id.toString(), hashedId);
 
   if (!compareIds) {
     return NextResponse.json(
