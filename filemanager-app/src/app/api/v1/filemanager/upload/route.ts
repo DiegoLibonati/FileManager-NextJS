@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     if (!path || !file) {
       return NextResponse.json(
         {
-          error: "Path and file is required.",
+          error: "Path and file are required.",
         },
         { status: 400 }
       );

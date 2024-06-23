@@ -6,18 +6,17 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   await connectMongo();
 
-  const body: { password: string } = await req.json();
+  const body: { id: string; password: string; username: string } =
+    await req.json();
 
   const password = body.password.trim();
-  const searchParams = req.nextUrl.searchParams;
+  const hashedId = body.id.trim();
+  const username = body.username.trim();
 
-  const hashedId = searchParams.get("id");
-  const username = searchParams.get("username");
-
-  if (!hashedId || !username) {
+  if (!hashedId || !username || !password) {
     return NextResponse.json(
       {
-        error: "Id is required.",
+        error: "Id, username and password are required.",
       },
       { status: 400 }
     );
@@ -35,7 +34,10 @@ export async function POST(req: NextRequest) {
   }
 
   const encrypt = new Encrpyt();
-  const compareIds = await encrypt.compareString(accountExists._id.toString(), hashedId);
+  const compareIds = await encrypt.compareString(
+    accountExists._id.toString(),
+    hashedId
+  );
 
   if (!compareIds) {
     return NextResponse.json(
@@ -46,9 +48,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const newPasswordHashed = await encrypt.cryptString(password)
+  const newPasswordHashed = await encrypt.cryptString(password);
 
-  await User.updateOne({ _id: accountExists._id }, { password: newPasswordHashed });
+  await User.updateOne(
+    { _id: accountExists._id },
+    { password: newPasswordHashed }
+  );
 
   return NextResponse.json(
     {

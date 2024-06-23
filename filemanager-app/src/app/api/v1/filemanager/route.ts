@@ -39,9 +39,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams;
+  const body: { path: string } = await req.json();
 
-  const path = searchParams.get("path");
+  const path = body.path.trim();
 
   if (!path) {
     return NextResponse.json(
@@ -79,7 +79,7 @@ export async function DELETE(req: NextRequest) {
   if (!path || !type) {
     return NextResponse.json(
       {
-        error: "Path and type is required.",
+        error: "Path and type are required.",
       },
       { status: 400 }
     );

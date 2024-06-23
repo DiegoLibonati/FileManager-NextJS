@@ -122,7 +122,7 @@ NOTE: All the endpoints except the AUTH endpoints, must have a header with the n
 - **Endpoint Name**: Reset Password
 - **Endpoint Route**: /api/v1/auth/reset
 - **Endpoint Method**: POST
-- **Endpoint Fn**: Endpoint that serves to reset the password of a specific account by parameter we will have the id of the hashed user and the username. And for body we will send the new password through the key: password
+- **Endpoint Fn**: Endpoint that serves to reset the password of a specific account by body with id, username and password.
 
 -----
 
@@ -192,7 +192,7 @@ NOTE: All the endpoints except the AUTH endpoints, must have a header with the n
 - **Endpoint Name**: Create Folder
 - **Endpoint Route**: /api/v1/filemanager
 - **Endpoint Method**: POST
-- **Endpoint Fn**: Endpoint which is used to create a specific folder by passing the path to where the folder should be created as a parameter.
+- **Endpoint Fn**: Endpoint which is used to create a specific folder by passing the path to where the folder should be created in body.
 
 -----
 

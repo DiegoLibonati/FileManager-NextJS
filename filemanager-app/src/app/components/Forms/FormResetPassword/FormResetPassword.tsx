@@ -28,13 +28,9 @@ export const FormResetPassword = (): JSX.Element => {
 
     try {
       const response = await postResetPassword(
-        {
-          password: formState.password.trim(),
-        },
-        {
-          id: searchParams.get("id")!,
-          username: searchParams.get("username")!,
-        }
+        searchParams.get("id")!,
+        searchParams.get("username")!,
+        formState.password.trim()
       );
       handleSetAlert("info", response.data.message, true);
       router.push("/login");
