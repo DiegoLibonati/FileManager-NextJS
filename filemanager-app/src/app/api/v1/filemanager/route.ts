@@ -42,7 +42,6 @@ export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
 
   const path = searchParams.get("path");
-  console.log("path", path);
 
   if (!path) {
     return NextResponse.json(

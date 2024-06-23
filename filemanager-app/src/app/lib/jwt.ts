@@ -25,7 +25,6 @@ export class Jwt {
 
       return token;
     } catch (e) {
-      console.log(e);
       return "";
     }
   }
@@ -39,7 +38,6 @@ export class Jwt {
 
       return session;
     } catch (e) {
-      console.log(e);
       return false;
     }
   }

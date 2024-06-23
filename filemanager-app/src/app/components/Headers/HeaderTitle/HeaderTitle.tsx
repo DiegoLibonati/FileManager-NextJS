@@ -2,7 +2,7 @@
 
 import { useParams, usePathname } from "next/navigation";
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { HeaderTitleProps } from "@/app/lib/entities";
 import { getTitleByParams } from "@/app/lib/utils";
 import { useUserStore } from "@/app/hooks/useUserStore";
@@ -16,10 +16,6 @@ export const HeaderTitle = ({}: HeaderTitleProps): JSX.Element => {
   const titleByParams = useMemo(() => {
     return getTitleByParams(params as Record<string, string>);
   }, [params]);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <Heading element={"h2"} className="font-semibold text-2xl lg:text-3xl">
