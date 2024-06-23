@@ -16,7 +16,7 @@ const LazySectionFolder = dynamic(
   }
 );
 
-export default function Folder({ params }: FolderPageProps): JSX.Element {
+export default function FolderPage({ params }: FolderPageProps): JSX.Element {
   return (
     <>
       <LazySectionFolder

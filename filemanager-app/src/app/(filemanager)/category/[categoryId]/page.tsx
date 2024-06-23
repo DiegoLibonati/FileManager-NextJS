@@ -10,7 +10,7 @@ const LazySectionFiles = dynamic(
   { ssr: false, loading: () => <SectionFilesSkeleton></SectionFilesSkeleton> }
 );
 
-export default function Category({ params }: CategoryPageProps): JSX.Element {
+export default function CategoryPage({ params }: CategoryPageProps): JSX.Element {
   return (
     <LazySectionFiles
       idCategory={params.categoryId as string}

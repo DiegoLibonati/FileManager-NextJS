@@ -14,6 +14,6 @@ const LazySectionFolders = dynamic(
   }
 );
 
-export default function Folders(): JSX.Element {
+export default function FoldersPage(): JSX.Element {
   return <LazySectionFolders></LazySectionFolders>;
 }

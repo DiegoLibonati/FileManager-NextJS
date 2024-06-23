@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NewPasswordPageProps } from "@/app/lib/entities";
 import { FormResetPassword } from "@/app/components/Forms/FormResetPassword/FormResetPassword";
 
-export default function NewPassword({
+export default function NewPasswordPage({
   searchParams,
 }: NewPasswordPageProps): JSX.Element {
   const username = searchParams.username;

@@ -41,7 +41,7 @@ const LazySectionFolders = dynamic(
   }
 );
 
-export default async function Cloud(): Promise<JSX.Element> {
+export default async function CloudPage(): Promise<JSX.Element> {
   const session = await getSession();
 
   return (
