@@ -14,7 +14,11 @@ export const useSession = <T,>(): UseSession<T> => {
   };
 
   useEffect(() => {
-    if (!pathname.includes("/login") && !pathname.includes("/register")) {
+    if (
+      !pathname.includes("/login") &&
+      !pathname.includes("/register") &&
+      !pathname.includes("/reset")
+    ) {
       handleGetSession();
     }
   }, [pathname]);

@@ -251,6 +251,12 @@ export interface UploadPageProps {
   };
 }
 
+export interface NewPasswordPageProps {
+  searchParams: {
+    username: string;
+  };
+}
+
 // ** Models Interfaces  **
 export interface IUser {
   username: string;

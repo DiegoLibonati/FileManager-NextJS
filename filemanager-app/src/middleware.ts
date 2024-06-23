@@ -3,12 +3,14 @@ import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import { Jwt } from "@/app/lib/jwt";
 
-const publicPaths = ["/login", "/register"];
+const publicPaths = ["/login", "/register", "/reset", "/new"];
 const apiAuthPaths = [
   "/api/v1/auth/login",
   "/api/v1/auth/register",
   "/api/v1/auth/logout",
   "/api/v1/auth/verify",
+  "/api/v1/auth/reset",
+  "/api/v1/auth/send_email_reset",
 ];
 
 export async function middleware(request: NextRequest) {

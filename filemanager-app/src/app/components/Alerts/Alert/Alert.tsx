@@ -1,11 +1,11 @@
 "use client";
 
-import { Loader } from "@/app/components/Loaders/Loader/Loader";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { FaInfoCircle, FaWindowClose } from "react-icons/fa";
 import { MdError } from "react-icons/md";
 import { CiWarning } from "react-icons/ci";
+import { BiLoader } from "react-icons/bi";
 
 export const Alert = (): JSX.Element => {
   const { alert, handleSetAlert } = useAlertStore();
@@ -33,10 +33,11 @@ export const Alert = (): JSX.Element => {
       ) : null}
 
       {alert.type === "loading" ? (
-        <Loader
-          color="#fff"
-          parentClassName="[&&]:w-[10%] [&&]:h-auto [&&]:min-h-[0]"
-        ></Loader>
+        <BiLoader
+          fontSize={32}
+          fill="#fff"
+          className="w-[10%] animate-pulse"
+        ></BiLoader>
       ) : null}
 
       <Paragraph className="text-sm text-white font-semibold ml-2 w-[80%]">

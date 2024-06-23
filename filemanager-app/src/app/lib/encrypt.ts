@@ -1,16 +1,16 @@
 import * as bcrypt from "bcryptjs";
 
 export class Encrpyt {
-  constructor(public password: string, public hashPassword: string = "") {}
+  constructor() {}
 
-  async cryptPassword(): Promise<string> {
+  async cryptString(str: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
-    this.hashPassword = await bcrypt.hash(this.password, salt);
-    return this.hashPassword;
+    const strEncrypted = await bcrypt.hash(str, salt);
+    return strEncrypted;
   }
 
-  async comparePassword(): Promise<boolean> {
-    const compare = await bcrypt.compare(this.password, this.hashPassword);
+  async compareString(str: string, strEncrypted: string): Promise<boolean> {
+    const compare = await bcrypt.compare(str, strEncrypted);
     return compare;
   }
 }

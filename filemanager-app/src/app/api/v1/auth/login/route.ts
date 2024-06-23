@@ -32,9 +32,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const encrypt = new Encrpyt(password, accountExists.password);
+  const encrypt = new Encrpyt();
 
-  const passwordAreEqual = await encrypt.comparePassword();
+  const passwordAreEqual = await encrypt.compareString(password, accountExists.password);
 
   if (!passwordAreEqual) {
     return NextResponse.json(

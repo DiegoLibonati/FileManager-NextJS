@@ -18,12 +18,12 @@ export default function Login(): JSX.Element {
         Sign up
       </Link>
 
-      <button
-        type="button"
+      <Link
+        href={"/reset"}
         className="mt-2 text-white text-xs transition-all hover:underline active:scale-75"
       >
         Forgot your password
-      </button>
+      </Link>
     </article>
   );
 }

@@ -3,9 +3,12 @@ import { Encrpyt } from "@/app/lib/encrypt";
 import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   await connectMongo();
 
+  const body: { password: string } = await req.json();
+
+  const password = body.password.trim();
   const searchParams = req.nextUrl.searchParams;
 
   const hashedId = searchParams.get("id");
@@ -14,7 +17,7 @@ export async function GET(req: NextRequest) {
   if (!hashedId || !username) {
     return NextResponse.json(
       {
-        error: "Id and username are required.",
+        error: "Id is required.",
       },
       { status: 400 }
     );
@@ -37,15 +40,20 @@ export async function GET(req: NextRequest) {
   if (!compareIds) {
     return NextResponse.json(
       {
-        error: `Invalid email validation link.`,
+        error: `Invalid reset password link.`,
       },
       { status: 400 }
     );
   }
 
-  await User.updateOne({ _id: accountExists._id }, { emailVerified: true });
+  const newPasswordHashed = await encrypt.cryptString(password)
 
-  return NextResponse.redirect(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-    status: 307,
-  });
+  await User.updateOne({ _id: accountExists._id }, { password: newPasswordHashed });
+
+  return NextResponse.json(
+    {
+      message: "Your password has been successfully reset!.",
+    },
+    { status: 200 }
+  );
 }

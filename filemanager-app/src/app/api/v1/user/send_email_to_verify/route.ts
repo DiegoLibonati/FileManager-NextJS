@@ -1,7 +1,8 @@
 import User from "@/models/user";
 import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Email } from "@/app/lib/email";
+import { Encrpyt } from "@/app/lib/encrypt";
 
 export async function GET(req: NextRequest) {
   await connectMongo();
@@ -10,37 +11,24 @@ export async function GET(req: NextRequest) {
 
   const user = await User.findOne({ username: payload.username });
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587, // 587 for TLS, 465 for SSL
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASS,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
+  const encrypt = new Encrpyt();
+  const hashedId = await encrypt.cryptString(user._id.toString());
+  const instanceEmail = new Email();
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.email,
-    subject: "Welcome to FileManager APP, it's a pleasure to have you with us.",
-    text: `Enter the following link to verify your email address: ${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/verify?id=${user._id}`,
-  };
+  const result = instanceEmail.sendEmail(
+    user.email,
+    "You can now verify your email in FileManager APP.",
+    `Enter the following link to verify your email address: ${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/verify?id=${hashedId}&username=${user.username}`
+  );
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      return NextResponse.json(
-        {
-          error: error,
-        },
-        { status: 400 }
-      );
-    }
-    console.log("Email sent: " + info.response);
-  });
+  if (result instanceof Error) {
+    return NextResponse.json(
+      {
+        error: result,
+      },
+      { status: 400 }
+    );
+  }
 
   return NextResponse.json(
     {
