@@ -149,27 +149,27 @@
 									"key": "password",
 									"value": "1234567",
 									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "hashedId",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Die2",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{APP_URL}}/auth/reset?id=hashedId&username=Die2",
+							"raw": "{{APP_URL}}/auth/reset",
 							"host": [
 								"{{APP_URL}}"
 							],
 							"path": [
 								"auth",
 								"reset"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "hashedId"
-								},
-								{
-									"key": "username",
-									"value": "Die2"
-								}
 							]
 						}
 					},
@@ -383,8 +383,18 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "path",
+									"value": "/carpeta/carpetita/carpe2/folder",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{APP_URL}}/filemanager?path=/carpeta/carpetita/carpe2",
+							"raw": "{{APP_URL}}/filemanager",
 							"host": [
 								"{{APP_URL}}"
 							],
@@ -393,8 +403,9 @@
 							],
 							"query": [
 								{
-									"key": "path",
-									"value": "/carpeta/carpetita/carpe2"
+									"key": "",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}
