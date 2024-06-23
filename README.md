@@ -42,8 +42,6 @@ This repository is a FileManager created in NextJS 14.
 
 ## Portfolio Link
 
-Cooming soon...
-
 [`https://www.diegolibonati.com.ar/#/project/109`](https://www.diegolibonati.com.ar/#/project/109)
 
 ## Video
