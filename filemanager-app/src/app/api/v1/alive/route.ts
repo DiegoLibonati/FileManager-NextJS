@@ -5,7 +5,7 @@ export async function GET() {
     {
       author: "Diego Libonati",
       name: "FileManager",
-      version: "0.0.1",
+      version: "1.0.0",
     },
     { status: 200 }
   );
