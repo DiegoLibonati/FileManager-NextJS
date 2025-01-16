@@ -1,7 +1,13 @@
-import { Heading } from "@/app/components/Headers/Heading/Heading";
 import Link from "next/link";
-import { NewPasswordPageProps } from "@/app/lib/entities";
+
+import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { FormResetPassword } from "@/app/components/Forms/FormResetPassword/FormResetPassword";
+
+interface NewPasswordPageProps {
+  searchParams: {
+    username: string;
+  };
+}
 
 export default function NewPasswordPage({
   searchParams,
@@ -18,6 +24,7 @@ export default function NewPasswordPage({
 
       <Link
         href={"/login"}
+        aria-label="go to login page"
         className="self-end text-center border-solid border-2 border-white rounded-full mt-2 py-2 w-[50%] text-white transition-alls active:scale-75"
       >
         Sign in

@@ -1,6 +1,9 @@
+import { GeneralShared } from "@/app/lib/entities";
+
 import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { Card } from "@/app/components/Cards/Card/Card";
-import { CardNotFoundProps } from "@/app/lib/entities";
+
+export interface CardNotFoundProps extends GeneralShared {}
 
 export const CardNotFound = ({
   children,

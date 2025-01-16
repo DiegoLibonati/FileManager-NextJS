@@ -1,7 +1,8 @@
+import { NextRequest, NextResponse } from "next/server";
+
 import connectMongo from "@/app/lib/connectMongo";
 import { Encrpyt } from "@/app/lib/encrypt";
 import User from "@/models/user";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   await connectMongo();
@@ -32,7 +33,10 @@ export async function GET(req: NextRequest) {
   }
 
   const encrypt = new Encrpyt();
-  const compareIds = await encrypt.compareString(accountExists._id.toString(), hashedId);
+  const compareIds = await encrypt.compareString(
+    accountExists._id.toString(),
+    hashedId
+  );
 
   if (!compareIds) {
     return NextResponse.json(

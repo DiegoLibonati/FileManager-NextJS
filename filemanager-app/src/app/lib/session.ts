@@ -2,6 +2,7 @@
 
 import * as jose from "jose";
 import { cookies } from "next/headers";
+
 import { User } from "@/app/lib/entities";
 
 export const getSession = async (): Promise<User> => {

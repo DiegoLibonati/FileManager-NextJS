@@ -1,4 +1,5 @@
 import { FolderList } from "@/app/components/Lists/FolderList/FolderList";
+
 import { getAllFolders } from "@/services/filemanager/get/getAllFolders/getAllFolders";
 
 export const SectionFolders = async (): Promise<JSX.Element> => {

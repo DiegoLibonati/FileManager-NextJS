@@ -1,6 +1,7 @@
-import User from "@/models/user";
-import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
+
+import connectMongo from "@/app/lib/connectMongo";
+import User from "@/models/user";
 
 export async function GET(req: NextRequest) {
   await connectMongo();

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import userSlice from "@/redux/features/user/userSlice";
 import alertSlice from "@/redux/features/alert/alertSlice";
 

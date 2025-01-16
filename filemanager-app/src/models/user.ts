@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+
 import { IUser } from "@/app/lib/entities";
 
 const UserSchema = new Schema<IUser>(
@@ -7,7 +8,7 @@ const UserSchema = new Schema<IUser>(
     email: String,
     password: String,
     plan: String,
-    emailVerified: Boolean
+    emailVerified: Boolean,
   },
   {
     timestamps: true,

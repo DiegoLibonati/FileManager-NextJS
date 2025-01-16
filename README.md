@@ -3,11 +3,11 @@
 ## Getting Started
 
 1. Clone the repository with `git clone "repository link"`
-2. Go to the folder where you cloned your repository
-3. Run `docker-compose build --no-cache` in the terminal
-4. Once built, you must execute the command: `docker-compose up`
-5. You have to be standing in the folder containing the: `docker-compose.yml`
+2. Join to `filemanager-app` folder and execute: `npm install` or `yarn install` in the terminal
+3. Go to the previous folder and execute: `docker-compose build --no-cache` in the terminal
+4. Once built, you must execute the command: `docker-compose up --force-recreate` in the terminal
 
+NOTE: You have to be standing in the folder containing the: `docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
 NOTE: In the folder whose location is: `filemanager-app/src/cloud`, inside the cloud folder will be created the folders for each user registered in the application. The name of the main folder refers to the user's username. 
 
 ## Description
@@ -34,11 +34,46 @@ This repository is a FileManager created in NextJS 14.
 
 ## Libraries used
 
-1. ReduxJS - Redux Toolkit
-2. Axios
-3. Bcryptjs
-4. Jose -> JWT
-5. Mongoose
+#### Dependencies
+
+```
+"@types/bcryptjs": "^2.4.6"
+"@types/jest": "^29.5.14"
+"@types/node": "^20.14.0"
+"@types/nodemailer": "^6.4.15"
+"@types/react": "^18"
+"@types/react-dom": "^18"
+"@types/supertest": "^6.0.2"
+"@reduxjs/toolkit": "^2.2.5"
+"axios": "^1.7.2"
+"bcryptjs": "^2.4.3"
+"jose": "^5.4.0"
+"mongoose": "^8.4.1"
+"next": "14.2.3"
+"nodemailer": "^6.9.14"
+"react": "^18"
+"react-dom": "^18"
+"react-icons": "^5.2.1"
+"react-redux": "^9.1.2"
+```
+
+#### devDependencies
+
+```
+"@testing-library/dom": "^10.4.0"
+"@testing-library/jest-dom": "^6.6.3"
+"@testing-library/react": "^16.1.0"
+"@testing-library/user-event": "^14.5.2"
+"eslint": "^8"
+"eslint-config-next": "14.2.3"
+"jest": "^29.7.0"
+"jest-environment-jsdom": "^29.7.0"
+"postcss": "^8"
+"tailwindcss": "^3.4.1"
+"ts-node": "^10.9.2"
+"typescript": "^5"
+"axios-mock-adapter": "^2.1.0"
+```
 
 ## Portfolio Link
 
@@ -48,13 +83,20 @@ This repository is a FileManager created in NextJS 14.
 
 https://github.com/DiegoLibonati/FileManager-App/assets/99032604/ec856a08-888c-4272-a68f-c3a0e58c6d41
 
+## Testing
+
+### Frontend
+
+1. Join to `filemanager-app` folder
+2. Execute: `yarn test` or `npm test`
+
 ## Documentation APP
 
 ### **Version**
 
 ```
 APP VERSION: 1.0.0
-README UPDATED: 23/06/2024
+README UPDATED: 15/01/2024
 AUTHOR: Diego Libonati
 ```
 

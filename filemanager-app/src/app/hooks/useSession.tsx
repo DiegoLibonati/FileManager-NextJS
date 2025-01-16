@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import { UseSession } from "@/app/lib/entities";
 import { usePathname } from "next/navigation";
+
 import { getSession } from "@/services/user/get/getSession/getSession";
+
+type UseSession<T> = {
+  session: T;
+};
 
 export const useSession = <T,>(): UseSession<T> => {
   const [session, setSession] = useState<T | null>(null);

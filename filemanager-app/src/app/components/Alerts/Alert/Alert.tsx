@@ -1,18 +1,24 @@
 "use client";
 
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { FaInfoCircle, FaWindowClose } from "react-icons/fa";
 import { MdError } from "react-icons/md";
 import { CiWarning } from "react-icons/ci";
 import { BiLoader } from "react-icons/bi";
 
+import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+
+import { useAlertStore } from "@/app/hooks/useAlertStore";
+
 export const Alert = (): JSX.Element => {
   const { alert, handleSetAlert } = useAlertStore();
 
+  const handleCloseAlert = (): void => {
+    handleSetAlert("info", "", false);
+  };
+
   return (
     <div
-      className={`flex-row items-center justify-start absolute z-[10] bg-secondary w-full h-auto rounded-bl-lg rounded-br-lg shadow-md p-2 lg:w-[50%] lg:right-2 lg:top-2 lg:rounded-lg ${
+      className={`flex-row items-center justify-start absolute z-[10] bg-secondary w-full h-auto rounded-bl-lg rounded-br-lg shadow-md p-2 lg:w-[50%] lg:right-2 lg:top-2 lg:rounded-lg alert ${
         alert.open ? "flex" : "hidden"
       }`}
     >
@@ -20,23 +26,23 @@ export const Alert = (): JSX.Element => {
         <FaInfoCircle
           fontSize={32}
           fill="#fff"
-          className="w-[10%]"
+          className="w-[10%] alert__info"
         ></FaInfoCircle>
       ) : null}
 
       {alert.type === "error" ? (
-        <MdError fontSize={32} fill="#fff" className="w-[10%]"></MdError>
+        <MdError fontSize={32} fill="#fff" className="w-[10%] alert__error"></MdError>
       ) : null}
 
       {alert.type === "warning" ? (
-        <CiWarning fontSize={32} fill="#fff" className="w-[10%]"></CiWarning>
+        <CiWarning fontSize={32} fill="#fff" className="w-[10%] alert__warning"></CiWarning>
       ) : null}
 
       {alert.type === "loading" ? (
         <BiLoader
           fontSize={32}
           fill="#fff"
-          className="w-[10%] animate-pulse"
+          className="w-[10%] animate-pulse alert__loading"
         ></BiLoader>
       ) : null}
 
@@ -44,12 +50,13 @@ export const Alert = (): JSX.Element => {
         {alert.message}
       </Paragraph>
 
-      <FaWindowClose
-        fontSize={32}
-        fill="#fff"
-        className="w-[10%] cursor-pointer"
-        onClick={() => handleSetAlert("info", "", false)}
-      ></FaWindowClose>
+      <button
+        className="flex items-center justify-center w-[10%] cursor-pointer border-none bg-none"
+        aria-label="close alert"
+        onClick={handleCloseAlert}
+      >
+        <FaWindowClose fontSize={32} fill="#fff"></FaWindowClose>
+      </button>
     </div>
   );
 };

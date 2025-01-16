@@ -1,5 +1,6 @@
-import axiosInstance from "@/services/axios";
 import { File, Folder } from "@/app/lib/entities";
+
+import axiosInstance from "@/services/axios";
 
 export const getFilesAndDirectories = async (
   path: string

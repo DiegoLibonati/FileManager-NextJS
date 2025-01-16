@@ -1,8 +1,11 @@
-import { getSession } from "@/app/lib/session";
+import { Fragment } from "react";
 import dynamic from "next/dynamic";
+
 import { SectionCloudStoragesSkeleton } from "@/app/components/Skeletons/SectionCloudStoragesSkeleton/SectionCloudStoragesSkeleton";
 import { SectionUpgradePlanSkeleton } from "@/app/components/Skeletons/SectionUpgradePlanSkeleton/SectionUpgradePlanSkeleton";
 import { SectionFolderListWithoutActionsSkeleton } from "@/app/components/Skeletons/SectionFolderListWithoutActionsSkeleton/SectionFolderListWithoutActionsSkeleton";
+
+import { getSession } from "@/app/lib/session";
 
 const LazySectionCloudStorages = dynamic(
   () =>
@@ -45,12 +48,12 @@ export default async function CloudPage(): Promise<JSX.Element> {
   const session = await getSession();
 
   return (
-    <>
+    <Fragment>
       <LazySectionCloudStorages></LazySectionCloudStorages>
       {session.plan === "0" ? (
         <LazySectionUpgradePlan></LazySectionUpgradePlan>
       ) : null}
       <LazySectionFolders></LazySectionFolders>
-    </>
+    </Fragment>
   );
 }

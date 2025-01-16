@@ -1,7 +1,11 @@
 import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
 import { FileList } from "@/app/components/Lists/FileList/FileList";
-import { SectionFilesProps } from "@/app/lib/entities";
+
 import { getCategoryFiles } from "@/services/filemanager/get/getCategoryFiles/getCategoryFiles";
+
+interface SectionFilesProps {
+  idCategory: string;
+}
 
 export const SectionFiles = async ({
   idCategory,

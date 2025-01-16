@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { FormLogin } from "@/app/components/Forms/FormLogin/FormLogin";
-import Link from "next/link";
 
 export default function LoginPage(): JSX.Element {
   return (
@@ -13,6 +14,7 @@ export default function LoginPage(): JSX.Element {
 
       <Link
         href={"/register"}
+        aria-label="go to register page"
         className="self-end text-center border-solid border-2 border-white rounded-full mt-2 py-2 w-[50%] text-white transition-all active:scale-75"
       >
         Sign up
@@ -20,6 +22,7 @@ export default function LoginPage(): JSX.Element {
 
       <Link
         href={"/reset"}
+        aria-label="go to reset your password"
         className="mt-2 text-white text-xs transition-all hover:underline active:scale-75"
       >
         Forgot your password

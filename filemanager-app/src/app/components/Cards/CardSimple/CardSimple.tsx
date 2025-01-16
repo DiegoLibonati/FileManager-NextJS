@@ -1,11 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
+import { ColorsShared } from "@/app/lib/entities";
+
 import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { Card } from "@/app/components/Cards/Card/Card";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
-import { CardSimpleProps } from "@/app/lib/entities";
-import { useRouter } from "next/navigation";
+
+export interface CardSimpleProps extends ColorsShared {
+  title: string;
+  subTitle: string;
+  type: string;
+  path: string;
+}
 
 export const CardSimple = ({
   title,
@@ -26,7 +35,7 @@ export const CardSimple = ({
     <Card
       className={`flex flex-row w-full justify-between items-center rounded-lg shadow-md p-4 h-20 ${
         type === "folder" ? "cursor-pointer" : ""
-      }`}
+      } card__simple`}
       onClick={handleClickCard}
     >
       <div className="flex flex-col">

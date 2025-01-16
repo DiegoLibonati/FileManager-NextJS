@@ -1,5 +1,10 @@
 import { FormUpload } from "@/app/components/Forms/FormUpload/FormUpload";
-import { UploadPageProps } from "@/app/lib/entities";
+
+interface UploadPageProps {
+  params: {
+    folderPath: string[];
+  };
+}
 
 export default function UploadPage({ params }: UploadPageProps): JSX.Element {
   return (

@@ -11,6 +11,7 @@ import {
 import { VscRootFolder } from "react-icons/vsc";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { ButtonLogout } from "@/app/components/Buttons/ButtonLogout/ButtonLogout";
 
 export const NavBar = (): JSX.Element => {
@@ -18,7 +19,7 @@ export const NavBar = (): JSX.Element => {
 
   return (
     <nav className="flex relative flex-row items-center justify-around w-full h-full lg:flex-col lg:justify-start">
-      <Link href={"/"} className="lg:my-4">
+      <Link href={"/"} aria-label="go to home page" className="lg:my-4">
         {pathname !== "/" ? (
           <AiOutlineHome fontSize={24}></AiOutlineHome>
         ) : null}
@@ -26,7 +27,7 @@ export const NavBar = (): JSX.Element => {
           <AiFillHome fontSize={24} fill={"#8357fe"}></AiFillHome>
         ) : null}
       </Link>
-      <Link href={"/folders"} className="lg:my-4">
+      <Link href={"/folders"} aria-label="go to folders page" className="lg:my-4">
         {pathname !== "/folders" ? (
           <AiOutlineFolder fontSize={24}></AiOutlineFolder>
         ) : null}
@@ -34,7 +35,7 @@ export const NavBar = (): JSX.Element => {
           <AiFillFolder fontSize={24} fill={"#8357fe"}></AiFillFolder>
         ) : null}
       </Link>
-      <Link href={"/cloud"} className="lg:my-4">
+      <Link href={"/cloud"} aria-label="go to cloud page" className="lg:my-4">
         {pathname !== "/cloud" ? (
           <AiOutlineCloud fontSize={24}></AiOutlineCloud>
         ) : null}
@@ -42,7 +43,7 @@ export const NavBar = (): JSX.Element => {
           <AiFillCloud fontSize={24} fill={"#8357fe"}></AiFillCloud>
         ) : null}
       </Link>
-      <Link href={`/folder/root`} className="lg:my-4">
+      <Link href={`/folder/root`} aria-label="go to folder root page" className="lg:my-4">
         {!pathname.includes("/folder/") ? (
           <VscRootFolder fontSize={24}></VscRootFolder>
         ) : null}

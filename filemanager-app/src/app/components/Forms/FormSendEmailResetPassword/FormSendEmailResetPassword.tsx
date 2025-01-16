@@ -1,10 +1,12 @@
 "use client";
 
+import { MouseEventHandler } from "react";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+
 import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { useForm } from "@/app/hooks/useForm";
 import { postSendEmailResetPassword } from "@/services/auth/post/postSendEmailResetPassword/postSendEmailResetPassword";
-import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 
 const INITIAL_VALUE_FORM = {
   email: "",
@@ -16,7 +18,10 @@ export const FormSendEmailResetPassword = (): JSX.Element => {
   const { alert, handleSetAlert } = useAlertStore();
   const router = useRouter();
 
-  const handleSubmitSendEmailResetPassword = async (): Promise<void> => {
+  const handleSubmitSendEmailResetPassword: MouseEventHandler<
+    HTMLButtonElement
+  > = async (e) => {
+    e.preventDefault();
     handleSetAlert("loading", "Sending email...", true);
 
     if (!formState.email.trim()) {
@@ -61,6 +66,7 @@ export const FormSendEmailResetPassword = (): JSX.Element => {
             ? "text-primary bg-white cursor-not-allowed"
             : "text-white"
         }`}
+        aria-label="send email"
         onClick={handleSubmitSendEmailResetPassword}
         disabled={alert.type === "loading"}
       >

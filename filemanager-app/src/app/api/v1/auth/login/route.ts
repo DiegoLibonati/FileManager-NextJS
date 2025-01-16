@@ -1,9 +1,11 @@
-import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/models/user";
-import { Encrpyt } from "@/app/lib/encrypt";
+
 import { IUser } from "@/app/lib/entities";
+
+import connectMongo from "@/app/lib/connectMongo";
+import { Encrpyt } from "@/app/lib/encrypt";
 import { Jwt } from "@/app/lib/jwt";
+import User from "@/models/user";
 
 export async function POST(req: NextRequest) {
   await connectMongo();
@@ -34,7 +36,10 @@ export async function POST(req: NextRequest) {
 
   const encrypt = new Encrpyt();
 
-  const passwordAreEqual = await encrypt.compareString(password, accountExists.password);
+  const passwordAreEqual = await encrypt.compareString(
+    password,
+    accountExists.password
+  );
 
   if (!passwordAreEqual) {
     return NextResponse.json(

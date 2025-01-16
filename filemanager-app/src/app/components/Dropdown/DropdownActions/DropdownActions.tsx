@@ -1,5 +1,11 @@
+import { MouseEventHandler } from "react";
+
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { DropdownActionsProps } from "@/app/lib/entities";
+
+interface DropdownActionsProps {
+  offsetLeft: number;
+  onClickDelete: MouseEventHandler<HTMLHeadingElement>;
+}
 
 export const DropdownActions = ({
   offsetLeft,
@@ -7,7 +13,7 @@ export const DropdownActions = ({
 }: DropdownActionsProps): JSX.Element => {
   return (
     <div
-      className="flex flex-col absolute items-center justify-center p-2 mb-16 bg-white shadow-md rounded-lg w-36"
+      className="flex flex-col absolute items-center justify-center p-2 mb-16 bg-white shadow-md rounded-lg w-36 dropdown__actions"
       style={{ left: offsetLeft - 160 }}
     >
       {onClickDelete ? (

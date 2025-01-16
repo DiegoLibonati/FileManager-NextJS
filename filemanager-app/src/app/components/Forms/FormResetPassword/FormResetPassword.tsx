@@ -1,10 +1,13 @@
 "use client";
 
+import { MouseEventHandler } from "react";
+import { AxiosError } from "axios";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { useForm } from "@/app/hooks/useForm";
 import { postResetPassword } from "@/services/auth/post/postResetPassword/postResetPassword";
-import { AxiosError } from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
 
 const INITIAL_VALUE_FORM = {
   password: "",
@@ -17,7 +20,10 @@ export const FormResetPassword = (): JSX.Element => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleSubmitResetPassword = async (): Promise<void> => {
+  const handleSubmitResetPassword: MouseEventHandler<
+    HTMLButtonElement
+  > = async (e) => {
+    e.preventDefault();
     handleSetAlert("loading", "Reseting password...", true);
 
     if (!formState.password.trim()) {
@@ -60,6 +66,7 @@ export const FormResetPassword = (): JSX.Element => {
             ? "text-primary bg-white cursor-not-allowed"
             : "text-white"
         }`}
+        aria-label="change password"
         onClick={handleSubmitResetPassword}
         disabled={alert.type === "loading"}
       >

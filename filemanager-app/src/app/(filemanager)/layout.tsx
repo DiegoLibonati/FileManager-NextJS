@@ -1,7 +1,10 @@
+import dynamic from "next/dynamic";
+
+import { Fragment } from "react";
+
 import { NavBar } from "@/app/components/NavBar/NavBar";
 import { Alert } from "@/app/components/Alerts/Alert/Alert";
 import { HeaderTitleSkeleton } from "@/app/components/Skeletons/HeaderTitleSkeleton/HeaderTitleSkeleton";
-import dynamic from "next/dynamic";
 
 const LazyHeaderTitle = dynamic(
   () =>
@@ -17,7 +20,7 @@ export default function FileManagerLayout({
   children: React.ReactNode;
 }>): JSX.Element {
   return (
-    <>
+    <Fragment>
       <header className="fixed bottom-0 w-full h-16 z-10 bg-white bg-opacity-95 shadow-md rounded-tl-lg rounded-tr-lg lg:h-screen lg:w-16">
         <NavBar></NavBar>
       </header>
@@ -28,6 +31,6 @@ export default function FileManagerLayout({
         {children}
       </main>
       <Alert></Alert>
-    </>
+    </Fragment>
   );
 }

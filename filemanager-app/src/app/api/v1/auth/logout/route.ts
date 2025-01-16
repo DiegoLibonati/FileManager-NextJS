@@ -1,5 +1,6 @@
-import connectMongo from "@/app/lib/connectMongo";
 import { NextResponse } from "next/server";
+
+import connectMongo from "@/app/lib/connectMongo";
 import { Jwt } from "@/app/lib/jwt";
 
 export async function GET() {

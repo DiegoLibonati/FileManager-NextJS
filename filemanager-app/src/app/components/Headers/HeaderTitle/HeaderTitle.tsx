@@ -1,14 +1,15 @@
 "use client";
 
-import { useParams, usePathname } from "next/navigation";
-import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { useMemo } from "react";
-import { HeaderTitleProps } from "@/app/lib/entities";
+import { useParams, usePathname } from "next/navigation";
+
+import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { ButtonUnverified } from "@/app/components/Buttons/ButtonUnverified/ButtonUnverified";
+
 import { getTitleByParams } from "@/app/lib/utils";
 import { useUserStore } from "@/app/hooks/useUserStore";
-import { ButtonUnverified } from "../../Buttons/ButtonUnverified/ButtonUnverified";
 
-export const HeaderTitle = ({}: HeaderTitleProps): JSX.Element => {
+export const HeaderTitle = (): JSX.Element => {
   const { user } = useUserStore();
   const pathname = usePathname();
   const params = useParams();

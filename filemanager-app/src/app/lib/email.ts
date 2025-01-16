@@ -30,6 +30,7 @@ export class Email {
     text: string
   ): string | Error {
     let message: string | Error = "";
+    
     const transporter = this.createTransport();
     const mailOptions = {
       from: this.authEmail,

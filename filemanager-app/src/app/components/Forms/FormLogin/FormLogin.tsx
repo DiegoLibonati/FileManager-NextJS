@@ -1,13 +1,15 @@
 "use client";
 
 import { MouseEventHandler } from "react";
-import { useForm } from "@/app/hooks/useForm";
-import { FormAuth } from "@/app/lib/entities";
-import { useRouter } from "next/navigation";
-import { useUserStore } from "@/app/hooks/useUserStore";
-import { postLogin } from "@/services/auth/post/postLogin/postLogin";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+
+import { FormAuth } from "@/app/lib/entities";
+
+import { useForm } from "@/app/hooks/useForm";
+import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { postLogin } from "@/services/auth/post/postLogin/postLogin";
 
 const INITIAL_VALUE_FORM = {
   username: "",
@@ -72,6 +74,7 @@ export const FormLogin = (): JSX.Element => {
 
       <button
         type="submit"
+        aria-label="sign in"
         className={`border-solid border-2 border-white rounded-full w-full mt-2 p-2 cursor-pointer transition-all active:scale-75 ${
           alert.type === "loading"
             ? "text-primary bg-white cursor-not-allowed"

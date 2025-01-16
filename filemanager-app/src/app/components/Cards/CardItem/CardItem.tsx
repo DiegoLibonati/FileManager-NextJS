@@ -1,17 +1,34 @@
 "use client";
 
-import { CardItemProps } from "@/app/lib/entities";
+import { MouseEventHandler, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import {
+  CategoryShared,
+  ColorsShared,
+  GeneralShared,
+} from "@/app/lib/entities";
+
 import { Card } from "@/app/components/Cards/Card/Card";
 import { Heading } from "@/app/components/Headers/Heading/Heading";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
-import { MouseEventHandler, useRef, useState } from "react";
 import { ButtonActions } from "@/app/components/Buttons/ButtonActions/ButtonActions";
 import { DropdownActions } from "@/app/components/Dropdown/DropdownActions/DropdownActions";
-import { useRouter } from "next/navigation";
+
 import { parseEscapeString } from "@/app/lib/utils";
-import { deleteItem } from "@/services/filemanager/delete/deleteItem/deleteItem";
 import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { deleteItem } from "@/services/filemanager/delete/deleteItem/deleteItem";
+
+interface CardItemProps
+  extends GeneralShared,
+    Partial<CategoryShared>,
+    ColorsShared {
+  title: string;
+  subTitle: string;
+  path: string;
+  type: string;
+}
 
 export const CardItem = ({
   idCategory,
@@ -57,7 +74,7 @@ export const CardItem = ({
 
   return (
     <Card
-      className={`relative flex flex-row items-center justify-start shadow-md w-full h-24 p-4 bg-white rounded-lg lg:h-32 ${
+      className={`relative flex flex-row items-center justify-start shadow-md w-full h-24 p-4 bg-white rounded-lg lg:h-32 card__item ${
         type === "folder" ? "cursor-pointer" : ""
       } ${className}`}
       onClick={handleClickCard}

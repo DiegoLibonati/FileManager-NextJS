@@ -1,9 +1,15 @@
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-
-import { setUser } from "@/redux/features/user/userSlice";
 import { useEffect } from "react";
+
+import { User, Session } from "@/app/lib/entities";
+
 import { useSession } from "@/app/hooks/useSession";
-import { UseUserStore, User, Session } from "@/app/lib/entities";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser } from "@/redux/features/user/userSlice";
+
+type UseUserStore = {
+  user: User | null;
+  handleSetUser: (user: User | null) => void;
+};
 
 export const useUserStore = (): UseUserStore => {
   const { session } = useSession<Session>();
@@ -28,6 +34,6 @@ export const useUserStore = (): UseUserStore => {
 
   return {
     user: user.user,
-    handleSetUser,
+    handleSetUser: handleSetUser,
   };
 };

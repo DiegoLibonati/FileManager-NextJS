@@ -1,7 +1,7 @@
 "use client";
 
-import { FaPlus } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import { FaPlus } from "react-icons/fa";
 
 export const ButtonAdd = (): JSX.Element => {
   const router = useRouter();
@@ -19,6 +19,7 @@ export const ButtonAdd = (): JSX.Element => {
       className="flex items-center justify-center absolute top-4 right-4 h-8 w-8 text-2xl bg-primary rounded-full cursor-pointer shadow-md"
       type="button"
       onClick={handleClickAdd}
+      aria-label="button add"
     >
       <FaPlus fontSize={16} fill="#fff"></FaPlus>
     </button>

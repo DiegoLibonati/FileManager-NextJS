@@ -1,8 +1,9 @@
-import User from "@/models/user";
-import connectMongo from "@/app/lib/connectMongo";
 import { NextRequest, NextResponse } from "next/server";
+
+import connectMongo from "@/app/lib/connectMongo";
 import { Email } from "@/app/lib/email";
 import { Encrpyt } from "@/app/lib/encrypt";
+import User from "@/models/user";
 
 export async function POST(req: NextRequest) {
   await connectMongo();

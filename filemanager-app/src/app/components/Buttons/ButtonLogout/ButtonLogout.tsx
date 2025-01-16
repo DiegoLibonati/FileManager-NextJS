@@ -1,10 +1,11 @@
 "use client";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { getLogout } from "@/services/auth/get/getLogout/getLogout";
-import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
+import { useRouter } from "next/navigation";
+
+import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { getLogout } from "@/services/auth/get/getLogout/getLogout";
 
 export const ButtonLogout = (): JSX.Element => {
   const router = useRouter();
@@ -24,6 +25,7 @@ export const ButtonLogout = (): JSX.Element => {
       className="lg:my-4 lg:absolute lg:bottom-0 lg:cursor-pointer"
       type="button"
       onClick={handleClickLogOut}
+      aria-label="button logout"
     >
       <AiOutlineLogout fontSize={24} fill="red"></AiOutlineLogout>
     </button>

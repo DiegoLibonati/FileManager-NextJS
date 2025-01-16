@@ -1,5 +1,10 @@
+import { LegacyRef, MouseEventHandler } from "react";
 import { TbDotsVertical } from "react-icons/tb";
-import { ButtonActionsProps } from "@/app/lib/entities";
+
+interface ButtonActionsProps {
+  innerRef: LegacyRef<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
 
 export const ButtonActions = ({
   onClick,
@@ -9,6 +14,7 @@ export const ButtonActions = ({
     <button
       className="flex absolute items-center justify-center right-2"
       type="button"
+      aria-label="button actions"
       onClick={onClick}
       ref={innerRef}
     >

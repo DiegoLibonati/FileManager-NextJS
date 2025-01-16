@@ -1,4 +1,6 @@
-import { ParagraphProps } from "@/app/lib/entities";
+import { GeneralShared } from "@/app/lib/entities";
+
+interface ParagraphProps extends GeneralShared {}
 
 export const Paragraph = ({
   className,

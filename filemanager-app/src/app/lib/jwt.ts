@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import * as jose from "jose";
+import { cookies } from "next/headers";
 
 type JWTConfig = {
   payload?: Record<string, string> | null;

@@ -1,18 +1,22 @@
 "use client";
 
-import { ButtonCreate } from "@/app/components/Buttons/ButtonCreate/ButtonCreate";
-import { MouseEventHandler, useEffect, useState } from "react";
-import {
-  FormUpload as FormUploadT,
-  FormUploadProps,
-} from "@/app/lib/entities";
-import { useForm } from "@/app/hooks/useForm";
+import { Fragment, MouseEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { parseEscapeString } from "@/app/lib/utils";
-import { postCreateFolder } from "@/services/filemanager/post/postCreateFolder/postCreateFolder";
-import { postUploadFile } from "@/services/filemanager/post/postUploadFile/postUploadFile";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { AxiosError } from "axios";
+
+import { FormUpload as FormUploadT } from "@/app/lib/entities";
+
+import { ButtonCreate } from "@/app/components/Buttons/ButtonCreate/ButtonCreate";
+
+import { parseEscapeString } from "@/app/lib/utils";
+import { useForm } from "@/app/hooks/useForm";
+import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { postUploadFile } from "@/services/filemanager/post/postUploadFile/postUploadFile";
+import { postCreateFolder } from "@/services/filemanager/post/postCreateFolder/postCreateFolder";
+
+interface FormUploadProps {
+  path: string;
+}
 
 const INITIAL_VALUE = {
   folderName: "",
@@ -40,7 +44,11 @@ export const FormUpload = ({ path }: FormUploadProps): JSX.Element => {
 
     if (!pathToUpload || (selectValue === "file" && !file)) {
       onClearForm();
-      handleSetAlert("warning", "A file is required to upload, select it.", true);
+      handleSetAlert(
+        "warning",
+        "A file is required to upload, select it.",
+        true
+      );
       return;
     }
 
@@ -137,7 +145,7 @@ export const FormUpload = ({ path }: FormUploadProps): JSX.Element => {
           </div>
         )}
         {selectValue === "file" && (
-          <>
+          <Fragment>
             <input
               className="p-4 outline-none rounded-lg mt-2 text-sm placeholder:text-black"
               placeholder="Path"
@@ -164,7 +172,7 @@ export const FormUpload = ({ path }: FormUploadProps): JSX.Element => {
                 {!file ? "Select a file" : file.name}
               </label>
             </div>
-          </>
+          </Fragment>
         )}
       </div>
 

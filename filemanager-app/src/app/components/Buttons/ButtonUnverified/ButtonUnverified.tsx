@@ -1,9 +1,10 @@
 "use client";
 
+import { MouseEventHandler } from "react";
+import { AxiosError } from "axios";
+
 import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { getSendEmailToVerify } from "@/services/user/get/getSendEmailToVerify/getSendEmailToVerify";
-import { AxiosError } from "axios";
-import { MouseEventHandler } from "react";
 
 export const ButtonUnverified = (): JSX.Element => {
   const { handleSetAlert } = useAlertStore();
@@ -27,6 +28,7 @@ export const ButtonUnverified = (): JSX.Element => {
       type="button"
       className="text-primary text-xs ml-2 hover:underline"
       onClick={handleSendEmailToVerify}
+      aria-label="button unverified"
     >
       Unverified
     </button>

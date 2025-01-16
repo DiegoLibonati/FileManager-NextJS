@@ -1,5 +1,7 @@
-import { Alert } from "@/app/components/Alerts/Alert/Alert";
+import { Fragment } from "react";
 import Image from "next/image";
+
+import { Alert } from "@/app/components/Alerts/Alert/Alert";
 
 export default function AuthLayout({
   children,
@@ -7,7 +9,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>): JSX.Element {
   return (
-    <>
+    <Fragment>
       <main className="flex relative items-center justify-center w-full min-h-screen h-full bg-primary p-8">
         <section className="flex flex-col items-center justify-center w-full bg-primary lg:flex-row lg:h-[30rem] lg:shadow-md lg:w-[60rem] lg:rounded-lg">
           <article className="hidden items-center justify-center w-[50%] h-full bg-white p-4 rounded-tl-lg rounded-bl-lg lg:flex">
@@ -23,6 +25,6 @@ export default function AuthLayout({
         </section>
       </main>
       <Alert></Alert>
-    </>
+    </Fragment>
   );
 }

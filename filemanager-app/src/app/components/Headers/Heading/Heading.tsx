@@ -1,4 +1,11 @@
-import { HeadingProps } from "@/app/lib/entities";
+import { MouseEventHandler } from "react";
+
+import { GeneralShared } from "@/app/lib/entities";
+
+interface HeadingProps extends GeneralShared {
+  element: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  onClick?: MouseEventHandler<HTMLHeadingElement>;
+}
 
 export const Heading = ({
   element,

@@ -1,7 +1,14 @@
+import { Folder, FolderType } from "@/app/lib/entities";
+
 import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
-import { FolderListProps } from "@/app/lib/entities";
 import { CardSimple } from "@/app/components/Cards/CardSimple/CardSimple";
+
 import { bytesToMB } from "@/app/lib/utils";
+
+interface FolderListProps {
+  folders: Folder[];
+  folderType: FolderType;
+}
 
 export const FolderList = ({ folders, folderType }: FolderListProps) => {
   return (

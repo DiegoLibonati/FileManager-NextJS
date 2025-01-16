@@ -1,6 +1,12 @@
 import React from "react";
+
+import { GeneralShared } from "@/app/lib/entities";
+
 import "@/app/components/Loaders/Loader/Loader.css";
-import { LoaderProps } from "@/app/lib/entities";
+
+interface LoaderProps extends GeneralShared {
+  color: string;
+}
 
 export const Loader = ({
   color,

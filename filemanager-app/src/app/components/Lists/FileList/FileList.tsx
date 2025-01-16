@@ -1,6 +1,12 @@
-import { bytesToMB } from "@/app/lib/utils";
-import { FileListProps } from "@/app/lib/entities";
+import { File } from "@/app/lib/entities";
+
 import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
+
+import { bytesToMB } from "@/app/lib/utils";
+
+interface FileListProps {
+  files: File[];
+}
 
 export const FileList = ({ files }: FileListProps): JSX.Element => {
   return (

@@ -1,5 +1,10 @@
 import { ChangeEventHandler, useState } from "react";
-import { UseForm } from "@/app/lib/entities";
+
+type UseForm<T> = {
+  formState: T;
+  onChangeInput: ChangeEventHandler<HTMLInputElement>;
+  onClearForm: () => void;
+};
 
 export const useForm = <T,>(initialValue: T): UseForm<T> => {
   const [formState, setFormState] = useState<T>(initialValue);

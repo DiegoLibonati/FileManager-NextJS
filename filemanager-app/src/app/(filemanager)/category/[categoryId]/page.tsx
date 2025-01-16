@@ -1,6 +1,12 @@
-import { CategoryPageProps } from "@/app/lib/entities";
 import dynamic from "next/dynamic";
+
 import { SectionFilesSkeleton } from "@/app/components/Skeletons/SectionFilesSkeleton/SectionFilesSkeleton";
+
+interface CategoryPageProps {
+  params: {
+    categoryId: string;
+  };
+}
 
 const LazySectionFiles = dynamic(
   () =>
@@ -10,7 +16,9 @@ const LazySectionFiles = dynamic(
   { ssr: false, loading: () => <SectionFilesSkeleton></SectionFilesSkeleton> }
 );
 
-export default function CategoryPage({ params }: CategoryPageProps): JSX.Element {
+export default function CategoryPage({
+  params,
+}: CategoryPageProps): JSX.Element {
   return (
     <LazySectionFiles
       idCategory={params.categoryId as string}

@@ -1,7 +1,21 @@
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import Link from "next/link";
-import { CardCategoryProps } from "@/app/lib/entities";
+
+import {
+  CategoryShared,
+  ColorsShared,
+  GeneralShared,
+} from "@/app/lib/entities";
+
+import { Paragraph } from "@/app/components/Paragraph/Paragraph";
 import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
+
+interface CardCategoryProps
+  extends GeneralShared,
+    CategoryShared,
+    ColorsShared {
+  href: string;
+  categoryName: string;
+}
 
 export const CardCategory = ({
   href,
@@ -13,6 +27,7 @@ export const CardCategory = ({
   return (
     <Link
       href={href}
+      aria-label={`go to ${href}`}
       className="flex flex-col items-center justify-center w-full h-auto lg:cursor-pointer"
     >
       <CardIcon

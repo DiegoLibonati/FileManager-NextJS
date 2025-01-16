@@ -1,16 +1,19 @@
 import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { CircleProgressProps } from "@/app/lib/entities";
 import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+
+interface CircleProgressProps {
+  percentage: string;
+}
 
 export const CircleProgress = ({
   percentage,
 }: CircleProgressProps): JSX.Element => {
-  const normalizedPercentage = Math.min(Math.max(parseInt(percentage), 0), 100); // Ensure the percentage is between 0 and 100
+  const normalizedPercentage = Math.min(Math.max(parseInt(percentage), 0), 100);
 
   return (
-    <div className="relative flex items-center justify-center w-48 h-48 rounded-full overflow-hidden lg:w-64 lg:h-64">
+    <div className="relative flex items-center justify-center w-48 h-48 rounded-full overflow-hidden circle__progress lg:w-64 lg:h-64">
       <div
-        className="absolute w-full h-full rounded-full"
+        className="absolute w-full h-full rounded-full circle__progress--filled"
         style={{
           backgroundImage: `conic-gradient(#8357fe ${normalizedPercentage}%, #f2f2f2 ${normalizedPercentage}%)`,
         }}

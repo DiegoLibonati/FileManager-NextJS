@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
-import { useForm } from "@/app/hooks/useForm";
-import { FormAuth } from "@/app/lib/entities";
-import { postRegister } from "@/services/auth/post/postRegister/postRegister";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+
+import { FormAuth } from "@/app/lib/entities";
+
+import { useForm } from "@/app/hooks/useForm";
+import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { postRegister } from "@/services/auth/post/postRegister/postRegister";
 
 const INITIAL_VALUE_FORM = {
   username: "",
@@ -85,6 +87,7 @@ export const FormRegister = (): JSX.Element => {
             ? "text-primary bg-white cursor-not-allowed"
             : "text-white"
         }`}
+        aria-label="sign up"
         onClick={handleSubmitRegister}
         disabled={alert.type === "loading"}
       >

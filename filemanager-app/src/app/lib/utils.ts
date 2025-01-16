@@ -1,4 +1,5 @@
 import { Category } from "@/app/lib/entities";
+
 import { categoriesExtension } from "@/app/lib/constants";
 
 export const roundToOneDecimal = (num: number): number => {

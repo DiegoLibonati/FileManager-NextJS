@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
 import { AlertState, Alert } from "@/app/lib/entities";
 
 const INITIAL_STATE: AlertState = {
