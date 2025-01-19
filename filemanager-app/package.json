@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
