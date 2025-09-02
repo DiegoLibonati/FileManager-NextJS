@@ -1,5 +1,5 @@
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
 
 interface CircleProgressProps {
   percentage: string;

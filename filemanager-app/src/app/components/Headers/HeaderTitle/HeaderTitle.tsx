@@ -3,11 +3,11 @@
 import { useMemo } from "react";
 import { useParams, usePathname } from "next/navigation";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { ButtonUnverified } from "@/app/components/Buttons/ButtonUnverified/ButtonUnverified";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { ButtonUnverified } from "@src/app/components/Buttons/ButtonUnverified/ButtonUnverified";
 
-import { getTitleByParams } from "@/app/lib/utils";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { getTitleByParams } from "@src/app/lib/utils";
+import { useUserStore } from "@src/app/hooks/useUserStore";
 
 export const HeaderTitle = (): JSX.Element => {
   const { user } = useUserStore();

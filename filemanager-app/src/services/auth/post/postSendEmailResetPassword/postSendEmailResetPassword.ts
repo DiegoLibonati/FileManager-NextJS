@@ -1,6 +1,6 @@
-import { FormAuth } from "@/app/lib/entities";
+import { FormAuth } from "@src/app/lib/entities";
 
-import axiosInstance from "@/services/axios";
+import axiosInstance from "@src/services/axios";
 
 export const postSendEmailResetPassword = async (
   form: Pick<FormAuth, "email">

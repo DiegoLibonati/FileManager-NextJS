@@ -18,7 +18,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@src/*": ["./src/*"],
+      "@tests/*": ["./tests/*"],
     },
     "types": ["node", "jest", "@testing-library/jest-dom"],
   },

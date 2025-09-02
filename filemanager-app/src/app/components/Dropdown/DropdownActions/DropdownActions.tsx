@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
 
 interface DropdownActionsProps {
   offsetLeft: number;

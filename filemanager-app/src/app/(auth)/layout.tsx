@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Image from "next/image";
 
-import { Alert } from "@/app/components/Alerts/Alert/Alert";
+import { Alert } from "@src/app/components/Alerts/Alert/Alert";
 
 export default function AuthLayout({
   children,

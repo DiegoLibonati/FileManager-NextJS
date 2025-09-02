@@ -1,11 +1,11 @@
 import React from "react";
 import { FaCloud } from "react-icons/fa";
 
-import { LinealProgress } from "@/app/components/Charts/LinealProgress/LinealProgress";
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+import { LinealProgress } from "@src/app/components/Charts/LinealProgress/LinealProgress";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
 
-import { getSpaceUsed } from "@/services/filemanager/get/getSpaceUsed/getSpaceUsed";
+import { getSpaceUsed } from "@src/services/filemanager/get/getSpaceUsed/getSpaceUsed";
 
 export const SectionCloudStorages = async (): Promise<JSX.Element> => {
   const spaceUsed = await getSpaceUsed();

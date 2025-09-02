@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { DropdownActions } from "@/app/components/Dropdown/DropdownActions/DropdownActions";
+import { DropdownActions } from "@src/app/components/Dropdown/DropdownActions/DropdownActions";
 
 type RenderComponent = {
   container: HTMLElement;

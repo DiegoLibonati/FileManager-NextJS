@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { SectionFilesSkeleton } from "@/app/components/Skeletons/SectionFilesSkeleton/SectionFilesSkeleton";
+import { SectionFilesSkeleton } from "@src/app/components/Skeletons/SectionFilesSkeleton/SectionFilesSkeleton";
 
 interface CategoryPageProps {
   params: {
@@ -10,7 +10,7 @@ interface CategoryPageProps {
 
 const LazySectionFiles = dynamic(
   () =>
-    import("@/containers/category/SectionFiles/SectionFiles").then(
+    import("@src/containers/category/SectionFiles/SectionFiles").then(
       (mod) => mod.SectionFiles
     ),
   { ssr: false, loading: () => <SectionFilesSkeleton></SectionFilesSkeleton> }

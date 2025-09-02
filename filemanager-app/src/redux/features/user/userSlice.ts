@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { User, UserState } from "@/app/lib/entities";
+import { User, UserState } from "@src/app/lib/entities";
 
 const INITIAL_STATE: UserState = {
   user: null,

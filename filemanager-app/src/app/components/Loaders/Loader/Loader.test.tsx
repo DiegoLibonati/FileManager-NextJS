@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { Loader } from "@/app/components/Loaders/Loader/Loader";
+import { Loader } from "@src/app/components/Loaders/Loader/Loader";
 
 type RenderComponent = {
   container: HTMLElement;

@@ -1,10 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { File, Folder } from "@/app/lib/entities";
+import { File, Folder } from "@src/app/lib/entities";
 
-import { getCategoryByExtension, getExtension } from "@/app/lib/utils";
-import { categories } from "@/app/lib/constants";
+import { getCategoryByExtension, getExtension } from "@src/app/lib/utils";
+import { categories } from "@src/app/lib/constants";
 
 export class FileManager {
   // /home/app/src/cloud/Die2/carpeta/carpetita

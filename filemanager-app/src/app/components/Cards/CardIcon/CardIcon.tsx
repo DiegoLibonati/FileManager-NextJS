@@ -7,9 +7,9 @@ import {
   CategoryShared,
   ColorsShared,
   GeneralShared,
-} from "@/app/lib/entities";
+} from "@src/app/lib/entities";
 
-import { Card } from "@/app/components/Cards/Card/Card";
+import { Card } from "@src/app/components/Cards/Card/Card";
 
 export interface CardIconProps
   extends GeneralShared,

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { FormSendEmailResetPassword } from "@/app/components/Forms/FormSendEmailResetPassword/FormSendEmailResetPassword";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { FormSendEmailResetPassword } from "@src/app/components/Forms/FormSendEmailResetPassword/FormSendEmailResetPassword";
 
 export default function ResetPasswordPage(): JSX.Element {
   return (

@@ -3,7 +3,7 @@ name: "filemanager-die"
 services:
   frontend:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.development
       context: ./filemanager-app
     restart: always
     env_file:

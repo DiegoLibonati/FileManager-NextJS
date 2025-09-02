@@ -1,14 +1,14 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { FileManager } from "@/app/lib/fileManager";
-import connectMongo from "@/app/lib/connectMongo";
+import { FileManager } from "@src/app/lib/fileManager";
+import connectMongo from "@src/app/lib/connectMongo";
 import {
   getCategoryByExtension,
   getExtension,
   validExtensions,
-} from "@/app/lib/utils";
-import { categories, categoriesExtension } from "@/app/lib/constants";
-import RecentFile from "@/models/recentFile";
+} from "@src/app/lib/utils";
+import { categories, categoriesExtension } from "@src/app/lib/constants";
+import RecentFile from "@src/models/recentFile";
 import pathLib from "path";
 
 export async function POST(req: NextRequest) {

@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 
 import { usePathname } from "next/navigation";
 
-import { NavBar } from "@/app/components/NavBar/NavBar";
+import { NavBar } from "@src/app/components/NavBar/NavBar";
 
-import { mockUseAlertStore, mockUsePathname } from "@/tests/jest.constants";
+import { mockUseAlertStore, mockUsePathname } from "@tests/jest.constants";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -24,7 +24,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
   usePathname: jest.fn(),
 }));
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
 

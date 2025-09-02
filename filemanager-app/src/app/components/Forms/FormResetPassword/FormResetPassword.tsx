@@ -5,9 +5,9 @@ import { AxiosError } from "axios";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { useForm } from "@/app/hooks/useForm";
-import { postResetPassword } from "@/services/auth/post/postResetPassword/postResetPassword";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { useForm } from "@src/app/hooks/useForm";
+import { postResetPassword } from "@src/services/auth/post/postResetPassword/postResetPassword";
 
 const INITIAL_VALUE_FORM = {
   password: "",

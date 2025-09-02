@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-import { IUser } from "@/app/lib/entities";
+import { IUser } from "@src/app/lib/entities";
 
 const UserSchema = new Schema<IUser>(
   {

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { IUser } from "@/app/lib/entities";
+import { IUser } from "@src/app/lib/entities";
 
-import connectMongo from "@/app/lib/connectMongo";
-import { Encrpyt } from "@/app/lib/encrypt";
-import { Jwt } from "@/app/lib/jwt";
-import User from "@/models/user";
+import connectMongo from "@src/app/lib/connectMongo";
+import { Encrpyt } from "@src/app/lib/encrypt";
+import { Jwt } from "@src/app/lib/jwt";
+import User from "@src/models/user";
 
 export async function POST(req: NextRequest) {
   await connectMongo();

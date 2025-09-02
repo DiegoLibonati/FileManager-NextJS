@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 
-import { FolderListWithActionsSkeleton } from "@/app/components/Skeletons/FolderListWithActionsSkeleton/FolderListWithActionsSkeleton";
+import { FolderListWithActionsSkeleton } from "@src/app/components/Skeletons/FolderListWithActionsSkeleton/FolderListWithActionsSkeleton";
 
 const LazySectionFolders = dynamic(
   () =>
-    import("@/containers/folders/SectionFolders/SectionFolders").then(
+    import("@src/containers/folders/SectionFolders/SectionFolders").then(
       (mod) => mod.SectionFolders
     ),
   {

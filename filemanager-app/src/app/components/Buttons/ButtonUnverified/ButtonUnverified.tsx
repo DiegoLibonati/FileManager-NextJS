@@ -3,8 +3,8 @@
 import { MouseEventHandler } from "react";
 import { AxiosError } from "axios";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { getSendEmailToVerify } from "@/services/user/get/getSendEmailToVerify/getSendEmailToVerify";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { getSendEmailToVerify } from "@src/services/user/get/getSendEmailToVerify/getSendEmailToVerify";
 
 export const ButtonUnverified = (): JSX.Element => {
   const { handleSetAlert } = useAlertStore();

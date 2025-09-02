@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { getUpgradePlan } from "@/services/user/get/getUpgradePlan/getUpgradePlan";
+import { getUpgradePlan } from "@src/services/user/get/getUpgradePlan/getUpgradePlan";
 
 export const ButtonUpgrade = (): JSX.Element => {
   const router = useRouter();

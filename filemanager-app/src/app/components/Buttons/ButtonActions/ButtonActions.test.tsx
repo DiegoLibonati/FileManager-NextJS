@@ -3,7 +3,7 @@ import user from "@testing-library/user-event";
 
 import { createRef, RefObject } from "react";
 
-import { ButtonActions } from "@/app/components/Buttons/ButtonActions/ButtonActions";
+import { ButtonActions } from "@src/app/components/Buttons/ButtonActions/ButtonActions";
 
 type RenderComponent = {
   container: HTMLElement;

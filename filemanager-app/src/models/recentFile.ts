@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-import { IFile } from "@/app/lib/entities";
+import { IFile } from "@src/app/lib/entities";
 
 const RecentFileSchema = new Schema<IFile>(
   {

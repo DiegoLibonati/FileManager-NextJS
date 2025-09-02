@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 
-import { ButtonAdd } from "@/app/components/Buttons/ButtonAdd/ButtonAdd";
-import { SectionFolderSkeleton } from "@/app/components/Skeletons/SectionFolderSkeleton/SectionFolderSkeleton";
+import { ButtonAdd } from "@src/app/components/Buttons/ButtonAdd/ButtonAdd";
+import { SectionFolderSkeleton } from "@src/app/components/Skeletons/SectionFolderSkeleton/SectionFolderSkeleton";
 
 interface FolderPageProps {
   params: {
@@ -12,7 +12,7 @@ interface FolderPageProps {
 
 const LazySectionFolder = dynamic(
   () =>
-    import("@/containers/folder/SectionFolder/SectionFolder").then(
+    import("@src/containers/folder/SectionFolder/SectionFolder").then(
       (mod) => mod.SectionFolder
     ),
   {

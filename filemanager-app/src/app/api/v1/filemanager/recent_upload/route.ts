@@ -1,5 +1,5 @@
-import connectMongo from "@/app/lib/connectMongo";
-import RecentFile from "@/models/recentFile";
+import connectMongo from "@src/app/lib/connectMongo";
+import RecentFile from "@src/models/recentFile";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

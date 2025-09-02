@@ -3,7 +3,7 @@
 import * as jose from "jose";
 import { cookies } from "next/headers";
 
-import { User } from "@/app/lib/entities";
+import { User } from "@src/app/lib/entities";
 
 export const getSession = async (): Promise<User> => {
   const session = await jose.jwtVerify(

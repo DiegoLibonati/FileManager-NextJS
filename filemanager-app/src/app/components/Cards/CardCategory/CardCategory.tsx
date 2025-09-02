@@ -4,10 +4,10 @@ import {
   CategoryShared,
   ColorsShared,
   GeneralShared,
-} from "@/app/lib/entities";
+} from "@src/app/lib/entities";
 
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
+import { CardIcon } from "@src/app/components/Cards/CardIcon/CardIcon";
 
 interface CardCategoryProps
   extends GeneralShared,

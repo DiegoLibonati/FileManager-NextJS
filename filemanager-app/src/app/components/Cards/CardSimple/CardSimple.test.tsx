@@ -3,9 +3,9 @@ import user from "@testing-library/user-event";
 
 import { useRouter } from "next/navigation";
 
-import { CardSimple } from "@/app/components/Cards/CardSimple/CardSimple";
+import { CardSimple } from "@src/app/components/Cards/CardSimple/CardSimple";
 
-import { mockUseRouter } from "@/tests/jest.constants";
+import { mockUseRouter } from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

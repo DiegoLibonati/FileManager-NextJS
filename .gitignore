@@ -43,3 +43,4 @@ jspm_packages
 # Docker
 volumes
 yarn.lock
+package-lock.json

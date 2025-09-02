@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
-import { Jwt } from "@/app/lib/jwt";
+import { Jwt } from "@src/app/lib/jwt";
 
 const publicPaths = ["/login", "/register", "/reset", "/new"];
 const apiAuthPaths = [

@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation";
 
-import { ColorsShared } from "@/app/lib/entities";
+import { ColorsShared } from "@src/app/lib/entities";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Card } from "@/app/components/Cards/Card/Card";
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Card } from "@src/app/components/Cards/Card/Card";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
+import { CardIcon } from "@src/app/components/Cards/CardIcon/CardIcon";
 
 export interface CardSimpleProps extends ColorsShared {
   title: string;

@@ -4,9 +4,9 @@ import { MouseEventHandler } from "react";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { useForm } from "@/app/hooks/useForm";
-import { postSendEmailResetPassword } from "@/services/auth/post/postSendEmailResetPassword/postSendEmailResetPassword";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { useForm } from "@src/app/hooks/useForm";
+import { postSendEmailResetPassword } from "@src/services/auth/post/postSendEmailResetPassword/postSendEmailResetPassword";
 
 const INITIAL_VALUE_FORM = {
   email: "",

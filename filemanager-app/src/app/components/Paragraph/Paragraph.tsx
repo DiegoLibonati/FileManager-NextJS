@@ -1,4 +1,4 @@
-import { GeneralShared } from "@/app/lib/entities";
+import { GeneralShared } from "@src/app/lib/entities";
 
 interface ParagraphProps extends GeneralShared {}
 

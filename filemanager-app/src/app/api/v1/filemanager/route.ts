@@ -1,5 +1,5 @@
-import { FileManager } from "@/app/lib/fileManager";
-import RecentFile from "@/models/recentFile";
+import { FileManager } from "@src/app/lib/fileManager";
+import RecentFile from "@src/models/recentFile";
 import { NextRequest, NextResponse } from "next/server";
 import pathLib from "path";
 

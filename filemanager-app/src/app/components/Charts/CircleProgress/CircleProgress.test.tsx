@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { CircleProgress } from "@/app/components/Charts/CircleProgress/CircleProgress";
+import { CircleProgress } from "@src/app/components/Charts/CircleProgress/CircleProgress";
 
 type RenderComponent = {
   container: HTMLElement;

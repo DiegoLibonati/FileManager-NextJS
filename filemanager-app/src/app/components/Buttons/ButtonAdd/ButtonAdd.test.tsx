@@ -3,9 +3,9 @@ import user from "@testing-library/user-event";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import { ButtonAdd } from "@/app/components/Buttons/ButtonAdd/ButtonAdd";
+import { ButtonAdd } from "@src/app/components/Buttons/ButtonAdd/ButtonAdd";
 
-import { mockUsePathname, mockUseRouter } from "@/tests/jest.constants";
+import { mockUsePathname, mockUseRouter } from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

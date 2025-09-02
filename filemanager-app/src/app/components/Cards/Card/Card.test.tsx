@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { Card } from "@/app/components/Cards/Card/Card";
+import { Card } from "@src/app/components/Cards/Card/Card";
 
 type RenderComponent = {
   container: HTMLElement;

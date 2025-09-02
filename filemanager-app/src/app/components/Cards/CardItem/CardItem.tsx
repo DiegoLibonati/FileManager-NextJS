@@ -7,18 +7,18 @@ import {
   CategoryShared,
   ColorsShared,
   GeneralShared,
-} from "@/app/lib/entities";
+} from "@src/app/lib/entities";
 
-import { Card } from "@/app/components/Cards/Card/Card";
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
-import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
-import { ButtonActions } from "@/app/components/Buttons/ButtonActions/ButtonActions";
-import { DropdownActions } from "@/app/components/Dropdown/DropdownActions/DropdownActions";
+import { Card } from "@src/app/components/Cards/Card/Card";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
+import { CardIcon } from "@src/app/components/Cards/CardIcon/CardIcon";
+import { ButtonActions } from "@src/app/components/Buttons/ButtonActions/ButtonActions";
+import { DropdownActions } from "@src/app/components/Dropdown/DropdownActions/DropdownActions";
 
-import { parseEscapeString } from "@/app/lib/utils";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { deleteItem } from "@/services/filemanager/delete/deleteItem/deleteItem";
+import { parseEscapeString } from "@src/app/lib/utils";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { deleteItem } from "@src/services/filemanager/delete/deleteItem/deleteItem";
 
 interface CardItemProps
   extends GeneralShared,

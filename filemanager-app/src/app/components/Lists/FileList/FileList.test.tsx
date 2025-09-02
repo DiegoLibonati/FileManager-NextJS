@@ -2,13 +2,13 @@ import { render } from "@testing-library/react";
 
 import { useRouter } from "next/navigation";
 
-import { File } from "@/app/lib/entities";
+import { File } from "@src/app/lib/entities";
 
-import { FileList } from "@/app/components/Lists/FileList/FileList";
+import { FileList } from "@src/app/components/Lists/FileList/FileList";
 
-import { mockUseAlertStore, mockUseRouter } from "@/tests/jest.constants";
+import { mockUseAlertStore, mockUseRouter } from "@tests/jest.constants";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -45,7 +45,7 @@ const renderComponent = (): RenderComponent => {
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
 

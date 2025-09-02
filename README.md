@@ -4,10 +4,10 @@
 
 1. Clone the repository with `git clone "repository link"`
 2. Join to `filemanager-app` folder and execute: `npm install` or `yarn install` in the terminal
-3. Go to the previous folder and execute: `docker-compose build --no-cache` in the terminal
-4. Once built, you must execute the command: `docker-compose up --force-recreate` in the terminal
+3. Go to the previous folder and execute: `docker-compose -f dev.docker-compose.yml build --no-cache` in the terminal
+4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
 
-NOTE: You have to be standing in the folder containing the: `docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
+NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
 NOTE: In the folder whose location is: `filemanager-app/src/cloud`, inside the cloud folder will be created the folders for each user registered in the application. The name of the main folder refers to the user's username. 
 
 ## Description
@@ -37,13 +37,6 @@ This repository is a FileManager created in NextJS 14.
 #### Dependencies
 
 ```
-"@types/bcryptjs": "^2.4.6"
-"@types/jest": "^29.5.14"
-"@types/node": "^20.14.0"
-"@types/nodemailer": "^6.4.15"
-"@types/react": "^18"
-"@types/react-dom": "^18"
-"@types/supertest": "^6.0.2"
 "@reduxjs/toolkit": "^2.2.5"
 "axios": "^1.7.2"
 "bcryptjs": "^2.4.3"
@@ -64,6 +57,14 @@ This repository is a FileManager created in NextJS 14.
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/react": "^16.1.0"
 "@testing-library/user-event": "^14.5.2"
+"@types/bcryptjs": "^2.4.6"
+"@types/jest": "^29.5.14"
+"@types/node": "^20.14.0"
+"@types/nodemailer": "^6.4.15"
+"@types/react": "^18"
+"@types/react-dom": "^18"
+"@types/supertest": "^6.0.2"
+"axios-mock-adapter": "^2.1.0"
 "eslint": "^8"
 "eslint-config-next": "14.2.3"
 "jest": "^29.7.0"
@@ -72,7 +73,6 @@ This repository is a FileManager created in NextJS 14.
 "tailwindcss": "^3.4.1"
 "ts-node": "^10.9.2"
 "typescript": "^5"
-"axios-mock-adapter": "^2.1.0"
 ```
 
 ## Portfolio Link

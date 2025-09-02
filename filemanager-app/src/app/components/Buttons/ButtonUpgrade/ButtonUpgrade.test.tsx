@@ -4,11 +4,14 @@ import user from "@testing-library/user-event";
 import MockAdapter from "axios-mock-adapter";
 import { useRouter } from "next/navigation";
 
-import { ButtonUpgrade } from "@/app/components/Buttons/ButtonUpgrade/ButtonUpgrade";
+import { ButtonUpgrade } from "@src/app/components/Buttons/ButtonUpgrade/ButtonUpgrade";
 
-import { mockResponseChangePlan, mockUseRouter } from "@/tests/jest.constants";
+import {
+  mockResponseChangePlan,
+  mockUseRouter,
+} from "@tests/jest.constants";
 
-import axiosInstance from "@/services/axios";
+import axiosInstance from "@src/services/axios";
 
 type RenderComponent = {
   container: HTMLElement;

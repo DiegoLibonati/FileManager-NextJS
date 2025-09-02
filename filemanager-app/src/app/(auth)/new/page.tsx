@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { FormResetPassword } from "@/app/components/Forms/FormResetPassword/FormResetPassword";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { FormResetPassword } from "@src/app/components/Forms/FormResetPassword/FormResetPassword";
 
 interface NewPasswordPageProps {
   searchParams: {

@@ -1,9 +1,9 @@
-import { Folder, FolderType } from "@/app/lib/entities";
+import { Folder, FolderType } from "@src/app/lib/entities";
 
-import { CardItem } from "@/app/components/Cards/CardItem/CardItem";
-import { CardSimple } from "@/app/components/Cards/CardSimple/CardSimple";
+import { CardItem } from "@src/app/components/Cards/CardItem/CardItem";
+import { CardSimple } from "@src/app/components/Cards/CardSimple/CardSimple";
 
-import { bytesToMB } from "@/app/lib/utils";
+import { bytesToMB } from "@src/app/lib/utils";
 
 interface FolderListProps {
   folders: Folder[];

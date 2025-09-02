@@ -1,7 +1,7 @@
-import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
-import { FileList } from "@/app/components/Lists/FileList/FileList";
+import { CardNotFound } from "@src/app/components/Cards/CardNotFound/CardNotFound";
+import { FileList } from "@src/app/components/Lists/FileList/FileList";
 
-import { getCategoryFiles } from "@/services/filemanager/get/getCategoryFiles/getCategoryFiles";
+import { getCategoryFiles } from "@src/services/filemanager/get/getCategoryFiles/getCategoryFiles";
 
 interface SectionFilesProps {
   idCategory: string;

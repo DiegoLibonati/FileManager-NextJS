@@ -1,4 +1,4 @@
-import { Category } from "@/app/lib/entities";
+import { Category } from "@src/app/lib/entities";
 
 export const categoriesExtension: Record<string, string[]> = {
   documents: ["txt"],

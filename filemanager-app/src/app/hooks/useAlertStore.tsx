@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-import { AlertState, TypeAlert } from "@/app/lib/entities";
+import { AlertState, TypeAlert } from "@src/app/lib/entities";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setAlert } from "@/redux/features/alert/alertSlice";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { setAlert } from "@src/redux/features/alert/alertSlice";
 
 type UseAlertStore = {
   alert: AlertState;

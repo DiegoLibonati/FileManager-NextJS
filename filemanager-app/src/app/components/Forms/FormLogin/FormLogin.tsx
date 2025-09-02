@@ -4,12 +4,12 @@ import { MouseEventHandler } from "react";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
-import { FormAuth } from "@/app/lib/entities";
+import { FormAuth } from "@src/app/lib/entities";
 
-import { useForm } from "@/app/hooks/useForm";
-import { useUserStore } from "@/app/hooks/useUserStore";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { postLogin } from "@/services/auth/post/postLogin/postLogin";
+import { useForm } from "@src/app/hooks/useForm";
+import { useUserStore } from "@src/app/hooks/useUserStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { postLogin } from "@src/services/auth/post/postLogin/postLogin";
 
 const INITIAL_VALUE_FORM = {
   username: "",

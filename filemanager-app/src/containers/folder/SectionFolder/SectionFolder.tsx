@@ -1,11 +1,11 @@
-import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
-import { FileList } from "@/app/components/Lists/FileList/FileList";
-import { FolderList } from "@/app/components/Lists/FolderList/FolderList";
+import { CardNotFound } from "@src/app/components/Cards/CardNotFound/CardNotFound";
+import { FileList } from "@src/app/components/Lists/FileList/FileList";
+import { FolderList } from "@src/app/components/Lists/FolderList/FolderList";
 
 import { Fragment } from "react";
 
-import { parseEscapeString } from "@/app/lib/utils";
-import { getFilesAndDirectories } from "@/services/filemanager/get/getFilesAndDirectories/getFilesAndDirectories";
+import { parseEscapeString } from "@src/app/lib/utils";
+import { getFilesAndDirectories } from "@src/services/filemanager/get/getFilesAndDirectories/getFilesAndDirectories";
 
 interface SectionFolderProps {
   folderPath: string;

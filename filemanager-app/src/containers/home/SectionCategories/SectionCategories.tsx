@@ -1,7 +1,7 @@
-import { CardCategory } from "@/app/components/Cards/CardCategory/CardCategory";
-import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { CardCategory } from "@src/app/components/Cards/CardCategory/CardCategory";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
 
-import { getCategories } from "@/services/filemanager/get/getCategories/getCategories";
+import { getCategories } from "@src/services/filemanager/get/getCategories/getCategories";
 
 export const SectionCategories = async (): Promise<JSX.Element> => {
   const categories = await getCategories();

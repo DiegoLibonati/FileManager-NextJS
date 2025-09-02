@@ -1,0 +1,27 @@
+Notas:
+
+Cosas de NextJS 14:
+- Carpeta Public al nivel de app para subir archivos y servirlos en la web - Check
+- Carpeta lib -> Dentro de APP - Check
+	a. utilidades / utils.tsx. En este archivo estan todo las funciones helpers
+	b. Fetching de datos
+	c. Typescript definiciones
+
+- Cuando se carga la fuente desde el className o style, es buena practica cargar la clase: antialiased que mejora en monitores no muy buenois como se renderizan las fuentes - Check
+- Utilizar el componente Link propio de NextJS para redirigir a otras paginas y no renderizar toda la pagina de nuevo
+- Streaming De Datos en Next JS usando suspense
+- Carpeta components dentro de app tambien - Check
+- En la carpeta Lib, podemos tener un actions.ts que nos sirve para ejecutar acciones de formulario en el servidor. Funciona para mutar datos como un CRUD. En la linea uno se especifica con un "use server"
+- Al marcar con "use server" en la linea 1 de un archivo como por ejemplo: actions.ts. Se marca que todas las funciones que se exportan en este archivo son de servidor y por lo tanto no se ejecuta ni se envian al cliente
+- revalidatePath lo que hace es decirle a NextJS, che llamame a todo de nuevo que hubo un cambio en x path
+
+
+Cosas de JS:
+- DefaultValue en inputs para cuando se recarga una pagina y queremos que tenga un valor predeterminado
+- Code Spliting esto lo hace por si solo NextJS pero a tener en cuenta a futuros proyectos con otras tecnologias
+- Pagina para generar Skeleton para Suspense
+- Debounce: Sirve para ejecutar una accion a traves de un busqueda cuando ya no apretamos teclas al buscar. Escribimos, espera unos ms y luego ejecuta la accion
+
+Cosas a Futuro:
+- Utilizar la URL en vez de estados para consumir Apis que necesiten querys en NExTJS
+- Libreria Zod para validar formularios

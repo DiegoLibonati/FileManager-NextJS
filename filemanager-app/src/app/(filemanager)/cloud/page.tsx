@@ -1,15 +1,15 @@
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 
-import { SectionCloudStoragesSkeleton } from "@/app/components/Skeletons/SectionCloudStoragesSkeleton/SectionCloudStoragesSkeleton";
-import { SectionUpgradePlanSkeleton } from "@/app/components/Skeletons/SectionUpgradePlanSkeleton/SectionUpgradePlanSkeleton";
-import { SectionFolderListWithoutActionsSkeleton } from "@/app/components/Skeletons/SectionFolderListWithoutActionsSkeleton/SectionFolderListWithoutActionsSkeleton";
+import { SectionCloudStoragesSkeleton } from "@src/app/components/Skeletons/SectionCloudStoragesSkeleton/SectionCloudStoragesSkeleton";
+import { SectionUpgradePlanSkeleton } from "@src/app/components/Skeletons/SectionUpgradePlanSkeleton/SectionUpgradePlanSkeleton";
+import { SectionFolderListWithoutActionsSkeleton } from "@src/app/components/Skeletons/SectionFolderListWithoutActionsSkeleton/SectionFolderListWithoutActionsSkeleton";
 
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@src/app/lib/session";
 
 const LazySectionCloudStorages = dynamic(
   () =>
-    import("@/containers/cloud/SectionCloudStorages/SectionCloudStorages").then(
+    import("@src/containers/cloud/SectionCloudStorages/SectionCloudStorages").then(
       (mod) => mod.SectionCloudStorages
     ),
   {
@@ -22,7 +22,7 @@ const LazySectionCloudStorages = dynamic(
 
 const LazySectionUpgradePlan = dynamic(
   () =>
-    import("@/containers/cloud/SectionUpgradePlan/SectionUpgradePlan").then(
+    import("@src/containers/cloud/SectionUpgradePlan/SectionUpgradePlan").then(
       (mod) => mod.SectionUpgradePlan
     ),
   {
@@ -33,7 +33,7 @@ const LazySectionUpgradePlan = dynamic(
 
 const LazySectionFolders = dynamic(
   () =>
-    import("@/containers/cloud/SectionFolders/SectionFolders").then(
+    import("@src/containers/cloud/SectionFolders/SectionFolders").then(
       (mod) => mod.SectionFolders
     ),
   {

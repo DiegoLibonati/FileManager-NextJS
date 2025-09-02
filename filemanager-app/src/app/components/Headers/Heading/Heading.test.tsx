@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
 
 type RenderComponent = {
   container: HTMLElement;

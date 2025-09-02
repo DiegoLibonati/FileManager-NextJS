@@ -1,8 +1,8 @@
-import { CircleProgress } from "@/app/components/Charts/CircleProgress/CircleProgress";
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+import { CircleProgress } from "@src/app/components/Charts/CircleProgress/CircleProgress";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
 
-import { getSpaceUsed } from "@/services/filemanager/get/getSpaceUsed/getSpaceUsed";
+import { getSpaceUsed } from "@src/services/filemanager/get/getSpaceUsed/getSpaceUsed";
 
 export const SectionChart = async (): Promise<JSX.Element> => {
   const spaceUsed = await getSpaceUsed();

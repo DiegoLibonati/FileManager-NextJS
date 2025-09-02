@@ -1,4 +1,4 @@
-import { store } from "@/redux/store";
+import { store } from "@src/redux/store";
 import { CSSProperties } from "react";
 
 // ** Components **

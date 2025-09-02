@@ -4,17 +4,17 @@ import user from "@testing-library/user-event";
 import MockAdapter from "axios-mock-adapter";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { FormResetPassword } from "@/app/components/Forms/FormResetPassword/FormResetPassword";
+import { FormResetPassword } from "@src/app/components/Forms/FormResetPassword/FormResetPassword";
 
 import {
   mockUseAlertStore,
   mockUseRouter,
   mockUseSearchParams,
   mockResponseAuthReset,
-} from "@/tests/jest.constants";
+} from "@tests/jest.constants";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import axiosInstance from "@/services/axios";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import axiosInstance from "@src/services/axios";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -32,7 +32,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
   useSearchParams: jest.fn(),
 }));
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
 

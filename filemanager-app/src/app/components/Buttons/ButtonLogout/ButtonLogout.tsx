@@ -4,8 +4,8 @@ import { MouseEventHandler } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { getLogout } from "@/services/auth/get/getLogout/getLogout";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { getLogout } from "@src/services/auth/get/getLogout/getLogout";
 
 export const ButtonLogout = (): JSX.Element => {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import React from "react";
 
-import { GeneralShared } from "@/app/lib/entities";
+import { GeneralShared } from "@src/app/lib/entities";
 
-import "@/app/components/Loaders/Loader/Loader.css";
+import "@src/app/components/Loaders/Loader/Loader.css";
 
 interface LoaderProps extends GeneralShared {
   color: string;

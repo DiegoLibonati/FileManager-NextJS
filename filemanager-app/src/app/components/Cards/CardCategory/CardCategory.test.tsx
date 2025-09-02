@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { CardCategory } from "@/app/components/Cards/CardCategory/CardCategory";
+import { CardCategory } from "@src/app/components/Cards/CardCategory/CardCategory";
 
 type RenderComponent = {
   container: HTMLElement;

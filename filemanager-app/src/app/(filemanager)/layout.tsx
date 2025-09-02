@@ -2,13 +2,13 @@ import dynamic from "next/dynamic";
 
 import { Fragment } from "react";
 
-import { NavBar } from "@/app/components/NavBar/NavBar";
-import { Alert } from "@/app/components/Alerts/Alert/Alert";
-import { HeaderTitleSkeleton } from "@/app/components/Skeletons/HeaderTitleSkeleton/HeaderTitleSkeleton";
+import { NavBar } from "@src/app/components/NavBar/NavBar";
+import { Alert } from "@src/app/components/Alerts/Alert/Alert";
+import { HeaderTitleSkeleton } from "@src/app/components/Skeletons/HeaderTitleSkeleton/HeaderTitleSkeleton";
 
 const LazyHeaderTitle = dynamic(
   () =>
-    import("@/app/components/Headers/HeaderTitle/HeaderTitle").then(
+    import("@src/app/components/Headers/HeaderTitle/HeaderTitle").then(
       (mod) => mod.HeaderTitle
     ),
   { ssr: false, loading: () => <HeaderTitleSkeleton></HeaderTitleSkeleton> }

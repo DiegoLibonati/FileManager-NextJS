@@ -5,9 +5,9 @@ import { MdError } from "react-icons/md";
 import { CiWarning } from "react-icons/ci";
 import { BiLoader } from "react-icons/bi";
 
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
 
 export const Alert = (): JSX.Element => {
   const { alert, handleSetAlert } = useAlertStore();

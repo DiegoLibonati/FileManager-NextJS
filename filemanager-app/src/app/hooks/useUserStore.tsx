@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { User, Session } from "@/app/lib/entities";
+import { User, Session } from "@src/app/lib/entities";
 
-import { useSession } from "@/app/hooks/useSession";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setUser } from "@/redux/features/user/userSlice";
+import { useSession } from "@src/app/hooks/useSession";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { setUser } from "@src/redux/features/user/userSlice";
 
 type UseUserStore = {
   user: User | null;

@@ -1,7 +1,7 @@
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { FolderList } from "@/app/components/Lists/FolderList/FolderList";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { FolderList } from "@src/app/components/Lists/FolderList/FolderList";
 
-import { getAllFolders } from "@/services/filemanager/get/getAllFolders/getAllFolders";
+import { getAllFolders } from "@src/services/filemanager/get/getAllFolders/getAllFolders";
 
 export const SectionFolders = async (): Promise<JSX.Element> => {
   const folders = await getAllFolders();

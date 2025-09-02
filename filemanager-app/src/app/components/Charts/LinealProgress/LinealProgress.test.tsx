@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { LinealProgress } from "@/app/components/Charts/LinealProgress/LinealProgress";
+import { LinealProgress } from "@src/app/components/Charts/LinealProgress/LinealProgress";
 
 type RenderComponent = {
   container: HTMLElement;

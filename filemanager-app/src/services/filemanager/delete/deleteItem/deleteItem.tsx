@@ -1,4 +1,4 @@
-import axiosInstance from "@/services/axios";
+import axiosInstance from "@src/services/axios";
 
 export const deleteItem = (path: string, type: string) => {
   return axiosInstance.delete("/filemanager", {

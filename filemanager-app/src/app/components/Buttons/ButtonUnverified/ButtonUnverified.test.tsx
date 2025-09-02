@@ -2,15 +2,15 @@ import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
 import MockAdapter from "axios-mock-adapter";
-import { ButtonUnverified } from "@/app/components/Buttons/ButtonUnverified/ButtonUnverified";
+import { ButtonUnverified } from "@src/app/components/Buttons/ButtonUnverified/ButtonUnverified";
 
 import {
   mockUseAlertStore,
   mockResponseSendEmailToVerify,
-} from "@/tests/jest.constants";
+} from "@tests/jest.constants";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import axiosInstance from "@/services/axios";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import axiosInstance from "@src/services/axios";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -24,7 +24,7 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
 

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { ButtonCreate } from "@/app/components/Buttons/ButtonCreate/ButtonCreate";
+import { ButtonCreate } from "@src/app/components/Buttons/ButtonCreate/ButtonCreate";
 
 type RenderComponent = {
   container: HTMLElement;

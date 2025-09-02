@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { CardIcon } from "@/app/components/Cards/CardIcon/CardIcon";
+import { CardIcon } from "@src/app/components/Cards/CardIcon/CardIcon";
 
 type RenderComponent = {
   container: HTMLElement;

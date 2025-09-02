@@ -1,4 +1,4 @@
-import axiosInstance from "@/services/axios";
+import axiosInstance from "@src/services/axios";
 
 export const postResetPassword = async (
   id: string,

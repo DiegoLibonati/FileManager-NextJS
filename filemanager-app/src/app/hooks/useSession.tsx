@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-import { getSession } from "@/services/user/get/getSession/getSession";
+import { getSession } from "@src/services/user/get/getSession/getSession";
 
 type UseSession<T> = {
   session: T;

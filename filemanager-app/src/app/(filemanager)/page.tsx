@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 
-import { SectionCircleChartSkeleton } from "@/app/components/Skeletons/SectionCircleChartSkeleton/SectionCircleChartSkeleton";
-import { SectionCategoriesSkeleton } from "@/app/components/Skeletons/SectionCategoriesSkeleton/SectionCategoriesSkeleton";
-import { SectionRecentUploadedSkeleton } from "@/app/components/Skeletons/SectionRecentUploadedSkeleton/SectionRecentUploadedSkeleton";
+import { SectionCircleChartSkeleton } from "@src/app/components/Skeletons/SectionCircleChartSkeleton/SectionCircleChartSkeleton";
+import { SectionCategoriesSkeleton } from "@src/app/components/Skeletons/SectionCategoriesSkeleton/SectionCategoriesSkeleton";
+import { SectionRecentUploadedSkeleton } from "@src/app/components/Skeletons/SectionRecentUploadedSkeleton/SectionRecentUploadedSkeleton";
 
 const LazySectionChart = dynamic(
   () =>
-    import("@/containers/home/SectionChart/SectionChart").then(
+    import("@src/containers/home/SectionChart/SectionChart").then(
       (mod) => mod.SectionChart
     ),
   {
@@ -18,7 +18,7 @@ const LazySectionChart = dynamic(
 
 const LazySectionCategories = dynamic(
   () =>
-    import("@/containers/home/SectionCategories/SectionCategories").then(
+    import("@src/containers/home/SectionCategories/SectionCategories").then(
       (mod) => mod.SectionCategories
     ),
   {
@@ -30,7 +30,7 @@ const LazySectionCategories = dynamic(
 const LazySectionRecentUploaded = dynamic(
   () =>
     import(
-      "@/containers/home/SectionRecentUploaded/SectionRecentUploaded"
+      "@src/containers/home/SectionRecentUploaded/SectionRecentUploaded"
     ).then((mod) => mod.SectionRecentUploaded),
   {
     ssr: false,

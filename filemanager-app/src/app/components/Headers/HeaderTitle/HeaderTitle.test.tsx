@@ -2,16 +2,16 @@ import { render, screen } from "@testing-library/react";
 
 import { useParams, usePathname, useRouter } from "next/navigation";
 
-import { HeaderTitle } from "@/app/components/Headers/HeaderTitle/HeaderTitle";
+import { HeaderTitle } from "@src/app/components/Headers/HeaderTitle/HeaderTitle";
 
 import {
   mockUseAlertStore,
   mockUseUserStore,
   mockUseRouter,
-} from "@/tests/jest.constants";
+} from "@tests/jest.constants";
 
-import { useUserStore } from "@/app/hooks/useUserStore";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { useUserStore } from "@src/app/hooks/useUserStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -30,10 +30,10 @@ jest.mock("next/navigation", () => ({
   usePathname: jest.fn(),
   useParams: jest.fn(),
 }));
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
-jest.mock("@/app/hooks/useUserStore", () => ({
+jest.mock("@src/app/hooks/useUserStore", () => ({
   useUserStore: jest.fn(),
 }));
 

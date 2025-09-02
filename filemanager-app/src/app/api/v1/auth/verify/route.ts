@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import connectMongo from "@/app/lib/connectMongo";
-import { Encrpyt } from "@/app/lib/encrypt";
-import User from "@/models/user";
+import connectMongo from "@src/app/lib/connectMongo";
+import { Encrpyt } from "@src/app/lib/encrypt";
+import User from "@src/models/user";
 
 export async function GET(req: NextRequest) {
   await connectMongo();

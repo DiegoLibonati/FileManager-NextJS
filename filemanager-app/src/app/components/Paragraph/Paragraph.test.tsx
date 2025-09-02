@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { Paragraph } from "@/app/components/Paragraph/Paragraph";
+import { Paragraph } from "@src/app/components/Paragraph/Paragraph";
 
 type RenderComponent = {
   container: HTMLElement;

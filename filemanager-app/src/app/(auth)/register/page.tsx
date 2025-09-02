@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { FormRegister } from "@/app/components/Forms/FormRegister/FormRegister";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { FormRegister } from "@src/app/components/Forms/FormRegister/FormRegister";
 
 export default function RegisterPage(): JSX.Element {
   return (

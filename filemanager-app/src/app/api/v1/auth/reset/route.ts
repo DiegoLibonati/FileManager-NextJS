@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import User from "@/models/user";
-import connectMongo from "@/app/lib/connectMongo";
-import { Encrpyt } from "@/app/lib/encrypt";
+import User from "@src/models/user";
+import connectMongo from "@src/app/lib/connectMongo";
+import { Encrpyt } from "@src/app/lib/encrypt";
 
 export async function POST(req: NextRequest) {
   await connectMongo();

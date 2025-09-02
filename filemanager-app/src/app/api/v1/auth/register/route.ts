@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { IUser } from "@/app/lib/entities";
+import { IUser } from "@src/app/lib/entities";
 
-import connectMongo from "@/app/lib/connectMongo";
-import { Encrpyt } from "@/app/lib/encrypt";
-import { FileManager } from "@/app/lib/fileManager";
-import { Email } from "@/app/lib/email";
-import User from "@/models/user";
+import connectMongo from "@src/app/lib/connectMongo";
+import { Encrpyt } from "@src/app/lib/encrypt";
+import { FileManager } from "@src/app/lib/fileManager";
+import { Email } from "@src/app/lib/email";
+import User from "@src/models/user";
 
 export async function POST(req: NextRequest) {
   await connectMongo();

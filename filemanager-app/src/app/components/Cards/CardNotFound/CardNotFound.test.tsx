@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { CardNotFound } from "@/app/components/Cards/CardNotFound/CardNotFound";
+import { CardNotFound } from "@src/app/components/Cards/CardNotFound/CardNotFound";
 
 type RenderComponent = {
   container: HTMLElement;

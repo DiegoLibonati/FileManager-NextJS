@@ -4,15 +4,15 @@ import { Fragment, MouseEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 
-import { FormUpload as FormUploadT } from "@/app/lib/entities";
+import { FormUpload as FormUploadT } from "@src/app/lib/entities";
 
-import { ButtonCreate } from "@/app/components/Buttons/ButtonCreate/ButtonCreate";
+import { ButtonCreate } from "@src/app/components/Buttons/ButtonCreate/ButtonCreate";
 
-import { parseEscapeString } from "@/app/lib/utils";
-import { useForm } from "@/app/hooks/useForm";
-import { useAlertStore } from "@/app/hooks/useAlertStore";
-import { postUploadFile } from "@/services/filemanager/post/postUploadFile/postUploadFile";
-import { postCreateFolder } from "@/services/filemanager/post/postCreateFolder/postCreateFolder";
+import { parseEscapeString } from "@src/app/lib/utils";
+import { useForm } from "@src/app/hooks/useForm";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
+import { postUploadFile } from "@src/services/filemanager/post/postUploadFile/postUploadFile";
+import { postCreateFolder } from "@src/services/filemanager/post/postCreateFolder/postCreateFolder";
 
 interface FormUploadProps {
   path: string;

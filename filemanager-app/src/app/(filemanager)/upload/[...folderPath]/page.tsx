@@ -1,4 +1,4 @@
-import { FormUpload } from "@/app/components/Forms/FormUpload/FormUpload";
+import { FormUpload } from "@src/app/components/Forms/FormUpload/FormUpload";
 
 interface UploadPageProps {
   params: {

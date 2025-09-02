@@ -1,7 +1,7 @@
-import { GeneralShared } from "@/app/lib/entities";
+import { GeneralShared } from "@src/app/lib/entities";
 
-import { Heading } from "@/app/components/Headers/Heading/Heading";
-import { Card } from "@/app/components/Cards/Card/Card";
+import { Heading } from "@src/app/components/Headers/Heading/Heading";
+import { Card } from "@src/app/components/Cards/Card/Card";
 
 export interface CardNotFoundProps extends GeneralShared {}
 

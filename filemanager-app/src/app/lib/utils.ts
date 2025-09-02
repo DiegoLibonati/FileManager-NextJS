@@ -1,6 +1,6 @@
-import { Category } from "@/app/lib/entities";
+import { Category } from "@src/app/lib/entities";
 
-import { categoriesExtension } from "@/app/lib/constants";
+import { categoriesExtension } from "@src/app/lib/constants";
 
 export const roundToOneDecimal = (num: number): number => {
   if (num % 1 !== 0) {

@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 
-import { GeneralShared } from "@/app/lib/entities";
+import { GeneralShared } from "@src/app/lib/entities";
 
 export interface ButtonCreateProps extends GeneralShared {
   onClick: MouseEventHandler<HTMLButtonElement>;

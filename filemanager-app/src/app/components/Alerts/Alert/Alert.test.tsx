@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { Alert } from "@/app/components/Alerts/Alert/Alert";
+import { Alert } from "@src/app/components/Alerts/Alert/Alert";
 
-import { useAlertStore } from "@/app/hooks/useAlertStore";
+import { useAlertStore } from "@src/app/hooks/useAlertStore";
 
-import { mockUseAlertStore } from "@/tests/jest.constants";
+import { mockUseAlertStore } from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -19,7 +19,7 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("@/app/hooks/useAlertStore", () => ({
+jest.mock("@src/app/hooks/useAlertStore", () => ({
   useAlertStore: jest.fn(),
 }));
 

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { AlertState, Alert } from "@/app/lib/entities";
+import { AlertState, Alert } from "@src/app/lib/entities";
 
 const INITIAL_STATE: AlertState = {
   type: "info",
