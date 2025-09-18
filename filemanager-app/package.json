@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsc -p tsconfig.app.json && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watchAll --verbose"
@@ -15,12 +15,13 @@
     "bcryptjs": "^2.4.3",
     "jose": "^5.4.0",
     "mongoose": "^8.4.1",
-    "next": "14.2.3",
+    "next": "^14.2.32",
     "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
@@ -41,6 +42,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }

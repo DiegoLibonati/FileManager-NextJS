@@ -47,3 +47,5 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export const dynamic = "force-dynamic";

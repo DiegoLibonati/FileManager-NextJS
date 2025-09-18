@@ -7,7 +7,7 @@ import { getCategoryByExtension, getExtension } from "@src/app/lib/utils";
 import { categories } from "@src/app/lib/constants";
 
 export class FileManager {
-  // /home/app/src/cloud/Die2/carpeta/carpetita
+  // /home/app/cloud/Die2/carpeta/carpetita
   constructor(public path: string) {}
 
   async getAllFiles(): Promise<File[]> {
@@ -176,7 +176,7 @@ export class FileManager {
   }
 
   async createFolder() {
-    await fs.mkdir(this.path);
+    await fs.mkdir(this.path, { recursive: true });
   }
 
   async writeFile(buffer: Uint8Array) {

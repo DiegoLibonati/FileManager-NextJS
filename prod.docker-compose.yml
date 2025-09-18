@@ -1,19 +1,16 @@
 version: "3.9"
-name: "filemanager-die"
+name: "filemanager-die-prod"
+
 services:
   next-app:
     build:
-      dockerfile: Dockerfile.development
       context: ./filemanager-app
+      dockerfile: Dockerfile.production
     restart: always
     env_file:
       - ./filemanager-app/.env
-    volumes:
-      - ./filemanager-app/src:/home/app/src
-      - ./filemanager-app/cloud:/home/app/cloud
-      - ./filemanager-app/tailwind.config.ts:/home/app/tailwind.config.ts
     ports:
-      - 3000:3000
+      - "3000:3000"
     networks:
       - filemanager-net
 

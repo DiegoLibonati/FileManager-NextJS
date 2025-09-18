@@ -20,7 +20,8 @@ const RecentFileSchema = new Schema<IFile>(
       versionKey: false,
       virtuals: true,
       transform: (_, ret) => {
-        delete ret._id;
+        const { _id, ...rest } = ret;
+        return rest;
       },
     },
   }

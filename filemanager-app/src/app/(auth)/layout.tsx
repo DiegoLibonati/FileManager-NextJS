@@ -1,7 +1,46 @@
 import { Fragment } from "react";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 import { Alert } from "@src/app/components/Alerts/Alert/Alert";
+
+
+export const metadata: Metadata = {
+  title: "FileManager",
+  description:
+    "FileManager is a modern application for organizing, uploading, and managing files with cloud support.",
+  keywords: ["FileManager", "Next.js", "MongoDB", "Cloud", "Gestión de archivos"],
+  authors: [{ name: "Diego Libonati" }],
+  openGraph: {
+    title: "FileManager",
+    description:
+      "Gestiona y organiza tus archivos fácilmente en la nube con FileManager.",
+    url: "https://your-site.com",
+    siteName: "FileManager",
+    images: [
+      {
+        url: "/logo192.png",
+        width: 1200,
+        height: 630,
+        alt: "FileManager",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FileManager",
+    description:
+      "Gestiona y organiza tus archivos fácilmente en la nube con FileManager.",
+    images: ["/logo192.png"],
+    creator: "@your-user",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo192.png",
+  },
+  manifest: "/manifest.json",
+};
 
 export default function AuthLayout({
   children,

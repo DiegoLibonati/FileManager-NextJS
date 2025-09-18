@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 
   const payload = JSON.parse(req.headers.get("payload")!);
   const pathCloud = pathLib.join(
-    `${process.cwd()}/src/cloud`,
+    process.env.CLOUD_PATH!,
     payload.username as string,
     path
   );
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
   const payload = JSON.parse(req.headers.get("payload")!);
   const pathCloud = pathLib.join(
-    `${process.cwd()}/src/cloud`,
+    process.env.CLOUD_PATH!,
     payload.username as string,
     path
   );
@@ -87,7 +87,7 @@ export async function DELETE(req: NextRequest) {
 
   const payload = JSON.parse(req.headers.get("payload")!);
   const pathCloud = pathLib.join(
-    `${process.cwd()}/src/cloud`,
+    process.env.CLOUD_PATH!,
     payload.username as string,
     path
   );
@@ -123,3 +123,5 @@ export async function DELETE(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export const dynamic = "force-dynamic";

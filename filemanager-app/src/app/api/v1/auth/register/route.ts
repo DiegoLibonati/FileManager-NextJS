@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const pathCloud = `${process.cwd()}/src/cloud/${username}`;
+  const pathCloud = `${process.env.CLOUD_PATH}/${username}`;
 
   const fileManager = new FileManager(pathCloud);
 
@@ -83,3 +83,5 @@ export async function POST(req: NextRequest) {
     { status: 201 }
   );
 }
+
+export const dynamic = "force-dynamic";

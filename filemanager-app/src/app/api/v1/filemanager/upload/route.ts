@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     const fileManager = new FileManager(
       pathLib.join(
-        `${process.cwd()}/src/cloud`,
+        process.env.CLOUD_PATH!,
         payload.username as string,
         path,
         file.name
@@ -88,3 +88,5 @@ export async function POST(req: NextRequest) {
     console.log(e);
   }
 }
+
+export const dynamic = "force-dynamic";

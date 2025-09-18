@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   const total_space = roundToOneDecimal(spaceByPlan);
   const pathCloud = path.join(
-    `${process.cwd()}/src/cloud`,
+    process.env.CLOUD_PATH!,
     payload.username as string
   );
   const fileManager = new FileManager(pathCloud);
@@ -61,3 +61,5 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export const dynamic = "force-dynamic";

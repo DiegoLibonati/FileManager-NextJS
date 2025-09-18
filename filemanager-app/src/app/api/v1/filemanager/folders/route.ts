@@ -5,7 +5,7 @@ import path from "path";
 export async function GET(req: NextRequest) {
   const payload = JSON.parse(req.headers.get("payload")!);
   const pathCloud = path.join(
-    `${process.cwd()}/src/cloud`,
+    process.env.CLOUD_PATH!,
     payload.username as string
   );
 
@@ -20,3 +20,5 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export const dynamic = "force-dynamic";

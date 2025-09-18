@@ -7,7 +7,7 @@ export default function LoginPage(): JSX.Element {
   return (
     <article className="flex flex-col items-start justify-around w-full lg:w-[50%] lg:p-4 lg:rounded-tr-lg lg:rounded-br-lg lg:justify-evenly lg:h-full">
       <Heading element="h2" className="text-4xl font-semibold text-white">
-        You're back, how nice!
+        You&apos;re back, how nice!
       </Heading>
 
       <FormLogin></FormLogin>

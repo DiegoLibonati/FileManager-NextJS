@@ -16,7 +16,8 @@ const UserSchema = new Schema<IUser>(
       versionKey: false,
       virtuals: true,
       transform: (_, ret) => {
-        delete ret._id;
+        const { _id, ...rest } = ret;
+        return rest;
       },
     },
   }

@@ -1,7 +1,11 @@
 import axios from "axios";
 
+const isServer = typeof window === "undefined";
+
 const axiosInstance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
+  baseURL: isServer
+    ? process.env.NEXT_API_URL + "/api/v1"
+    : "/api/v1",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -32,7 +36,5 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
-
-const isServer = typeof window === "undefined";
 
 export default axiosInstance;

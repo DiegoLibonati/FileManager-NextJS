@@ -53,3 +53,5 @@ export async function GET(req: NextRequest) {
     status: 307,
   });
 }
+
+export const dynamic = "force-dynamic";

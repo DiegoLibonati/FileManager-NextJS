@@ -1,5 +1,11 @@
 # FileManager NextJS
 
+## Educational Purpose
+
+This project was created primarily for **educational and learning purposes**.  
+While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
+The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
+
 ## Getting Started
 
 1. Clone the repository with `git clone "repository link"`
@@ -8,7 +14,7 @@
 4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
 
 NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
-NOTE: In the folder whose location is: `filemanager-app/src/cloud`, inside the cloud folder will be created the folders for each user registered in the application. The name of the main folder refers to the user's username. 
+NOTE: In the folder whose location is: `CLOUD_PATH` (ENV), inside the cloud folder will be created the folders for each user registered in the application. The name of the main folder refers to the user's username. 
 
 ## Description
 
@@ -42,12 +48,13 @@ This repository is a FileManager created in NextJS 14.
 "bcryptjs": "^2.4.3"
 "jose": "^5.4.0"
 "mongoose": "^8.4.1"
-"next": "14.2.3"
+"next": "^14.2.32"
 "nodemailer": "^6.9.14"
 "react": "^18"
 "react-dom": "^18"
 "react-icons": "^5.2.1"
 "react-redux": "^9.1.2"
+"sharp": "^0.34.4"
 ```
 
 #### devDependencies
@@ -71,6 +78,7 @@ This repository is a FileManager created in NextJS 14.
 "jest-environment-jsdom": "^29.7.0"
 "postcss": "^8"
 "tailwindcss": "^3.4.1"
+"ts-jest": "^29.4.3"
 "ts-node": "^10.9.2"
 "typescript": "^5"
 ```
@@ -110,19 +118,23 @@ NOTE: You must create the .env inside the folder filemanager-app
 4. `SECRET_KEY_AUTH`: This environment variable is a random string for signing JWT tokens.
 5. `EMAIL`: Here you will enter your email
 6. `EMAIL_PASS`: Here you will enter the application password generated for your email or email company.
+7. `NEXT_API_URL`: It refers to the API URL
+8. `CLOUD_PATH`: This is the path where user data is stored.
 
 ```
-# React
 WATCHPACK_POLLING=true
 
-# Frontend Envs
+NEXT_API_URL=http://next-app:3000
 NEXT_PUBLIC_API_URL=http://localhost:3000
 
-# Backend Envs
 MONGODB_URI=mongodb://root:pass@host.docker.internal:27017/filemanager?authSource=admin
-SECRET_KEY_AUTH=MO1GlDj3f88CzE294KePeWiT9GLG3qIoE9inxNYBadkBwfCUo1
-EMAIL=YOUREMAIL@gmail.com
-EMAIL_PASS=Your password application
+
+SECRET_KEY_AUTH=asd
+
+EMAIL=pepe@gmail.com
+EMAIL_PASS=3212 2313 3212 1234
+
+CLOUD_PATH=/home/app/cloud
 ```
 
 ### **FileManger Endpoints API**
@@ -263,3 +275,5 @@ NOTE: All the endpoints except the AUTH endpoints, must have a header with the n
 - **Endpoint Fn**: Endpoint used to obtain information about the active user, i.e., logged in.
 
 -----
+
+## Known Issues
