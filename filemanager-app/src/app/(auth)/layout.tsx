@@ -17,14 +17,14 @@ export const metadata: Metadata = {
       "Gestiona y organiza tus archivos fácilmente en la nube con FileManager.",
     url: "https://your-site.com",
     siteName: "FileManager",
-    images: [
-      {
-        url: "/logo192.png",
-        width: 1200,
-        height: 630,
-        alt: "FileManager",
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "/logo192.png",
+    //     width: 1200,
+    //     height: 630,
+    //     alt: "FileManager",
+    //   },
+    // ],
     type: "website",
   },
   twitter: {
@@ -32,14 +32,14 @@ export const metadata: Metadata = {
     title: "FileManager",
     description:
       "Gestiona y organiza tus archivos fácilmente en la nube con FileManager.",
-    images: ["/logo192.png"],
+    // images: ["/logo192.png"],
     creator: "@your-user",
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/logo192.png",
+    // apple: "/logo192.png",
   },
-  manifest: "/manifest.json",
+  // manifest: "/manifest.json",
 };
 
 export default function AuthLayout({
