@@ -37,12 +37,12 @@ describe("Loader.tsx", () => {
     test("It must render the loader.", () => {
       const { props, container } = renderComponent();
 
-      const loaderRoot = container.querySelector(
+      const loaderRoot = container.querySelector<HTMLDivElement>(
         `.${props.parentClassName}`
-      ) as HTMLDivElement;
-      const loader = container.querySelector(
+      );
+      const loader = container.querySelector<HTMLDivElement>(
         `.${props.className}`
-      ) as HTMLDivElement;
+      );
 
       expect(loaderRoot).toBeInTheDocument();
       expect(loader).toBeInTheDocument();

@@ -45,9 +45,8 @@ describe("LinealProgress.tsx", () => {
         mockOnClickDelete: mockOnClickDelete,
       });
 
-      const dropdownActionsRoot = container.querySelector(
-        ".dropdown__actions"
-      ) as HTMLDivElement;
+      const dropdownActionsRoot =
+        container.querySelector<HTMLDivElement>(".dropdown__actions");
 
       expect(dropdownActionsRoot).toBeInTheDocument();
     });

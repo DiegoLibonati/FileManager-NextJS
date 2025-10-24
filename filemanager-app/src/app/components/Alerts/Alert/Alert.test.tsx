@@ -38,7 +38,7 @@ describe("Alert.tsx", () => {
     test("It must render the alert with class flex.", () => {
       const { container } = renderComponent();
 
-      const alertRoot = container.querySelector(".alert") as HTMLDivElement;
+      const alertRoot = container.querySelector<HTMLDivElement>(".alert");
 
       expect(alertRoot).toBeInTheDocument();
       expect(alertRoot?.className).toContain("flex");
@@ -83,7 +83,7 @@ describe("Alert.tsx", () => {
     test("It must render the alert with class hidden.", () => {
       const { container } = renderComponent();
 
-      const alertRoot = container.querySelector(".alert") as HTMLDivElement;
+      const alertRoot = container.querySelector<HTMLDivElement>(".alert");
 
       expect(alertRoot).toBeInTheDocument();
       expect(alertRoot?.className).toContain("hidden");
@@ -103,7 +103,7 @@ describe("Alert.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent();
 
-      const icon = container.querySelector(".alert__info") as HTMLElement;
+      const icon = container.querySelector<HTMLElement>(".alert__info");
 
       expect(icon).toBeInTheDocument();
     });
@@ -122,7 +122,7 @@ describe("Alert.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent();
 
-      const icon = container.querySelector(".alert__error") as HTMLElement;
+      const icon = container.querySelector<HTMLElement>(".alert__error");
 
       expect(icon).toBeInTheDocument();
     });
@@ -141,7 +141,7 @@ describe("Alert.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent();
 
-      const icon = container.querySelector(".alert__warning") as HTMLElement;
+      const icon = container.querySelector<HTMLElement>(".alert__warning");
 
       expect(icon).toBeInTheDocument();
     });
@@ -160,7 +160,7 @@ describe("Alert.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent();
 
-      const icon = container.querySelector(".alert__loading") as HTMLElement;
+      const icon = container.querySelector<HTMLElement>(".alert__loading");
 
       expect(icon).toBeInTheDocument();
     });

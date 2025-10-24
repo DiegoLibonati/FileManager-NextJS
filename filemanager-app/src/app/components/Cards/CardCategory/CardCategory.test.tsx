@@ -11,7 +11,7 @@ type RenderComponent = {
     bgColor: string;
     color: string;
   };
-}
+};
 
 const renderComponent = (): RenderComponent => {
   const props = {
@@ -53,12 +53,11 @@ describe("CardCategory.tsx", () => {
     test("It must render the root of the cardIcon with the background color entered by props.", () => {
       const { props, container } = renderComponent();
 
-      const cardIconRoot = container.querySelector(
-        `.card__icon`
-      ) as HTMLDivElement;
+      const cardIconRoot =
+        container.querySelector<HTMLDivElement>(`.card__icon`);
 
       expect(cardIconRoot).toBeInTheDocument();
-      expect(cardIconRoot.style.backgroundColor).toEqual(props.bgColor);
+      expect(cardIconRoot!.style.backgroundColor).toEqual(props.bgColor);
     });
 
     test("It must render the category name.", () => {

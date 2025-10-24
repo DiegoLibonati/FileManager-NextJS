@@ -52,12 +52,11 @@ describe("CardIcon.tsx", () => {
     test("It must render the root of the card with the color and classes of the props.", () => {
       const { container, props } = renderComponent({ idCategory: idCategory });
 
-      const cardIconRoot = container.querySelector(
-        ".card__icon"
-      ) as HTMLDivElement;
+      const cardIconRoot =
+        container.querySelector<HTMLDivElement>(".card__icon");
 
       expect(cardIconRoot).toBeInTheDocument();
-      expect(cardIconRoot.style.backgroundColor).toBe(props.bgColor);
+      expect(cardIconRoot!.style.backgroundColor).toBe(props.bgColor);
     });
 
     test("It must render the children entered by props.", () => {
@@ -75,9 +74,9 @@ describe("CardIcon.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent({ idCategory: idCategory });
 
-      const iconFolder = container.querySelector(
+      const iconFolder = container.querySelector<HTMLElement>(
         ".card__icon__folder"
-      ) as HTMLElement;
+      );
 
       expect(iconFolder).toBeInTheDocument();
     });
@@ -89,9 +88,8 @@ describe("CardIcon.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent({ idCategory: idCategory });
 
-      const iconDocs = container.querySelector(
-        ".card__icon__docs"
-      ) as HTMLElement;
+      const iconDocs =
+        container.querySelector<HTMLElement>(".card__icon__docs");
 
       expect(iconDocs).toBeInTheDocument();
     });
@@ -103,9 +101,9 @@ describe("CardIcon.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent({ idCategory: idCategory });
 
-      const iconImages = container.querySelector(
+      const iconImages = container.querySelector<HTMLElement>(
         ".card__icon__images"
-      ) as HTMLElement;
+      );
 
       expect(iconImages).toBeInTheDocument();
     });
@@ -117,9 +115,9 @@ describe("CardIcon.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent({ idCategory: idCategory });
 
-      const iconVideos = container.querySelector(
+      const iconVideos = container.querySelector<HTMLElement>(
         ".card__icon__videos"
-      ) as HTMLElement;
+      );
 
       expect(iconVideos).toBeInTheDocument();
     });
@@ -131,9 +129,8 @@ describe("CardIcon.tsx", () => {
     test("It must render the relevant icon.", () => {
       const { container } = renderComponent({ idCategory: idCategory });
 
-      const iconMusic = container.querySelector(
-        ".card__icon__music"
-      ) as HTMLElement;
+      const iconMusic =
+        container.querySelector<HTMLElement>(".card__icon__music");
 
       expect(iconMusic).toBeInTheDocument();
     });

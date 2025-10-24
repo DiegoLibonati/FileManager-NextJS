@@ -31,9 +31,9 @@ describe("CardNotFound.tsx", () => {
     test("It must render the card not found root.", () => {
       const { container, props } = renderComponent();
 
-      const card = container.querySelector(
+      const card = container.querySelector<HTMLDivElement>(
         `.${props.className}`
-      ) as HTMLDivElement;
+      );
 
       expect(card).toBeInTheDocument();
       expect(card).toHaveClass(props.className);

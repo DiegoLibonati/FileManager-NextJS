@@ -34,9 +34,8 @@ describe("CircleProgress.tsx", () => {
     test("It must render the circle progress root.", () => {
       const { container } = renderComponent();
 
-      const chartProgressRoot = container.querySelector(
-        `.circle__progress`
-      ) as HTMLDivElement;
+      const chartProgressRoot =
+        container.querySelector<HTMLDivElement>(`.circle__progress`);
 
       expect(chartProgressRoot).toBeInTheDocument();
     });
@@ -44,9 +43,9 @@ describe("CircleProgress.tsx", () => {
     test("It must render the fill part of the graphic.", () => {
       const { container } = renderComponent();
 
-      const chartProgressFilled = container.querySelector(
+      const chartProgressFilled = container.querySelector<HTMLDivElement>(
         `.circle__progress--filled`
-      ) as HTMLDivElement;
+      );
 
       expect(chartProgressFilled).toBeInTheDocument();
       //   expect(chartProgressFilled.style.backgroundImage).toEqual(

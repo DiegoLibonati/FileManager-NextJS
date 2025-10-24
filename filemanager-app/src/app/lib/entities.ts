@@ -1,5 +1,6 @@
-import { store } from "@src/redux/store";
 import { CSSProperties } from "react";
+
+import { store } from "@src/redux/store";
 
 // ** Components **
 
@@ -84,7 +85,7 @@ export type AppDispatch = typeof store.dispatch;
 
 // ** Types Shared **
 export type GeneralShared = {
-  children?: ReactNode | ReactNode[] | string | string[];
+  children?: React.ReactNode | React.ReactNode[] | string | string[];
   className?: string;
   parentClassName?: string;
   style?: CSSProperties;

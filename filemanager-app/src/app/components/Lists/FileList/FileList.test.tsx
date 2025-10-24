@@ -61,7 +61,7 @@ describe("FileList.tsx", () => {
     test("It must render all card items.", () => {
       const { props, container } = renderComponent();
 
-      const files = container.querySelectorAll(".card__item") as NodeList;
+      const files = container.querySelectorAll<HTMLDivElement>(".card__item");
 
       expect(files).toHaveLength(props.files.length);
     });

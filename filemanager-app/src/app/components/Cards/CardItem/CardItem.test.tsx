@@ -88,9 +88,8 @@ describe("CardIcon.tsx", () => {
     test("It must render the root of the card item.", () => {
       const { container } = renderComponent({ type: type });
 
-      const cardItemRoot = container.querySelector(
-        ".card__item"
-      ) as HTMLDivElement;
+      const cardItemRoot =
+        container.querySelector<HTMLDivElement>(".card__item");
 
       expect(cardItemRoot).toBeInTheDocument();
     });
@@ -189,22 +188,20 @@ describe("CardIcon.tsx", () => {
     test("It must render the root of the card item with specified class.", () => {
       const { container } = renderComponent({ type: type });
 
-      const cardItemRoot = container.querySelector(
-        ".card__item"
-      ) as HTMLDivElement;
+      const cardItemRoot =
+        container.querySelector<HTMLDivElement>(".card__item");
 
       expect(cardItemRoot).toBeInTheDocument();
-      expect(cardItemRoot.className).toContain("cursor-pointer");
+      expect(cardItemRoot!.className).toContain("cursor-pointer");
     });
 
     test("It must execute the handleClickCard function when the card is clicked.", async () => {
       const { container, props } = renderComponent({ type: type });
 
-      const cardItemRoot = container.querySelector(
-        ".card__item"
-      ) as HTMLDivElement;
+      const cardItemRoot =
+        container.querySelector<HTMLDivElement>(".card__item");
 
-      await user.click(cardItemRoot);
+      await user.click(cardItemRoot!);
 
       expect(mockUseRouter.push).toHaveBeenCalledTimes(1);
       expect(mockUseRouter.push).toHaveBeenCalledWith(`/folder/${props.path}`);

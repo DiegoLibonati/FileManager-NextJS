@@ -29,9 +29,8 @@ describe("LinealProgress.tsx", () => {
     test("It must render the root of the linear chart progress.", () => {
       const { container } = renderComponent();
 
-      const linealProgressRoot = container.querySelector(
-        ".lineal__progress"
-      ) as HTMLDivElement;
+      const linealProgressRoot =
+        container.querySelector<HTMLDivElement>(".lineal__progress");
 
       expect(linealProgressRoot).toBeInTheDocument();
     });
@@ -39,10 +38,9 @@ describe("LinealProgress.tsx", () => {
     test("It must render the fill of the linear progress chart", () => {
       const { container } = renderComponent();
 
-      const linealProgressRoot = container.querySelector(
-        ".lineal__progress"
-      ) as HTMLDivElement;
-      const linealProgressFill = linealProgressRoot
+      const linealProgressRoot =
+        container.querySelector<HTMLDivElement>(".lineal__progress");
+      const linealProgressFill = linealProgressRoot!
         .children[0] as HTMLDivElement;
 
       expect(linealProgressFill).toBeInTheDocument();

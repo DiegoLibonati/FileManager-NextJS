@@ -36,9 +36,9 @@ describe("Card.tsx", () => {
     test("It must render the card.", () => {
       const { container, props } = renderComponent();
 
-      const card = container.querySelector(
+      const card = container.querySelector<HTMLDivElement>(
         `.${props.className}`
-      ) as HTMLDivElement;
+      );
 
       expect(card).toBeInTheDocument();
     });
@@ -46,11 +46,11 @@ describe("Card.tsx", () => {
     test("It must execute the onClick function of the card when it is clicked.", async () => {
       const { container, props } = renderComponent();
 
-      const card = container.querySelector(
+      const card = container.querySelector<HTMLDivElement>(
         `.${props.className}`
-      ) as HTMLDivElement;
+      );
 
-      await user.click(card);
+      await user.click(card!);
 
       expect(props.mockOnClick).toHaveBeenCalledTimes(1);
     });

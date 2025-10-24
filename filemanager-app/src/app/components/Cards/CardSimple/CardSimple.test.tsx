@@ -67,9 +67,8 @@ describe("CardSimple.tsx", () => {
     test("It must render the root of the card simple.", () => {
       const { container } = renderComponent({ type: type });
 
-      const cardSimpleRoot = container.querySelector(
-        ".card__simple"
-      ) as HTMLDivElement;
+      const cardSimpleRoot =
+        container.querySelector<HTMLDivElement>(".card__simple");
 
       expect(cardSimpleRoot).toBeInTheDocument();
     });
@@ -87,9 +86,8 @@ describe("CardSimple.tsx", () => {
     test("It must render the card icon.", () => {
       const { container } = renderComponent({ type: type });
 
-      const cardIconRoot = container.querySelector(
-        ".card__icon"
-      ) as HTMLDivElement;
+      const cardIconRoot =
+        container.querySelector<HTMLDivElement>(".card__icon");
 
       expect(cardIconRoot).toBeInTheDocument();
     });
@@ -107,22 +105,20 @@ describe("CardSimple.tsx", () => {
     test("It must render the root of the card simple with specified class.", () => {
       const { container } = renderComponent({ type: type });
 
-      const cardSimpleRoot = container.querySelector(
-        ".card__simple"
-      ) as HTMLDivElement;
+      const cardSimpleRoot =
+        container.querySelector<HTMLDivElement>(".card__simple");
 
       expect(cardSimpleRoot).toBeInTheDocument();
-      expect(cardSimpleRoot.className).toContain("cursor-pointer");
+      expect(cardSimpleRoot!.className).toContain("cursor-pointer");
     });
 
     test("It must execute the handleClickCard function when the card is clicked.", async () => {
       const { container, props } = renderComponent({ type: type });
 
-      const cardSimpleRoot = container.querySelector(
-        ".card__simple"
-      ) as HTMLDivElement;
+      const cardSimpleRoot =
+        container.querySelector<HTMLDivElement>(".card__simple");
 
-      await user.click(cardSimpleRoot);
+      await user.click(cardSimpleRoot!);
 
       expect(mockUseRouter.push).toHaveBeenCalledTimes(1);
       expect(mockUseRouter.push).toHaveBeenCalledWith(`/folder/${props.path}`);

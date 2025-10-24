@@ -74,7 +74,8 @@ describe("FolderList.tsx", () => {
     test("It must render all card simple.", () => {
       const { props, container } = renderComponent({ folderType: folderType });
 
-      const folders = container.querySelectorAll(".card__simple") as NodeList;
+      const folders =
+        container.querySelectorAll<HTMLDivElement>(".card__simple");
 
       expect(folders).toHaveLength(props.folders.length);
     });
@@ -93,7 +94,7 @@ describe("FolderList.tsx", () => {
     test("It must render all card item.", () => {
       const { props, container } = renderComponent({ folderType: folderType });
 
-      const folders = container.querySelectorAll(".card__item") as NodeList;
+      const folders = container.querySelectorAll<HTMLDivElement>(".card__item");
 
       expect(folders).toHaveLength(props.folders.length);
     });

@@ -184,9 +184,7 @@ describe("FormUpload.tsx", () => {
 
       await user.selectOptions(select, ["file"]);
 
-      const inputs = container.querySelectorAll(
-        "input"
-      ) as unknown as HTMLInputElement[];
+      const inputs = container.querySelectorAll<HTMLInputElement>("input");
       const inputFile = Array.from(inputs).find(
         (input) => input.id === "custom-input"
       );
@@ -235,9 +233,7 @@ describe("FormUpload.tsx", () => {
 
       await user.selectOptions(select, ["file"]);
 
-      const inputs = container.querySelectorAll(
-        "input"
-      ) as unknown as HTMLInputElement[];
+      const inputs = container.querySelectorAll<HTMLInputElement>("input");
       const inputFile = Array.from(inputs).find(
         (input) => input.id === "custom-input"
       );
