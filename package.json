@@ -1,0 +1,80 @@
+{
+  "name": "nexdrive",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "dev:docker": "next dev --webpack",
+    "build": "tsc -p tsconfig.app.json && next build",
+    "start": "next start",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "lint:all": "eslint src __tests__ --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
+    "format:all": "prettier --write \"src/**/*.{ts,tsx,css}\" \"__tests__/**/*.{ts,tsx}\"",
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll --verbose",
+    "test:coverage": "jest --coverage",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.4.0",
+    "mongoose": "^8.4.1",
+    "nodemailer": "^8.0.7",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.2.1",
+    "react-redux": "^9.1.2",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.0.0",
+    "@eslint/js": "^9.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^6.4.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/supertest": "^6.0.2",
+    "supertest": "^7.0.0",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "globals": "^15.0.0",
+    "husky": "^9.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "lint-staged": "^15.0.0",
+    "postcss": "^8.5.10",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md}": [
+      "prettier --write"
+    ]
+  }
+}

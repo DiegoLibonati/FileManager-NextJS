@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+coverage
+
+.env
+.env.local
+.env.*.local
+
+.git
+.gitignore
+
+__tests__
+*.md
+
+.vscode
+.idea

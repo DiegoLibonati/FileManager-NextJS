@@ -1,29 +1,51 @@
-version: "3.9"
-name: "filemanager-die-prod"
+name: "nexdrive-prod"
 
 services:
-  next-app:
+  nexdrive-nginx:
     build:
-      context: ./filemanager-app
+      context: .
+      dockerfile: Dockerfile.nginx
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nexdrive-app
+    networks:
+      - nexdrive-net
+
+  nexdrive-app:
+    build:
+      context: .
       dockerfile: Dockerfile.production
     restart: always
-    env_file:
-      - ./filemanager-app/.env
-    ports:
-      - "3000:3000"
+    env_file: .env
+    depends_on:
+      nexdrive-db:
+        condition: service_healthy
     networks:
-      - filemanager-net
+      - nexdrive-net
 
-  mongo:
-    image: mongo:7
+
+  nexdrive-db:
+    image: mongo:7.0
     restart: always
-    ports:
-      - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: pass
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
     volumes:
-      - ./volumes/mongo:/data/db
+      - mongo-prod-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - nexdrive-net
 
 networks:
-  filemanager-net:
+  nexdrive-net:
+
+volumes:
+  mongo-prod-data:

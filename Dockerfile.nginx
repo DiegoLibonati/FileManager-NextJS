@@ -1,0 +1,21 @@
+FROM nginx:stable-alpine
+
+RUN addgroup -g 1001 -S appgroup && adduser -S appuser -u 1001 -G appgroup
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN sed -i '/^user /d' /etc/nginx/nginx.conf
+
+RUN touch /run/nginx.pid \
+    && mkdir -p /var/cache/nginx \
+    && chown -R appuser:appgroup \
+        /run/nginx.pid \
+        /var/cache/nginx \
+        /var/log/nginx \
+        /etc/nginx/conf.d
+
+EXPOSE 8080
+
+USER appuser
+
+CMD ["nginx", "-g", "daemon off;"]
