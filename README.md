@@ -6,55 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-### Prerequisites
-
-- [Node.js 20+](https://nodejs.org/)
-- [Docker](https://www.docker.com/) (optional, required for Docker setup)
-
-### Environment variables
-
-Copy `.env.example` to `.env` and fill in the values:
-
-```bash
-cp .env.example .env
-```
-
----
-
-### Without Docker
-
-> Requires a running MongoDB instance. Update `MONGO_HOST`, `MONGO_PORT`, and credentials in `.env` to point to it.
-
-1. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-The application will be available at `http://localhost:3000`.
-
----
-
-### With Docker
-
-> MongoDB is included as a container — no local installation needed.
-
-1. Build and start all services:
-   ```bash
-   docker compose -f dev.docker-compose.yml up --build
-   ```
-
-The application will be available at `http://localhost:3000`.
-
-> **WSL2 users:** Uncomment `WATCHPACK_POLLING=true` in `.env` if hot reload is not working.
-
 ## Description
 
 **Nexdrive** is a self-hosted personal cloud file manager built with Next.js 16. It gives each registered user a private storage space on the server where they can organize, upload, and manage files and folders from any browser — no third-party cloud service required.
@@ -154,107 +105,60 @@ The entire application (frontend, API, and file system operations) runs inside a
 "typescript-eslint": "^8.0.0"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/nexdrive`](https://www.diegolibonati.com.ar/#/project/nexdrive)
+With the stack in mind, here's how to spin up Nexdrive on your machine. Two paths are supported: a plain `npm` setup against your own MongoDB, or a full Docker stack that bundles the database for you.
 
-## Testing
+### Prerequisites
 
-1. Navigate to the project folder
-2. Execute: `npm test`
-
-For coverage report:
-
-```bash
-npm run test:coverage
-```
-
-## Production
-
-### Architecture
-
-The production stack is defined in `prod.docker-compose.yml` and consists of three containers:
-
-| Container        | Image                              | Role                                                           |
-| ---------------- | ---------------------------------- | -------------------------------------------------------------- |
-| `nexdrive-nginx` | `nginx:stable-alpine`              | Reverse proxy, static asset caching, security headers          |
-| `nexdrive-app`   | Built from `Dockerfile.production` | Next.js standalone server (Node.js, port 3000 — internal only) |
-| `nexdrive-db`    | `mongo:7.0`                        | MongoDB database (not exposed externally)                      |
-
-Nginx is the only container with a published port (`8080`). The app and database communicate over an internal Docker network (`nexdrive-net`) and are never directly reachable from outside.
-
-### Build and deploy
-
-```bash
-docker compose -f prod.docker-compose.yml up --build -d
-```
-
-The application will be available at `http://<your-host>:8080`.
-
-To stop:
-
-```bash
-docker compose -f prod.docker-compose.yml down
-```
-
-### Docker build — multi-stage
-
-`Dockerfile.production` uses a three-stage build to keep the final image small:
-
-1. **deps** — installs all npm dependencies with `npm ci`
-2. **builder** — runs `npm run build` to produce the Next.js standalone output
-3. **runner** — copies only the standalone bundle, static assets, and public folder into a clean `node:22-alpine` image. Runs as a non-root user (`appuser`) for security.
-
-> **Note:** The `CLOUD_PATH` directory where user files are stored must exist inside the container at runtime. Either pre-create it or ensure it is mounted as a volume so uploaded files persist across container restarts.
-
-### Nginx
-
-`nginx.conf` is configured with the following behaviour:
-
-- Listens on port **8080**
-- Proxies all requests to `nexdrive-app:3000` over the internal network
-- **Static assets** (`/_next/static/`) are cached for 1 year (`immutable`) — content-hashed filenames guarantee cache busting on deploy
-- **Images and fonts** (`ico`, `png`, `jpg`, `svg`, `woff`, etc.) are cached for 1 day
-- **All other routes** are served with `no-cache, no-store` to prevent stale HTML or API responses
-- **Gzip compression** is enabled for HTML, CSS, JS, JSON, and SVG
-- **Security headers** applied on every response:
-  - `X-Frame-Options: SAMEORIGIN` — prevents clickjacking
-  - `X-Content-Type-Options: nosniff` — prevents MIME-type sniffing
-  - `Referrer-Policy: strict-origin-when-cross-origin`
-- `server_tokens off` — hides the Nginx version from response headers
-
-### Data persistence
-
-MongoDB data is stored in the named volume `mongo-prod-data`. This volume survives container restarts and `down` commands. To fully wipe the database:
-
-```bash
-docker compose -f prod.docker-compose.yml down -v
-```
-
-> **Warning:** `-v` deletes all named volumes including `mongo-prod-data`. This is irreversible.
+- [Node.js 20+](https://nodejs.org/)
+- [Docker](https://www.docker.com/) (optional, required for Docker setup)
 
 ### Environment variables
 
-Use the same `.env` file as development. Key differences to review before deploying to production:
+Copy `.env.example` to `.env` and fill in the values. See [Env Keys](#env-keys) below for the full reference of every variable:
 
-- Set `JWT_SECRET` to a long, random string — never reuse the dev value
-- Set `NEXT_PUBLIC_APP_URL` and `NEXT_PUBLIC_API_URL` to the public domain or IP (e.g. `http://yourdomain.com:8080`)
-- Set `CLOUD_PATH` to an absolute path that will be accessible inside the `nexdrive-app` container
-- Make sure `EMAIL` and `EMAIL_PASS` are valid — registration and password reset depend on email delivery
-
-## Documentation APP
-
-### **Version**
-
-```
-APP VERSION: 1.0.0
-README UPDATED: 08/05/2026
-AUTHOR: Diego Libonati
+```bash
+cp .env.example .env
 ```
 
-### **Env Keys**
+---
 
-Copy `.env.example` to `.env` and fill in the values. All keys are required unless marked optional.
+### Without Docker
+
+> Requires a running MongoDB instance. Update `MONGO_HOST`, `MONGO_PORT`, and credentials in `.env` to point to it.
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The application will be available at `http://localhost:3000`.
+
+---
+
+### With Docker
+
+> MongoDB is included as a container — no local installation needed.
+
+1. Build and start all services:
+   ```bash
+   docker compose -f dev.docker-compose.yml up --build
+   ```
+
+The application will be available at `http://localhost:3000`.
+
+> **WSL2 users:** Uncomment `WATCHPACK_POLLING=true` in `.env` if hot reload is not working.
+
+## Env Keys
+
+The setup above relies on a fully-populated `.env`. Below is the reference for every variable — all keys are required unless marked optional.
 
 | Key                                 | Description                                                                                |
 | ----------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -301,9 +205,9 @@ CLOUD_PATH=/home/app/cloud
 # WATCHPACK_POLLING=true
 ```
 
-### **Nexdrive Endpoints API**
+## API Reference
 
-Protected endpoints require a valid JWT. The token is read automatically from the `token` cookie (sent by the browser when `credentials: "include"` is used). External API clients may alternatively pass the token via the `Authorization` header. Auth endpoints (`/api/v1/auth/*`) are public and require no token.
+With the app running and the environment configured, the following HTTP endpoints are exposed. Protected endpoints require a valid JWT — the token is read automatically from the `token` cookie (sent by the browser when `credentials: "include"` is used). External API clients may alternatively pass the token via the `Authorization` header. Auth endpoints (`/api/v1/auth/*`) are public and require no token.
 
 ---
 
@@ -440,7 +344,22 @@ Protected endpoints require a valid JWT. The token is read automatically from th
 
 ---
 
-## Security
+## Testing
+
+Before promoting any change to production, run the test suite to validate behavior end-to-end.
+
+1. Navigate to the project folder
+2. Execute: `npm test`
+
+For coverage report:
+
+```bash
+npm run test:coverage
+```
+
+## Security Audit
+
+Once tests pass, audit the dependency tree and review the auth model that protects the app at runtime.
 
 ### npm audit
 
@@ -464,6 +383,93 @@ npm audit fix
 - The `getSession()` server helper provides a typed session object to Server Components and API routes by reading and verifying the `token` cookie directly — no middleware round-trip needed.
 - The `getPayload()` helper reads the pre-verified payload injected by `proxy.ts`, so controllers never perform JWT verification themselves.
 
+## Production
+
+With [Testing](#testing) green and the [Security Audit](#security-audit) clean, the app is ready to deploy. The production stack reuses the same variables documented in [Env Keys](#env-keys) — the only thing left is to harden a few of those values for the public environment and bring the containers up.
+
+### Architecture
+
+The production stack is defined in `prod.docker-compose.yml` and consists of three containers:
+
+| Container        | Image                              | Role                                                           |
+| ---------------- | ---------------------------------- | -------------------------------------------------------------- |
+| `nexdrive-nginx` | `nginx:stable-alpine`              | Reverse proxy, static asset caching, security headers          |
+| `nexdrive-app`   | Built from `Dockerfile.production` | Next.js standalone server (Node.js, port 3000 — internal only) |
+| `nexdrive-db`    | `mongo:7.0`                        | MongoDB database (not exposed externally)                      |
+
+Nginx is the only container with a published port (`8080`). The app and database communicate over an internal Docker network (`nexdrive-net`) and are never directly reachable from outside.
+
+### Production environment values
+
+The same `.env` from [Env Keys](#env-keys) is used. Before deploying, harden the following keys for the public environment:
+
+- Set `JWT_SECRET` to a long, random string — never reuse the dev value
+- Set `NEXT_PUBLIC_APP_URL` and `NEXT_PUBLIC_API_URL` to the public domain or IP (e.g. `http://yourdomain.com:8080`)
+- Set `CLOUD_PATH` to an absolute path that will be accessible inside the `nexdrive-app` container
+- Make sure `EMAIL` and `EMAIL_PASS` are valid — registration and password reset depend on email delivery
+
+### Build and deploy
+
+```bash
+docker compose -f prod.docker-compose.yml up --build -d
+```
+
+The application will be available at `http://<your-host>:8080`.
+
+To stop:
+
+```bash
+docker compose -f prod.docker-compose.yml down
+```
+
+### Docker build — multi-stage
+
+`Dockerfile.production` uses a three-stage build to keep the final image small:
+
+1. **deps** — installs all npm dependencies with `npm ci`
+2. **builder** — runs `npm run build` to produce the Next.js standalone output
+3. **runner** — copies only the standalone bundle, static assets, and public folder into a clean `node:22-alpine` image. Runs as a non-root user (`appuser`) for security.
+
+> **Note:** The `CLOUD_PATH` directory where user files are stored must exist inside the container at runtime. Either pre-create it or ensure it is mounted as a volume so uploaded files persist across container restarts.
+
+### Nginx
+
+`nginx.conf` is configured with the following behaviour:
+
+- Listens on port **8080**
+- Proxies all requests to `nexdrive-app:3000` over the internal network
+- **Static assets** (`/_next/static/`) are cached for 1 year (`immutable`) — content-hashed filenames guarantee cache busting on deploy
+- **Images and fonts** (`ico`, `png`, `jpg`, `svg`, `woff`, etc.) are cached for 1 day
+- **All other routes** are served with `no-cache, no-store` to prevent stale HTML or API responses
+- **Gzip compression** is enabled for HTML, CSS, JS, JSON, and SVG
+- **Security headers** applied on every response:
+  - `X-Frame-Options: SAMEORIGIN` — prevents clickjacking
+  - `X-Content-Type-Options: nosniff` — prevents MIME-type sniffing
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+- `server_tokens off` — hides the Nginx version from response headers
+
+### Data persistence
+
+MongoDB data is stored in the named volume `mongo-prod-data`. This volume survives container restarts and `down` commands. To fully wipe the database:
+
+```bash
+docker compose -f prod.docker-compose.yml down -v
+```
+
+> **Warning:** `-v` deletes all named volumes including `mongo-prod-data`. This is irreversible.
+
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/nexdrive`](https://www.diegolibonati.com.ar/#/project/nexdrive)
+
+---
+
+```
+APP VERSION: 1.0.0
+README UPDATED: 10/05/2026
+AUTHOR: Diego Libonati
+```
