@@ -1,8 +1,6 @@
 import type { JSX } from "react";
 import type { LoaderProps } from "@/types/props";
 
-import "@/components/Loaders/Loader/Loader.css";
-
 const Loader = ({ color, className, parentClassName }: LoaderProps): JSX.Element => {
   const loaderStyle = {
     "--loader-color": color,
