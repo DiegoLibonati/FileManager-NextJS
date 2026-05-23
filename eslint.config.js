@@ -9,7 +9,7 @@ import nextPlugin from "@next/eslint-plugin-next";
 export default [
   // Archivos ignorados
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**", ".next/**"],
+    ignores: ["dist/**", "node_modules/**", "coverage/**", ".next/**", "next.config.ts"],
   },
 
   // Reglas base de JS
@@ -63,10 +63,7 @@ export default [
       ],
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/consistent-type-imports": [
-        "error",
-        { prefer: "type-imports" },
-      ],
+      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
       "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
       "@typescript-eslint/no-non-null-assertion": "off",
 
@@ -89,11 +86,7 @@ export default [
 
   // Tests (reglas más permisivas)
   {
-    files: [
-      "**/__tests__/**/*.{ts,tsx}",
-      "**/*.test.{ts,tsx}",
-      "**/*.spec.{ts,tsx}",
-    ],
+    files: ["**/__tests__/**/*.{ts,tsx}", "**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],
     languageOptions: {
       globals: {
         ...globals.jest,

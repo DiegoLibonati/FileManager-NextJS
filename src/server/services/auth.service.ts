@@ -1,4 +1,5 @@
 import type { UserPublicData } from "@/types/cross";
+import type { ResponseData, ResponseError } from "@/types/responses";
 
 import { UserDAO } from "@/server/daos/user.dao";
 
@@ -9,18 +10,11 @@ import { FileManager } from "@/server/helpers/file_manager.helper";
 import { getEnvs } from "@/server/configs/env.config";
 import { Email } from "@/server/configs/email.config";
 
-interface Ok<T> {
-  data: T;
-  error?: never;
-}
-interface Err {
-  error: string;
-  data?: never;
-}
-type Result<T> = Ok<T> | Err;
-
 export const AuthService = {
-  async validateLogin(username: string, password: string): Promise<Result<UserPublicData>> {
+  async validateLogin(
+    username: string,
+    password: string
+  ): Promise<ResponseData<UserPublicData> | ResponseError> {
     const user = await UserDAO.findByUsername(username);
     if (!user) return { error: `There is no account with the username: ${username}.` };
 
@@ -35,7 +29,7 @@ export const AuthService = {
     username: string,
     email: string,
     password: string
-  ): Promise<Result<UserPublicData>> {
+  ): Promise<ResponseData<UserPublicData> | ResponseError> {
     const exists = await UserDAO.findByEmailOrUsername(email, username);
     if (exists) {
       return {
@@ -66,7 +60,10 @@ export const AuthService = {
     return { data: serializeUser(user) };
   },
 
-  async verifyEmail(username: string, hashedId: string): Promise<Result<{ redirectUrl: string }>> {
+  async verifyEmail(
+    username: string,
+    hashedId: string
+  ): Promise<ResponseData<{ redirectUrl: string }> | ResponseError> {
     const user = await UserDAO.findByUsername(username);
     if (!user) return { error: "This account does not have an email to verify." };
 
@@ -78,7 +75,11 @@ export const AuthService = {
     return { data: { redirectUrl: `${getEnvs().NEXT_PUBLIC_API_URL}/login` } };
   },
 
-  async resetPassword(username: string, hashedId: string, password: string): Promise<Result<true>> {
+  async resetPassword(
+    username: string,
+    hashedId: string,
+    password: string
+  ): Promise<ResponseData<true> | ResponseError> {
     const user = await UserDAO.findByUsername(username);
     if (!user) return { error: "This account does not have an email to verify." };
 
@@ -91,7 +92,7 @@ export const AuthService = {
     return { data: true };
   },
 
-  async sendEmailReset(email: string): Promise<Result<true>> {
+  async sendEmailReset(email: string): Promise<ResponseData<true> | ResponseError> {
     const user = await UserDAO.findByEmail(email);
     if (!user) return { error: `There is no email: ${email} registered` };
 

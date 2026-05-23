@@ -8,5 +8,5 @@ export const mockEnvs = {
   JWT_SECRET: "test-secret-key-for-jest",
   EMAIL: "pepe@gmail.com",
   EMAIL_PASS: "3212 2313 3212 1234",
-  CLOUDE_PATH: "/home/app/cloud",
+  CLOUD_PATH: "/home/app/cloud",
 };

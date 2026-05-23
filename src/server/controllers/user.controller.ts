@@ -1,89 +1,80 @@
 import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
-import type { RequestPayload } from "@/types/payloads";
+import type { RequestPayload } from "@/types/api";
 
 import { Jwt } from "@/server/configs/jwt.config";
+import { getEnvs } from "@/server/configs/env.config";
 
 import { UserService } from "@/server/services/user.service";
 
-import { getExceptionMessage } from "@/server/helpers/get_exception_message.helper";
 import { getPayload } from "@/server/helpers/get_payload.helper";
+import { validateQuery } from "@/server/helpers/validate.helper";
+import { withErrorHandler } from "@/server/helpers/with_error_handler.helper";
+
+import { changePlanQuerySchema } from "@/server/schemas/user.schema";
+
+import { BadRequestError } from "@/server/errors/bad_request.error";
+import { NotFoundError } from "@/server/errors/not_found.error";
 
 import { CODES_ERROR, CODES_SUCCESS } from "@/server/constants/codes.constant";
-import {
-  MESSAGES_ERROR,
-  MESSAGES_SUCCESS,
-  MESSAGES_VALIDATION,
-} from "@/server/constants/messages.constant";
-import { COOKIE_NAME } from "@/server/constants/vars.constant";
+import { MESSAGES_ERROR, MESSAGES_SUCCESS } from "@/server/constants/messages.constant";
+import { COOKIE_NAME, COOKIE_MAX_AGE } from "@/server/constants/vars.constant";
 
 export const UserController = {
-  async getUserInfo(req: NextRequest): Promise<NextResponse> {
-    try {
+  getUserInfo: withErrorHandler(
+    "UserController.getUserInfo",
+    async (req: NextRequest): Promise<NextResponse> => {
       const { username } = getPayload(req) as RequestPayload;
       const user = await UserService.getUserInfo(username);
 
       if (!user) {
-        return NextResponse.json(
-          { code: CODES_ERROR.notFound, message: MESSAGES_ERROR.notFound },
-          { status: 404 }
-        );
+        throw new NotFoundError(CODES_ERROR.notFound, MESSAGES_ERROR.notFound);
       }
 
       return NextResponse.json(
         { code: CODES_SUCCESS.getUserInfo, message: MESSAGES_SUCCESS.getUserInfo, data: user },
         { status: 200 }
       );
-    } catch (error) {
-      const { status, ...response } = getExceptionMessage(error);
-      return NextResponse.json(response, { status });
     }
-  },
+  ),
 
-  async changePlan(req: NextRequest): Promise<NextResponse> {
-    try {
-      const plan = req.nextUrl.searchParams.get("plan");
-      if (!plan) {
-        return NextResponse.json(
-          { code: CODES_ERROR.validation, message: MESSAGES_VALIDATION.plan },
-          { status: 400 }
-        );
-      }
-
+  changePlan: withErrorHandler(
+    "UserController.changePlan",
+    async (req: NextRequest): Promise<NextResponse> => {
+      const { plan } = validateQuery(req, changePlanQuerySchema);
       const { username } = getPayload(req) as RequestPayload;
       const user = await UserService.changePlan(username, plan);
 
       if (!user) {
-        return NextResponse.json(
-          { code: CODES_ERROR.notFound, message: MESSAGES_ERROR.notFound },
-          { status: 404 }
-        );
+        throw new NotFoundError(CODES_ERROR.notFound, MESSAGES_ERROR.notFound);
       }
 
-      const jwt = new Jwt({ cookieName: COOKIE_NAME, payload: user });
-      await jwt.signJWT();
+      const token = await new Jwt({ payload: { ...user } }).signJWT();
 
-      return NextResponse.json(
+      const response = NextResponse.json(
         { code: CODES_SUCCESS.changePlan, message: MESSAGES_SUCCESS.changePlan, data: user },
         { status: 200 }
       );
-    } catch (error) {
-      const { status, ...response } = getExceptionMessage(error);
-      return NextResponse.json(response, { status });
+      response.cookies.set(COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: getEnvs().ENV === "production",
+        sameSite: "lax",
+        maxAge: COOKIE_MAX_AGE,
+        path: "/",
+      });
+      return response;
     }
-  },
+  ),
 
-  async sendVerificationEmail(req: NextRequest): Promise<NextResponse> {
-    try {
+  sendVerificationEmail: withErrorHandler(
+    "UserController.sendVerificationEmail",
+    async (req: NextRequest): Promise<NextResponse> => {
       const { username } = getPayload(req) as RequestPayload;
       const result = await UserService.sendVerificationEmail(username);
 
       if ("error" in result) {
-        return NextResponse.json(
-          { code: CODES_ERROR.generic, message: result.error },
-          { status: 400 }
-        );
+        throw new BadRequestError(CODES_ERROR.generic, result.error);
       }
 
       return NextResponse.json(
@@ -93,9 +84,6 @@ export const UserController = {
         },
         { status: 200 }
       );
-    } catch (error) {
-      const { status, ...response } = getExceptionMessage(error);
-      return NextResponse.json(response, { status });
     }
-  },
+  ),
 };

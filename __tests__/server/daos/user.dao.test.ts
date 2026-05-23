@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 import type { HydratedDocument } from "mongoose";
 import type { IUserDoc } from "@/types/api";
-import type { UserCreatePayload } from "@/types/payloads";
+import type { UserCreatePayload } from "@/types/api";
 
 import { UserDAO } from "@/server/daos/user.dao";
 import { connectDb } from "@/server/configs/mongo.config";

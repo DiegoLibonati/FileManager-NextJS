@@ -3,7 +3,7 @@ FROM node:22-alpine AS deps
 
 WORKDIR /home/app
 
-COPY package*.json ./
+COPY package*.json .npmrc ./
 RUN npm ci
 
 # Stage 2 — build the app
@@ -37,5 +37,9 @@ RUN mkdir -p /home/app/.next/cache $CLOUD_PATH \
 USER appuser
 
 EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD python -c "import urllib.request, sys; \
+sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:3000/api/v1/health/live', timeout=3).status == 200 else sys.exit(1)" || exit 1
 
 CMD ["node", "server.js"]

@@ -9,4 +9,4 @@ process.env.MONGO_AUTH_SOURCE = mockEnvs.MONGO_AUTH_SOURCE;
 process.env.JWT_SECRET = mockEnvs.JWT_SECRET;
 process.env.EMAIL = mockEnvs.EMAIL;
 process.env.EMAIL_PASS = mockEnvs.EMAIL_PASS;
-process.env.CLOUDE_PATH = mockEnvs.CLOUDE_PATH;
+process.env.CLOUD_PATH = mockEnvs.CLOUD_PATH;

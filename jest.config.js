@@ -7,7 +7,11 @@ const config = {
   roots: ["<rootDir>/__tests__"],
   globalSetup: "<rootDir>/__tests__/jest.globalSetup.ts",
   globalTeardown: "<rootDir>/__tests__/jest.globalTeardown.ts",
-  setupFiles: ["<rootDir>/__tests__/jest.env.ts"],
+  setupFiles: [
+    "<rootDir>/__tests__/jest.polyfills.ts",
+    "<rootDir>/__tests__/jest.polyfills-undici.ts",
+    "<rootDir>/__tests__/jest.env.ts",
+  ],
   setupFilesAfterEnv: ["<rootDir>/__tests__/jest.setup.ts"],
   testMatch: ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],

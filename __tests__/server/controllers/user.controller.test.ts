@@ -16,6 +16,9 @@ jest.mock("@/server/configs/jwt.config", () => ({
     signJWT: jest.fn().mockResolvedValue("mock-token"),
   })),
 }));
+jest.mock("@/server/configs/env.config", () => ({
+  getEnvs: (): { ENV: string } => ({ ENV: "test" }),
+}));
 
 const buildRequest = (url: string, payloadData = mockUser): NextRequest =>
   new NextRequest(url, {
@@ -71,7 +74,7 @@ describe("user.controller", () => {
       expect(response.status).toBe(404);
     });
 
-    it("should return 200 with updated user data on success", async () => {
+    it("should return 200 with updated user data and set cookie on success", async () => {
       const updatedUser = { ...mockUser, plan: "1" };
       (UserService.changePlan as jest.Mock).mockResolvedValue(updatedUser);
       const req = buildRequest("http://localhost/api/v1/user/change_plan?plan=1");
@@ -81,6 +84,7 @@ describe("user.controller", () => {
 
       expect(response.status).toBe(200);
       expect(body.data.plan).toBe("1");
+      expect(response.cookies.get("token")?.value).toBe("mock-token");
     });
   });
 

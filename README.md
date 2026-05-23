@@ -56,17 +56,19 @@ The entire application (frontend, API, and file system operations) runs inside a
 #### Dependencies
 
 ```
+"@node-rs/bcrypt": "^1.10.0"
 "@reduxjs/toolkit": "^2.2.5"
-"bcryptjs": "^2.4.3"
 "jose": "^5.4.0"
 "mongoose": "^8.4.1"
+"next": "^16.2.6"
 "nodemailer": "^8.0.7"
-"next": "^16.0.0"
+"pino": "^10.3.1"
 "react": "^19.0.0"
 "react-dom": "^19.0.0"
 "react-icons": "^5.2.1"
 "react-redux": "^9.1.2"
 "sharp": "^0.34.4"
+"zod": "^4.4.3"
 ```
 
 #### devDependencies
@@ -78,17 +80,15 @@ The entire application (frontend, API, and file system operations) runs inside a
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/react": "^16.0.1"
 "@testing-library/user-event": "^14.5.2"
-"@types/bcryptjs": "^2.4.6"
 "@types/jest": "^30.0.0"
 "@types/node": "^22.0.0"
 "@types/nodemailer": "^6.4.15"
 "@types/react": "^19.2.14"
 "@types/react-dom": "^19.2.3"
 "@types/supertest": "^6.0.2"
-"supertest": "^7.0.0"
 "autoprefixer": "^10.4.18"
 "eslint": "^9.0.0"
-"eslint-config-next": "^16.0.0"
+"eslint-config-next": "^16.2.6"
 "eslint-config-prettier": "^9.0.0"
 "eslint-plugin-prettier": "^5.5.5"
 "eslint-plugin-react-hooks": "^5.0.0"
@@ -97,12 +97,16 @@ The entire application (frontend, API, and file system operations) runs inside a
 "jest": "^30.3.0"
 "jest-environment-jsdom": "^30.3.0"
 "lint-staged": "^15.0.0"
+"msw": "2.10.4"
+"pino-pretty": "^13.1.3"
 "postcss": "^8.5.10"
 "prettier": "^3.0.0"
+"supertest": "^7.0.0"
 "tailwindcss": "^3.4.1"
 "ts-jest": "^29.4.6"
 "typescript": "^5.2.2"
 "typescript-eslint": "^8.0.0"
+"undici": "7.25.0"
 ```
 
 ## Getting Started
@@ -111,7 +115,7 @@ With the stack in mind, here's how to spin up Nexdrive on your machine. Two path
 
 ### Prerequisites
 
-- [Node.js 20+](https://nodejs.org/)
+- [Node.js 22+](https://nodejs.org/)
 - [Docker](https://www.docker.com/) (optional, required for Docker setup)
 
 ### Environment variables
@@ -160,26 +164,43 @@ The application will be available at `http://localhost:3000`.
 
 The setup above relies on a fully-populated `.env`. Below is the reference for every variable — all keys are required unless marked optional.
 
-| Key                                 | Description                                                                                |
-| ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| `MONGO_HOST`                        | Hostname of the MongoDB instance (e.g. `nexdrive-db` inside Docker, `localhost` otherwise) |
-| `MONGO_PORT`                        | MongoDB port — default `27017`                                                             |
-| `MONGO_USER`                        | MongoDB root username                                                                      |
-| `MONGO_PASS`                        | MongoDB root password                                                                      |
-| `MONGO_DB_NAME`                     | Name of the database to use (e.g. `nexdrive_db`)                                           |
-| `MONGO_AUTH_SOURCE`                 | Authentication database — typically `admin`                                                |
-| `JWT_SECRET`                        | Secret used to sign and verify JWT tokens. Use a long random string in production.         |
-| `EMAIL`                             | Gmail address used to send verification and reset emails                                   |
-| `EMAIL_PASS`                        | Gmail App Password (not your account password — generate one in Google account settings)   |
-| `CLOUD_PATH`                        | Absolute path on the server where user files are stored (e.g. `/home/app/cloud`)           |
-| `NEXT_PUBLIC_APP_URL`               | Public base URL of the app, used for metadata (e.g. `http://localhost:3000`)               |
-| `NEXT_PUBLIC_API_URL`               | Base URL used to build links in emails and redirects (e.g. `http://localhost:3000`)        |
-| `NEXT_REDIRECT_IF_ROUTE_NOT_EXISTS` | Set to `true` to redirect to home on unknown routes                                        |
-| `WATCHPACK_POLLING`                 | _(optional)_ Set to `true` to fix hot reload under WSL2 / Docker on Windows                |
+| Key                                 | Description                                                                                                |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `MONGO_HOST`                        | Hostname of the MongoDB instance (e.g. `nexdrive-db` inside Docker, `localhost` otherwise)                 |
+| `MONGO_PORT`                        | MongoDB port — default `27017`                                                                             |
+| `MONGO_USER`                        | MongoDB root username                                                                                      |
+| `MONGO_PASS`                        | MongoDB root password                                                                                      |
+| `MONGO_DB_NAME`                     | Name of the database to use (e.g. `nexdrive_db`)                                                           |
+| `MONGO_AUTH_SOURCE`                 | Authentication database — typically `admin`                                                                |
+| `JWT_SECRET`                        | Secret used to sign and verify JWT tokens. Use a long random string in production.                         |
+| `EMAIL`                             | Gmail address used to send verification and reset emails                                                   |
+| `EMAIL_PASS`                        | Gmail App Password (not your account password — generate one in Google account settings)                   |
+| `CLOUD_PATH`                        | Absolute path on the server where user files are stored (e.g. `/home/app/cloud`)                           |
+| `NEXT_PUBLIC_APP_URL`               | Public base URL of the app, used for metadata (e.g. `http://localhost:3000`)                               |
+| `NEXT_PUBLIC_API_URL`               | Base URL used to build links in emails and redirects (e.g. `http://localhost:3000`)                        |
+| `NEXT_REDIRECT_IF_ROUTE_NOT_EXISTS` | Set to `true` to redirect to home on unknown routes                                                        |
+| `LOG_LEVEL`                         | _(optional)_ Pino log level — `fatal`, `error`, `warn`, `info`, `debug`, `trace`, `silent`. Default `info` |
+| `RATE_LIMIT_WINDOW_MS`              | _(optional)_ Rate-limit window in milliseconds. Default `900000` (15 min)                                  |
+| `RATE_LIMIT_MAX`                    | _(optional)_ Max requests per window per IP on rate-limited routes. `0` disables. Default `0`              |
+| `BODY_LIMIT`                        | _(optional)_ Max JSON/urlencoded body size (e.g. `100kb`, `1mb`, `1gb`). Default `1gb`                     |
+| `SEED_DEFAULT_DATA`                 | _(optional)_ Set to `true` to seed default data on startup. Default `false`                                |
+| `WATCHPACK_POLLING`                 | _(optional)_ Set to `true` to fix hot reload under WSL2 / Docker on Windows                                |
 
 Example `.env`:
 
 ```env
+SEED_DEFAULT_DATA=false
+
+# Logging (fatal | error | warn | info | debug | trace | silent)
+LOG_LEVEL=info
+
+# Rate limit (max=0 disables limiting; window in ms)
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=0
+
+# JSON / urlencoded body size limit (e.g. 100kb, 1mb, 1gb)
+BODY_LIMIT=1gb
+
 # Database
 MONGO_HOST=nexdrive-db
 MONGO_PORT=27017
@@ -208,6 +229,20 @@ CLOUD_PATH=/home/app/cloud
 ## API Reference
 
 With the app running and the environment configured, the following HTTP endpoints are exposed. Protected endpoints require a valid JWT — the token is read automatically from the `token` cookie (sent by the browser when `credentials: "include"` is used). External API clients may alternatively pass the token via the `Authorization` header. Auth endpoints (`/api/v1/auth/*`) are public and require no token.
+
+---
+
+- **Endpoint Name**: Health Live
+- **Endpoint Route**: /api/v1/health/live
+- **Endpoint Method**: GET
+- **Endpoint Fn**: Liveness probe. Returns 200 if the process is running. Used by Docker HEALTHCHECK and orchestrators.
+
+---
+
+- **Endpoint Name**: Health Ready
+- **Endpoint Route**: /api/v1/health/ready
+- **Endpoint Method**: GET
+- **Endpoint Fn**: Readiness probe. Returns 200 if the service and its dependencies (MongoDB) are ready to accept traffic. Returns 503 if any dependency is unavailable.
 
 ---
 
@@ -377,11 +412,61 @@ npm audit fix
 
 ### Authentication
 
-- Passwords are hashed with `bcryptjs` before being stored — plain-text passwords never touch the database.
-- JWT tokens are signed and verified with `jose` (HS256) using the `JWT_SECRET` env variable. Tokens expire after 30 days and are stored in a cookie named `token`.
-- `proxy.ts` (Next.js 16 middleware) intercepts every request before it reaches a route handler. For API routes it reads the JWT from the `Authorization` header or, if absent, from the `token` cookie, then verifies it and injects the decoded payload into a `payload` request header for controllers to consume. For page routes it redirects unauthenticated users to `/login` and authenticated users away from public pages.
+- Passwords are hashed with `@node-rs/bcrypt` (native N-API binding) before being stored — plain-text passwords never touch the database.
+- JWT tokens are signed and verified with `jose` (HS256) using the `JWT_SECRET` env variable. Tokens expire after 7 days, include `iss`/`aud` claims, and are stored in an HTTP-only, `SameSite=Lax` cookie named `token`.
+- `proxy.ts` (Next.js 16 middleware) intercepts every request before it reaches a route handler. For API routes it reads the JWT from the `Authorization: Bearer` header or, if absent, from the `token` cookie, then verifies it and injects the decoded payload into a `payload` request header for controllers to consume. For page routes it redirects unauthenticated users to `/login` and authenticated users away from public pages.
+- **CSRF protection** — non-safe HTTP methods (`POST`, `PUT`, `DELETE`, `PATCH`) on API routes are rejected with `403` if the `Origin` header does not match the request host.
+- **Rate limiting** — configurable per-IP rate limiting on sensitive routes (e.g. `/api/v1/auth/login`). Disabled by default (`RATE_LIMIT_MAX=0`).
+- **Input validation** — all request bodies and query parameters are validated with Zod schemas before reaching controller logic. Invalid input returns a structured `400` response.
+- **Security headers** — `next.config.ts` applies `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Strict-Transport-Security` (production only) on every response.
 - The `getSession()` server helper provides a typed session object to Server Components and API routes by reading and verifying the `token` cookie directly — no middleware round-trip needed.
 - The `getPayload()` helper reads the pre-verified payload injected by `proxy.ts`, so controllers never perform JWT verification themselves.
+
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch.
+
+### Pipeline overview
+
+```
+                      ┌─── PR or push to main ───┐
+                      ▼                           ▼
+┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+│   lint-and-audit     │─▶│       test       │─▶│      build       │
+│ eslint · prettier ·  │  │    jest (unit)   │  │  tsc + next build│
+│ tsc · npm audit      │  │                  │  │   (standalone)   │
+└──────────────────────┘  └──────────────────┘  └──────────────────┘
+                                                          │
+                                                          ▼
+                                                ┌──────────────────────┐
+                                                │     docker-build     │
+                                                │ dev · prod · nginx   │
+                                                │   (matrix, parallel) │
+                                                └──────────────────────┘
+```
+
+### Validation jobs
+
+1. **`lint-and-audit`** — `npm run lint` (ESLint), `npm run format:check` (Prettier), `npm run type-check` (TypeScript), `npm audit --audit-level=high`.
+2. **`test`** — installs dependencies and runs `npm test` (Jest).
+3. **`build`** — runs `npm run build` (`tsc` + `next build` standalone output). Dummy env vars are injected so the Zod env loader does not fail at build time.
+4. **`docker-build`** — builds all three Dockerfiles in parallel via a matrix strategy (`Dockerfile.development`, `Dockerfile.production`, `Dockerfile.nginx`). Images are built but not pushed.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run format:check
+npm run type-check
+npm audit --audit-level=high
+
+# test
+npm test
+
+# build
+npm run build
+```
 
 ## Production
 
@@ -432,6 +517,8 @@ docker compose -f prod.docker-compose.yml down
 
 > **Note:** The `CLOUD_PATH` directory where user files are stored must exist inside the container at runtime. Either pre-create it or ensure it is mounted as a volume so uploaded files persist across container restarts.
 
+The production image includes a `HEALTHCHECK` instruction that polls `/api/v1/health/live` every 30 seconds. Docker marks the container as unhealthy after 3 consecutive failures, which orchestrators can use to restart or replace the instance automatically.
+
 ### Nginx
 
 `nginx.conf` is configured with the following behaviour:
@@ -470,6 +557,6 @@ None at the moment.
 
 ```
 APP VERSION: 1.0.0
-README UPDATED: 10/05/2026
+README UPDATED: 23/05/2026
 AUTHOR: Diego Libonati
 ```

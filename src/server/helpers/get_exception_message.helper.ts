@@ -2,10 +2,16 @@ import mongoose from "mongoose";
 
 import type { ExceptionInfo } from "@/types/api";
 
+import { AppError } from "@/server/errors/app.error";
+
 import { CODES_ERROR, CODES_NOT } from "@/server/constants/codes.constant";
 import { MESSAGES_ERROR, MESSAGES_NOT } from "@/server/constants/messages.constant";
 
 export const getExceptionMessage = (e: unknown): ExceptionInfo => {
+  if (e instanceof AppError) {
+    return { status: e.status, code: e.code, message: e.message };
+  }
+
   if (e instanceof mongoose.Error.CastError) {
     return { status: 400, code: CODES_NOT.validId, message: MESSAGES_NOT.validId };
   }

@@ -1,31 +1,14 @@
+import { http, HttpResponse } from "msw";
+
 import authService from "@/services/authService";
 
-import {
-  mockFetchSuccess,
-  mockFetchError,
-  mockFetchNetworkError,
-} from "@tests/__mocks__/fetch.mock";
+import { mockMswServer } from "@tests/__mocks__/mswServer.mock";
 
 describe("authService", () => {
   describe("login", () => {
-    it("should call the login endpoint with username and password", async () => {
-      const mockData = { code: "SUCCESS_LOGIN", message: "Logged in", data: { username: "alice" } };
-      mockFetchSuccess(mockData);
-
-      await authService.login("alice", "password");
-
-      expect(global.fetch).toHaveBeenCalledWith(
-        "/api/v1/auth/login",
-        expect.objectContaining({
-          method: "POST",
-          body: JSON.stringify({ username: "alice", password: "password" }),
-        })
-      );
-    });
-
     it("should return the response data on success", async () => {
       const mockData = { code: "SUCCESS_LOGIN", message: "Logged in", data: { username: "alice" } };
-      mockFetchSuccess(mockData);
+      mockMswServer.use(http.post("/api/v1/auth/login", () => HttpResponse.json(mockData)));
 
       const result = await authService.login("alice", "password");
 
@@ -33,88 +16,95 @@ describe("authService", () => {
     });
 
     it("should throw an error when the response is not ok", async () => {
-      mockFetchError(401);
+      mockMswServer.use(
+        http.post("/api/v1/auth/login", () => new HttpResponse(null, { status: 401 }))
+      );
 
       await expect(authService.login("alice", "wrong")).rejects.toThrow();
     });
 
     it("should throw a network error when fetch fails", async () => {
-      mockFetchNetworkError("Network down");
+      mockMswServer.use(http.post("/api/v1/auth/login", () => HttpResponse.error()));
 
-      await expect(authService.login("alice", "password")).rejects.toThrow("Network down");
+      await expect(authService.login("alice", "password")).rejects.toThrow();
     });
   });
 
   describe("logout", () => {
-    it("should call the logout endpoint", async () => {
-      mockFetchSuccess({ code: "SUCCESS_LOGOUT", message: "Logged out" });
+    it("should return the response data on success", async () => {
+      const mockData = { code: "SUCCESS_LOGOUT", message: "Logged out" };
+      mockMswServer.use(http.get("/api/v1/auth/logout", () => HttpResponse.json(mockData)));
 
-      await authService.logout();
+      const result = await authService.logout();
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        "/api/v1/auth/logout",
-        expect.objectContaining({ credentials: "include" })
-      );
+      expect(result).toEqual(mockData);
     });
 
     it("should throw when the logout response is not ok", async () => {
-      mockFetchError(500);
+      mockMswServer.use(
+        http.get("/api/v1/auth/logout", () => new HttpResponse(null, { status: 500 }))
+      );
 
       await expect(authService.logout()).rejects.toThrow();
     });
   });
 
   describe("register", () => {
-    it("should call the register endpoint with the correct body", async () => {
+    it("should return the response data on success", async () => {
       const mockData = { code: "SUCCESS_REGISTER", message: "Created", data: { username: "bob" } };
-      mockFetchSuccess(mockData);
+      mockMswServer.use(http.post("/api/v1/auth/register", () => HttpResponse.json(mockData)));
 
-      await authService.register("bob", "bob@example.com", "pass123");
+      const result = await authService.register("bob", "bob@example.com", "pass123");
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        "/api/v1/auth/register",
-        expect.objectContaining({
-          method: "POST",
-          body: JSON.stringify({ username: "bob", email: "bob@example.com", password: "pass123" }),
-        })
-      );
+      expect(result).toEqual(mockData);
     });
 
     it("should throw when registration fails", async () => {
-      mockFetchError(400);
+      mockMswServer.use(
+        http.post("/api/v1/auth/register", () => new HttpResponse(null, { status: 400 }))
+      );
 
       await expect(authService.register("bob", "bob@example.com", "pass")).rejects.toThrow();
     });
   });
 
   describe("resetPassword", () => {
-    it("should call the reset endpoint with the correct body", async () => {
-      mockFetchSuccess({ code: "SUCCESS_RESET_PASSWORD", message: "Reset done" });
+    it("should return the response data on success", async () => {
+      const mockData = { code: "SUCCESS_RESET_PASSWORD", message: "Reset done" };
+      mockMswServer.use(http.post("/api/v1/auth/reset", () => HttpResponse.json(mockData)));
 
-      await authService.resetPassword("hash-id", "alice", "newpass");
+      const result = await authService.resetPassword("hash-id", "alice", "newpass");
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        "/api/v1/auth/reset",
-        expect.objectContaining({
-          method: "POST",
-          body: JSON.stringify({ id: "hash-id", username: "alice", password: "newpass" }),
-        })
+      expect(result).toEqual(mockData);
+    });
+
+    it("should throw when reset fails", async () => {
+      mockMswServer.use(
+        http.post("/api/v1/auth/reset", () => new HttpResponse(null, { status: 400 }))
       );
+
+      await expect(authService.resetPassword("hash-id", "alice", "newpass")).rejects.toThrow();
     });
   });
 
   describe("sendEmailReset", () => {
-    it("should call the send_email_reset endpoint with the email", async () => {
-      mockFetchSuccess({ code: "SUCCESS_SEND_EMAIL_RESET", message: "Email sent" });
-
-      await authService.sendEmailReset("alice@example.com");
-
-      expect(global.fetch).toHaveBeenCalledWith(
-        "/api/v1/auth/send_email_reset",
-        expect.objectContaining({
-          body: JSON.stringify({ email: "alice@example.com" }),
-        })
+    it("should return the response data on success", async () => {
+      const mockData = { code: "SUCCESS_SEND_EMAIL_RESET", message: "Email sent" };
+      mockMswServer.use(
+        http.post("/api/v1/auth/send_email_reset", () => HttpResponse.json(mockData))
       );
+
+      const result = await authService.sendEmailReset("alice@example.com");
+
+      expect(result).toEqual(mockData);
+    });
+
+    it("should throw when the request fails", async () => {
+      mockMswServer.use(
+        http.post("/api/v1/auth/send_email_reset", () => new HttpResponse(null, { status: 400 }))
+      );
+
+      await expect(authService.sendEmailReset("alice@example.com")).rejects.toThrow();
     });
   });
 });

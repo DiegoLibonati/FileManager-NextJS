@@ -12,6 +12,7 @@ describe("env.config", () => {
     process.env = {
       ...ORIGINAL_ENV,
       CLOUD_PATH: "/home/app/cloud",
+      NEXT_PUBLIC_APP_URL: "http://localhost:3000",
       NEXT_PUBLIC_API_URL: "http://localhost:3000",
     };
   });
@@ -29,6 +30,7 @@ describe("env.config", () => {
       expect(result.EMAIL).toBe("pepe@gmail.com");
       expect(result.CLOUD_PATH).toBe("/home/app/cloud");
       expect(result.NEXT_PUBLIC_API_URL).toBe("http://localhost:3000");
+      expect(result.NEXT_PUBLIC_APP_URL).toBe("http://localhost:3000");
       expect(result.DATABASE_URL).toContain("localhost");
       expect(result.DATABASE_URL).toContain("27018");
     });
@@ -54,7 +56,7 @@ describe("env.config", () => {
 
       const { getEnvs } = await import("@/server/configs/env.config");
 
-      expect(() => getEnvs()).toThrow("Missing required environment variable: JWT_SECRET");
+      expect(() => getEnvs()).toThrow("Invalid environment variables");
     });
   });
 });

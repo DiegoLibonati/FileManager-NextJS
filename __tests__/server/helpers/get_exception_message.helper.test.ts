@@ -7,10 +7,33 @@ import mongoose from "mongoose";
 import type { ExceptionInfo } from "@/types/api";
 
 import { getExceptionMessage } from "@/server/helpers/get_exception_message.helper";
+import { AppError } from "@/server/errors/app.error";
 import { CODES_ERROR, CODES_NOT } from "@/server/constants/codes.constant";
 import { MESSAGES_ERROR, MESSAGES_NOT } from "@/server/constants/messages.constant";
 
 describe("get_exception_message", () => {
+  describe("when the error is an AppError", () => {
+    it("should return the status, code and message from the AppError", () => {
+      const error = new AppError(400, "ERROR_VALIDATION", "Invalid input");
+
+      const result: ExceptionInfo = getExceptionMessage(error);
+
+      expect(result.status).toBe(400);
+      expect(result.code).toBe("ERROR_VALIDATION");
+      expect(result.message).toBe("Invalid input");
+    });
+
+    it("should handle AppError subclasses with different status codes", () => {
+      const error = new AppError(404, "ERROR_NOT_FOUND", "Not found");
+
+      const result: ExceptionInfo = getExceptionMessage(error);
+
+      expect(result.status).toBe(404);
+      expect(result.code).toBe("ERROR_NOT_FOUND");
+      expect(result.message).toBe("Not found");
+    });
+  });
+
   describe("when the error is a CastError", () => {
     it("should return status 400 with validId code and message", () => {
       const error = new mongoose.Error.CastError("ObjectId", "bad-id", "_id");

@@ -1,44 +1,52 @@
 import * as jose from "jose";
-import { cookies } from "next/headers";
 
 import type { JWTConfig } from "@/types/api";
 
-import { getEnvs } from "@/server/configs/env.config";
+import {
+  JWT_ALGORITHM,
+  JWT_AUDIENCE,
+  JWT_EXPIRATION,
+  JWT_ISSUER,
+} from "@/server/constants/vars.constant";
+
+let _secret: Uint8Array | null = null;
+
+const getJwtSecret = (): Uint8Array => {
+  if (_secret) return _secret;
+
+  const raw = process.env.JWT_SECRET;
+  if (!raw) {
+    throw new Error("Missing required environment variable: JWT_SECRET");
+  }
+
+  _secret = new TextEncoder().encode(raw);
+  return _secret;
+};
 
 export class Jwt {
   constructor(public config?: JWTConfig) {}
 
-  private get secret(): Uint8Array {
-    return new TextEncoder().encode(getEnvs().JWT_SECRET);
-  }
-
-  async signJWT(): Promise<string> {
-    try {
-      const token = await new jose.SignJWT((this.config?.payload ?? {}) as Record<string, unknown>)
-        .setProtectedHeader({ alg: "HS256" })
-        .setIssuedAt()
-        .setExpirationTime("30d")
-        .sign(this.secret);
-
-      const cookieStore = await cookies();
-      cookieStore.set(this.config?.cookieName ?? "", token);
-
-      return token;
-    } catch {
-      return "";
-    }
+  signJWT(): Promise<string> {
+    return new jose.SignJWT(this.config?.payload ?? {})
+      .setProtectedHeader({ alg: JWT_ALGORITHM })
+      .setIssuedAt()
+      .setIssuer(JWT_ISSUER)
+      .setAudience(JWT_AUDIENCE)
+      .setExpirationTime(JWT_EXPIRATION)
+      .sign(getJwtSecret());
   }
 
   async verifyJWT(): Promise<jose.JWTVerifyResult | false> {
+    if (!this.config?.token) return false;
+
     try {
-      return await jose.jwtVerify(this.config?.token ?? "", this.secret);
+      return await jose.jwtVerify(this.config.token, getJwtSecret(), {
+        algorithms: [JWT_ALGORITHM],
+        issuer: JWT_ISSUER,
+        audience: JWT_AUDIENCE,
+      });
     } catch {
       return false;
     }
-  }
-
-  async deleteCookieJWT(): Promise<void> {
-    const cookieStore = await cookies();
-    cookieStore.delete(this.config?.cookieName ?? "");
   }
 }

@@ -3,47 +3,76 @@
  */
 
 import { NextRequest } from "next/server";
-import { cookies } from "next/headers";
 
 import { proxy } from "@/proxy";
 
 import { Jwt } from "@/server/configs/jwt.config";
 
-jest.mock("next/headers");
 jest.mock("@/server/configs/jwt.config", () => ({
   Jwt: jest.fn().mockImplementation(() => ({
-    verifyJWT: jest.fn(),
-    config: {},
+    verifyJWT: jest.fn().mockResolvedValue(false),
   })),
 }));
-jest.mock("@/server/configs/env.config", () => ({
-  getEnvs: (): { JWT_SECRET: string } => ({ JWT_SECRET: "test-secret-key-for-jest" }),
-}));
 
-const buildRequest = (url: string, headers: Record<string, string> = {}): NextRequest =>
-  new NextRequest(url, { headers });
+const buildRequest = (
+  url: string,
+  options: { method?: string; headers?: Record<string, string> } = {}
+): NextRequest =>
+  new NextRequest(url, {
+    method: options.method ?? "GET",
+    headers: {
+      host: "localhost",
+      ...options.headers,
+    },
+  });
 
-const mockCookieStore = (tokenValue?: string): void => {
-  const store = {
-    get: jest.fn().mockReturnValue(tokenValue ? { value: tokenValue } : undefined),
-  };
-  (cookies as jest.Mock).mockResolvedValue(store);
+const mockValidToken = (): void => {
+  (Jwt as jest.Mock).mockImplementation(() => ({
+    verifyJWT: jest.fn().mockResolvedValue({ payload: { username: "alice" } }),
+  }));
+};
+
+const mockInvalidToken = (): void => {
+  (Jwt as jest.Mock).mockImplementation(() => ({
+    verifyJWT: jest.fn().mockResolvedValue(false),
+  }));
 };
 
 describe("proxy", () => {
-  describe("when the path is an API auth path", () => {
-    it("should allow the request through without token validation", async () => {
-      mockCookieStore();
-      const req = buildRequest("http://localhost/api/v1/auth/login");
+  beforeEach(() => {
+    mockInvalidToken();
+  });
+
+  describe("CSRF protection", () => {
+    it("should block cross-origin POST to API routes", async () => {
+      const req = buildRequest("http://localhost/api/v1/filemanager", {
+        method: "POST",
+        headers: { origin: "http://evil.com", host: "localhost" },
+      });
+
+      const response = await proxy(req);
+
+      expect(response.status).toBe(403);
+    });
+
+    it("should allow same-origin POST to API routes", async () => {
+      mockValidToken();
+      const req = buildRequest("http://localhost/api/v1/filemanager", {
+        method: "POST",
+        headers: {
+          origin: "http://localhost",
+          host: "localhost",
+          cookie: "token=valid-token",
+        },
+      });
 
       const response = await proxy(req);
 
       expect(response.status).toBe(200);
     });
 
-    it("should allow logout without a token", async () => {
-      mockCookieStore();
-      const req = buildRequest("http://localhost/api/v1/auth/logout");
+    it("should allow GET requests without origin check", async () => {
+      const req = buildRequest("http://localhost/api/v1/auth/login");
 
       const response = await proxy(req);
 
@@ -51,9 +80,34 @@ describe("proxy", () => {
     });
   });
 
-  describe("when the path is a protected API path", () => {
-    it("should return 401 when no authorization token is provided", async () => {
-      mockCookieStore();
+  describe("public API routes", () => {
+    it("should allow requests to auth routes without token", async () => {
+      const req = buildRequest("http://localhost/api/v1/auth/login");
+
+      const response = await proxy(req);
+
+      expect(response.status).toBe(200);
+    });
+
+    it("should allow requests to health routes without token", async () => {
+      const req = buildRequest("http://localhost/api/v1/health/live");
+
+      const response = await proxy(req);
+
+      expect(response.status).toBe(200);
+    });
+
+    it("should allow requests to alive route without token", async () => {
+      const req = buildRequest("http://localhost/api/v1/alive");
+
+      const response = await proxy(req);
+
+      expect(response.status).toBe(200);
+    });
+  });
+
+  describe("protected API routes", () => {
+    it("should return 401 when no token is provided", async () => {
       const req = buildRequest("http://localhost/api/v1/filemanager");
 
       const response = await proxy(req);
@@ -62,25 +116,31 @@ describe("proxy", () => {
     });
 
     it("should return 401 when the token is invalid", async () => {
-      mockCookieStore("invalid-token");
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue(false),
-        config: {},
-      }));
-      const req = buildRequest("http://localhost/api/v1/filemanager");
+      const req = buildRequest("http://localhost/api/v1/filemanager", {
+        headers: { cookie: "token=invalid-token" },
+      });
 
       const response = await proxy(req);
 
       expect(response.status).toBe(401);
     });
 
-    it("should forward the request when the token is valid", async () => {
-      mockCookieStore("valid-token");
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue({ payload: { username: "alice" } }),
-        config: {},
-      }));
-      const req = buildRequest("http://localhost/api/v1/filemanager");
+    it("should forward the request with payload header when token is valid", async () => {
+      mockValidToken();
+      const req = buildRequest("http://localhost/api/v1/filemanager", {
+        headers: { cookie: "token=valid-token" },
+      });
+
+      const response = await proxy(req);
+
+      expect(response.status).toBe(200);
+    });
+
+    it("should accept Bearer token from Authorization header", async () => {
+      mockValidToken();
+      const req = buildRequest("http://localhost/api/v1/filemanager", {
+        headers: { authorization: "Bearer valid-token" },
+      });
 
       const response = await proxy(req);
 
@@ -88,13 +148,8 @@ describe("proxy", () => {
     });
   });
 
-  describe("when the path is a public page", () => {
-    it("should allow access to /login without a token", async () => {
-      mockCookieStore();
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue(false),
-        config: {},
-      }));
+  describe("page routes", () => {
+    it("should allow unauthenticated access to /login", async () => {
       const req = buildRequest("http://localhost/login");
 
       const response = await proxy(req);
@@ -103,26 +158,18 @@ describe("proxy", () => {
     });
 
     it("should redirect authenticated users away from /login", async () => {
-      mockCookieStore("valid-token");
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue({ payload: { username: "alice" } }),
-        config: {},
-      }));
-      const req = buildRequest("http://localhost/login");
+      mockValidToken();
+      const req = buildRequest("http://localhost/login", {
+        headers: { cookie: "token=valid-token" },
+      });
 
       const response = await proxy(req);
 
       expect(response.status).toBe(307);
+      expect(response.headers.get("location")).toContain("/");
     });
-  });
 
-  describe("when the path is a protected page", () => {
-    it("should redirect unauthenticated users to /login", async () => {
-      mockCookieStore();
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue(false),
-        config: {},
-      }));
+    it("should redirect unauthenticated users to /login from protected pages", async () => {
       const req = buildRequest("http://localhost/");
 
       const response = await proxy(req);
@@ -132,12 +179,10 @@ describe("proxy", () => {
     });
 
     it("should allow authenticated users to access protected pages", async () => {
-      mockCookieStore("valid-token");
-      (Jwt as jest.Mock).mockImplementation(() => ({
-        verifyJWT: jest.fn().mockResolvedValue({ payload: { username: "alice" } }),
-        config: {},
-      }));
-      const req = buildRequest("http://localhost/");
+      mockValidToken();
+      const req = buildRequest("http://localhost/", {
+        headers: { cookie: "token=valid-token" },
+      });
 
       const response = await proxy(req);
 

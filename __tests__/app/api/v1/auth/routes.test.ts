@@ -15,7 +15,7 @@ import { POST as sendEmailPOST } from "@/app/api/v1/auth/send_email_reset/route"
 jest.mock("@/server/controllers/auth.controller", () => ({
   AuthController: {
     login: jest.fn().mockResolvedValue(new Response("{}", { status: 200 })),
-    logout: jest.fn().mockResolvedValue(new Response("{}", { status: 200 })),
+    logout: jest.fn().mockReturnValue(new Response("{}", { status: 200 })),
     register: jest.fn().mockResolvedValue(new Response("{}", { status: 200 })),
     verify: jest.fn().mockResolvedValue(new Response("{}", { status: 200 })),
     resetPassword: jest.fn().mockResolvedValue(new Response("{}", { status: 200 })),
@@ -26,8 +26,8 @@ jest.mock("@/server/controllers/auth.controller", () => ({
 const req = (): NextRequest => new NextRequest("http://localhost/api/v1/auth/test");
 
 describe("Auth route handlers", () => {
-  it("GET /auth/logout should delegate to AuthController.logout", async () => {
-    await logoutGET();
+  it("GET /auth/logout should delegate to AuthController.logout", () => {
+    logoutGET();
 
     expect(AuthController.logout).toHaveBeenCalledTimes(1);
   });

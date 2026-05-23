@@ -4,6 +4,19 @@ import type { AnchorHTMLAttributes, ReactNode } from "react";
 
 import "@testing-library/jest-dom";
 
+import { mockMswServer } from "@tests/__mocks__/mswServer.mock";
+
+const trackedMessageChannels = new Set<MessageChannel>();
+const OriginalMessageChannel = globalThis.MessageChannel;
+class TrackedMessageChannel extends OriginalMessageChannel {
+  constructor() {
+    super();
+    trackedMessageChannels.add(this);
+  }
+}
+
+globalThis.MessageChannel = TrackedMessageChannel;
+
 // Next.js's loadable runtime fires an async React state update when dynamic
 // imports resolve. This update escapes act() in both component tests (before
 // the act boundary closes) and server/node tests (no act context at all).
@@ -30,3 +43,20 @@ jest.mock("next/link", () => ({
     return createElement("a", { href, ...rest }, children);
   },
 }));
+
+beforeAll((): void => {
+  mockMswServer.listen({ onUnhandledRequest: "bypass" });
+});
+
+afterEach((): void => {
+  mockMswServer.resetHandlers();
+});
+
+afterAll((): void => {
+  mockMswServer.close();
+  trackedMessageChannels.forEach((channel): void => {
+    channel.port1.close();
+    channel.port2.close();
+  });
+  trackedMessageChannels.clear();
+});

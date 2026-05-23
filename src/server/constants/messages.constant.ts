@@ -15,9 +15,13 @@ export const MESSAGES_SUCCESS: MessagesSuccess = {
   getCategoryFiles: "Recent upload sent successfully!.",
   getFolders: "All directories sent successfully!.",
   getRecentUpload: "Recent upload sent successfully!.",
+  getSpaceUsed: "Space used sent successfully!.",
   changePlan: "Plan successfully changed!.",
   sendVerificationEmail: "Verification email sent successfully!.",
   getUserInfo: "User information successfully delivered!.",
+  healthLive: "Service is alive.",
+  healthReady: "Service is ready.",
+  alive: "Service is alive.",
 };
 
 export const MESSAGES_NOT: MessagesNot = {
@@ -27,8 +31,12 @@ export const MESSAGES_NOT: MessagesNot = {
 export const MESSAGES_ERROR: MessagesError = {
   generic: "Something went wrong.",
   unauthorized: "Unauthorized.",
+  forbidden: "Forbidden.",
+  rateLimit: "Too many requests. Please try again later.",
   invalidCredentials: "Invalid credentials.",
   notFound: "Not found.",
+  validation: "Validation failed.",
+  malformedBody: "Malformed JSON body.",
 };
 
 export const MESSAGES_VALIDATION: MessagesValidation = {

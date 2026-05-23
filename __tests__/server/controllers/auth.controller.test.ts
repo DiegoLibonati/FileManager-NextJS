@@ -8,23 +8,6 @@ import { AuthController } from "@/server/controllers/auth.controller";
 import { AuthService } from "@/server/services/auth.service";
 import { Jwt } from "@/server/configs/jwt.config";
 
-jest.mock("@/server/services/auth.service");
-jest.mock("@/server/configs/jwt.config", () => ({
-  Jwt: jest.fn().mockImplementation(() => ({
-    signJWT: jest.fn().mockResolvedValue("mock-token"),
-    deleteCookieJWT: jest.fn().mockResolvedValue(undefined),
-    verifyJWT: jest.fn().mockResolvedValue(false),
-  })),
-}));
-
-beforeEach(() => {
-  (Jwt as jest.Mock).mockImplementation(() => ({
-    signJWT: jest.fn().mockResolvedValue("mock-token"),
-    deleteCookieJWT: jest.fn().mockResolvedValue(undefined),
-    verifyJWT: jest.fn().mockResolvedValue(false),
-  }));
-});
-
 const mockUser = {
   _id: "507f1f77bcf86cd799439011",
   username: "alice",
@@ -33,12 +16,28 @@ const mockUser = {
   emailVerified: false,
 };
 
+jest.mock("@/server/services/auth.service");
+jest.mock("@/server/configs/jwt.config", () => ({
+  Jwt: jest.fn().mockImplementation(() => ({
+    signJWT: jest.fn().mockResolvedValue("mock-token"),
+  })),
+}));
+jest.mock("@/server/configs/env.config", () => ({
+  getEnvs: (): { ENV: string } => ({ ENV: "test" }),
+}));
+
 const buildRequest = (body: unknown, url = "http://localhost/api/v1/auth/login"): NextRequest =>
   new NextRequest(url, {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   });
+
+beforeEach(() => {
+  (Jwt as jest.Mock).mockImplementation(() => ({
+    signJWT: jest.fn().mockResolvedValue("mock-token"),
+  }));
+});
 
 describe("auth.controller", () => {
   describe("login", () => {
@@ -68,7 +67,7 @@ describe("auth.controller", () => {
       expect(response.status).toBe(400);
     });
 
-    it("should return 200 with user data on successful login", async () => {
+    it("should return 200 with user data and set cookie on successful login", async () => {
       (AuthService.validateLogin as jest.Mock).mockResolvedValue({ data: mockUser });
       const req = buildRequest({ username: "alice", password: "correct" });
 
@@ -77,12 +76,13 @@ describe("auth.controller", () => {
 
       expect(response.status).toBe(200);
       expect(body.data.username).toBe("alice");
+      expect(response.cookies.get("token")?.value).toBe("mock-token");
     });
   });
 
   describe("logout", () => {
-    it("should return 200 on successful logout", async () => {
-      const response = await AuthController.logout();
+    it("should return 200 on successful logout", () => {
+      const response = AuthController.logout();
 
       expect(response.status).toBe(200);
     });

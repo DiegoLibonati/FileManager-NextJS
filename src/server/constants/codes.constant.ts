@@ -19,6 +19,9 @@ export const CODES_SUCCESS: CodesSuccess = {
   changePlan: "SUCCESS_CHANGE_PLAN",
   sendVerificationEmail: "SUCCESS_SEND_VERIFICATION_EMAIL",
   getUserInfo: "SUCCESS_GET_USER_INFO",
+  healthLive: "SUCCESS_HEALTH_LIVE",
+  healthReady: "SUCCESS_HEALTH_READY",
+  alive: "SUCCESS_ALIVE",
 };
 
 export const CODES_NOT: CodesNot = {
@@ -28,7 +31,10 @@ export const CODES_NOT: CodesNot = {
 export const CODES_ERROR: CodesError = {
   generic: "ERROR_GENERIC",
   unauthorized: "ERROR_UNAUTHORIZED",
+  forbidden: "ERROR_FORBIDDEN",
+  rateLimit: "ERROR_RATE_LIMIT",
   invalidCredentials: "ERROR_INVALID_CREDENTIALS",
   notFound: "ERROR_NOT_FOUND",
   validation: "ERROR_VALIDATION",
+  malformedBody: "ERROR_MALFORMED_BODY",
 };

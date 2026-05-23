@@ -1,6 +1,6 @@
 import type { HydratedDocument } from "mongoose";
 import type { IUserDoc } from "@/types/api";
-import type { UserCreatePayload } from "@/types/payloads";
+import type { UserCreatePayload } from "@/types/api";
 
 import { connectDb } from "@/server/configs/mongo.config";
 

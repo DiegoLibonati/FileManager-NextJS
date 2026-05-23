@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 import type { HydratedDocument } from "mongoose";
 import type { IRecentFileDoc } from "@/types/api";
-import type { RecentFileCreatePayload } from "@/types/payloads";
+import type { RecentFileCreatePayload } from "@/types/api";
 
 import { RecentFileDAO } from "@/server/daos/recent_file.dao";
 import { connectDb } from "@/server/configs/mongo.config";

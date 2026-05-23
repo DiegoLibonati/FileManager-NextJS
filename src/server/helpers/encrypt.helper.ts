@@ -1,12 +1,11 @@
-import * as bcrypt from "bcryptjs";
+import { hash, verify } from "@node-rs/bcrypt";
 
 export class Encrypt {
   async cryptString(str: string): Promise<string> {
-    const salt = await bcrypt.genSalt(10);
-    return bcrypt.hash(str, salt);
+    return hash(str, 10);
   }
 
   async compareString(str: string, strEncrypted: string): Promise<boolean> {
-    return bcrypt.compare(str, strEncrypted);
+    return verify(str, strEncrypted);
   }
 }

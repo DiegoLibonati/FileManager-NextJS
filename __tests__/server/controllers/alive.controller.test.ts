@@ -3,22 +3,30 @@
  */
 
 import { AliveController } from "@/server/controllers/alive.controller";
+import { CODES_SUCCESS } from "@/server/constants/codes.constant";
+import { MESSAGES_SUCCESS } from "@/server/constants/messages.constant";
 
 describe("alive.controller", () => {
   describe("check", () => {
-    it("should return a 200 response", () => {
-      const response: Response = AliveController.check();
+    it("should return 200", () => {
+      const response = AliveController.check();
 
       expect(response.status).toBe(200);
     });
 
-    it("should return the author, name and version in the body", async () => {
-      const response: Response = AliveController.check();
-      const body = (await response.json()) as { author: string; name: string; version: string };
+    it("should return the correct response body with app metadata", async () => {
+      const response = AliveController.check();
+      const body = (await response.json()) as {
+        code: string;
+        message: string;
+        data: { author: string; name: string; version: string };
+      };
 
-      expect(body.author).toBe("Diego Libonati");
-      expect(body.name).toBe("Nexdrive");
-      expect(body.version).toBe("1.0.0");
+      expect(body.code).toBe(CODES_SUCCESS.alive);
+      expect(body.message).toBe(MESSAGES_SUCCESS.alive);
+      expect(body.data.author).toBe("Diego Libonati");
+      expect(body.data.name).toBe("Nexdrive");
+      expect(body.data.version).toBe("1.0.0");
     });
   });
 });

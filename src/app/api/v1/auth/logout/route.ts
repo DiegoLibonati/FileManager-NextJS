@@ -1,6 +1,8 @@
+import type { NextResponse } from "next/server";
+
 import { AuthController } from "@/server/controllers/auth.controller";
 
-export async function GET(): Promise<Response> {
+export function GET(): NextResponse {
   return AuthController.logout();
 }
 
