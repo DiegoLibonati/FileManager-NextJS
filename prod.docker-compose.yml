@@ -19,6 +19,8 @@ services:
       dockerfile: Dockerfile.production
     restart: always
     env_file: .env
+    environment:
+      MONGO_HOST: nexdrive-db
     depends_on:
       nexdrive-db:
         condition: service_healthy

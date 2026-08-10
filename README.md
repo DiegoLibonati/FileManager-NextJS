@@ -116,7 +116,9 @@ With the stack in mind, here's how to spin up Nexdrive on your machine. Two path
 ### Prerequisites
 
 - [Node.js 22+](https://nodejs.org/)
-- [Docker](https://www.docker.com/) (optional, required for Docker setup)
+- [Docker](https://www.docker.com/) — optional. It is only needed for the Docker setup and to spin up the test database automatically; everything else runs with plain `npm`.
+
+`.env.example` ships with `MONGO_HOST=localhost`, so the same file works in both modes: without Docker it points at a MongoDB on your machine, and the Compose files override it with the `nexdrive-db` service name when the app runs inside a container. You never have to edit `.env` when switching between the two.
 
 ### Environment variables
 
@@ -130,7 +132,7 @@ cp .env.example .env
 
 ### Without Docker
 
-> Requires a running MongoDB instance. Update `MONGO_HOST`, `MONGO_PORT`, and credentials in `.env` to point to it.
+> Requires a running MongoDB instance reachable at `MONGO_HOST:MONGO_PORT` (`localhost:27017` by default). Point it at your own `mongod`, or start just the database container with `docker compose -f dev.docker-compose.yml up -d nexdrive-db` and leave the app on the host.
 
 1. Install dependencies:
 
@@ -158,33 +160,33 @@ The application will be available at `http://localhost:3000`.
 
 The application will be available at `http://localhost:3000`.
 
-> **WSL2 users:** Uncomment `WATCHPACK_POLLING=true` in `.env` if hot reload is not working.
+> **WSL2 users:** nothing to uncomment — `dev.docker-compose.yml` already sets `WATCHPACK_POLLING=true` inside the container, which is the only place it matters.
 
 ## Env Keys
 
 The setup above relies on a fully-populated `.env`. Below is the reference for every variable — all keys are required unless marked optional.
 
-| Key                                 | Description                                                                                                |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `MONGO_HOST`                        | Hostname of the MongoDB instance (e.g. `nexdrive-db` inside Docker, `localhost` otherwise)                 |
-| `MONGO_PORT`                        | MongoDB port — default `27017`                                                                             |
-| `MONGO_USER`                        | MongoDB root username                                                                                      |
-| `MONGO_PASS`                        | MongoDB root password                                                                                      |
-| `MONGO_DB_NAME`                     | Name of the database to use (e.g. `nexdrive_db`)                                                           |
-| `MONGO_AUTH_SOURCE`                 | Authentication database — typically `admin`                                                                |
-| `JWT_SECRET`                        | Secret used to sign and verify JWT tokens. Use a long random string in production.                         |
-| `EMAIL`                             | Gmail address used to send verification and reset emails                                                   |
-| `EMAIL_PASS`                        | Gmail App Password (not your account password — generate one in Google account settings)                   |
-| `CLOUD_PATH`                        | Absolute path on the server where user files are stored (e.g. `/home/app/cloud`)                           |
-| `NEXT_PUBLIC_APP_URL`               | Public base URL of the app, used for metadata (e.g. `http://localhost:3000`)                               |
-| `NEXT_PUBLIC_API_URL`               | Base URL used to build links in emails and redirects (e.g. `http://localhost:3000`)                        |
-| `NEXT_REDIRECT_IF_ROUTE_NOT_EXISTS` | Set to `true` to redirect to home on unknown routes                                                        |
-| `LOG_LEVEL`                         | _(optional)_ Pino log level — `fatal`, `error`, `warn`, `info`, `debug`, `trace`, `silent`. Default `info` |
-| `RATE_LIMIT_WINDOW_MS`              | _(optional)_ Rate-limit window in milliseconds. Default `900000` (15 min)                                  |
-| `RATE_LIMIT_MAX`                    | _(optional)_ Max requests per window per IP on rate-limited routes. `0` disables. Default `0`              |
-| `BODY_LIMIT`                        | _(optional)_ Max JSON/urlencoded body size (e.g. `100kb`, `1mb`, `1gb`). Default `1gb`                     |
-| `SEED_DEFAULT_DATA`                 | _(optional)_ Set to `true` to seed default data on startup. Default `false`                                |
-| `WATCHPACK_POLLING`                 | _(optional)_ Set to `true` to fix hot reload under WSL2 / Docker on Windows                                |
+| Key                                 | Description                                                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `MONGO_HOST`                        | Hostname of the MongoDB instance — keep `localhost`, Compose overrides it with `nexdrive-db`                                 |
+| `MONGO_PORT`                        | MongoDB port — default `27017`                                                                                               |
+| `MONGO_USER`                        | MongoDB root username                                                                                                        |
+| `MONGO_PASS`                        | MongoDB root password                                                                                                        |
+| `MONGO_DB_NAME`                     | Name of the database to use (e.g. `nexdrive_db`)                                                                             |
+| `MONGO_AUTH_SOURCE`                 | Authentication database — typically `admin`                                                                                  |
+| `JWT_SECRET`                        | Secret used to sign and verify JWT tokens. Use a long random string in production.                                           |
+| `EMAIL`                             | Gmail address used to send verification and reset emails                                                                     |
+| `EMAIL_PASS`                        | Gmail App Password (not your account password — generate one in Google account settings)                                     |
+| `CLOUD_PATH`                        | Absolute path on the server where user files are stored (e.g. `/home/app/cloud`)                                             |
+| `NEXT_PUBLIC_APP_URL`               | Public base URL of the app, used for metadata (e.g. `http://localhost:3000`)                                                 |
+| `NEXT_PUBLIC_API_URL`               | Base URL used to build links in emails and redirects (e.g. `http://localhost:3000`)                                          |
+| `NEXT_REDIRECT_IF_ROUTE_NOT_EXISTS` | Set to `true` to redirect to home on unknown routes                                                                          |
+| `LOG_LEVEL`                         | _(optional)_ Pino log level — `fatal`, `error`, `warn`, `info`, `debug`, `trace`, `silent`. Default `info`                   |
+| `RATE_LIMIT_WINDOW_MS`              | _(optional)_ Rate-limit window in milliseconds. Default `900000` (15 min)                                                    |
+| `RATE_LIMIT_MAX`                    | _(optional)_ Max requests per window per IP on rate-limited routes. `0` disables. Default `0`                                |
+| `BODY_LIMIT`                        | _(optional)_ Max JSON/urlencoded body size (e.g. `100kb`, `1mb`, `1gb`). Default `1gb`                                       |
+| `SEED_DEFAULT_DATA`                 | _(optional)_ Set to `true` to seed default data on startup. Default `false`                                                  |
+| `WATCHPACK_POLLING`                 | _(optional)_ Hot reload under WSL2 / Docker on Windows — set automatically by `dev.docker-compose.yml`; Turbopack ignores it |
 
 Example `.env`:
 
@@ -202,7 +204,9 @@ RATE_LIMIT_MAX=0
 BODY_LIMIT=1gb
 
 # Database
-MONGO_HOST=nexdrive-db
+# `localhost` keeps `npm run dev` working without Docker. The Compose files
+# override MONGO_HOST with the `nexdrive-db` service name.
+MONGO_HOST=localhost
 MONGO_PORT=27017
 MONGO_USER=root
 MONGO_PASS=pass
@@ -222,7 +226,8 @@ EMAIL_PASS=xxxx xxxx xxxx xxxx
 
 CLOUD_PATH=/home/app/cloud
 
-# Uncomment if running inside Docker on WSL2
+# Docker-only knob. dev.docker-compose.yml already sets it inside the container,
+# and Turbopack (`npm run dev`) ignores it — leave it commented out.
 # WATCHPACK_POLLING=true
 ```
 
@@ -392,6 +397,30 @@ For coverage report:
 npm run test:coverage
 ```
 
+### How the test database is resolved
+
+The suite needs a MongoDB listening on `localhost:27018` with the credentials declared in `__tests__/__mocks__/envs.mock.ts` (user `root`, password `pass`, database `boilerplate_db`). Those exact values are hardcoded in `test.docker-compose.yml`, so the container and the tests can never drift apart. `__tests__/jest.globalSetup.ts` resolves the database in this order:
+
+1. **`SKIP_TEST_DB=true`** — Docker is never invoked; the suite assumes you already have a MongoDB on `localhost:27018`.
+2. **TCP probe** — if something is already listening on `localhost:27018`, it is reused as-is and logs `Reusing the MongoDB already listening on ...`.
+3. **`docker compose -f test.docker-compose.yml up -d --wait`** — only if the port is closed. If Docker is unavailable, the run fails with instructions instead of a connection timeout.
+
+Teardown mirrors that: the container is removed **only** when this same run started it. A database started by anything else (a long-lived container, a local `mongod`, a CI service container) survives the run.
+
+Fast feedback loop — start the database once and keep re-running the suite against it:
+
+```bash
+docker compose -f test.docker-compose.yml up -d --wait   # once
+npm test                                                 # as many times as you want
+docker compose -f test.docker-compose.yml down -v        # when you are done
+```
+
+Without Docker, point any MongoDB at `localhost:27018` with the credentials above and run:
+
+```bash
+SKIP_TEST_DB=true npm test
+```
+
 ## Security Audit
 
 Once tests pass, audit the dependency tree and review the auth model that protects the app at runtime.
@@ -488,6 +517,7 @@ Nginx is the only container with a published port (`8080`). The app and database
 
 The same `.env` from [Env Keys](#env-keys) is used. Before deploying, harden the following keys for the public environment:
 
+- Leave `MONGO_HOST=localhost` — `prod.docker-compose.yml` overrides it with the `nexdrive-db` service name, so it must not be edited for Docker
 - Set `JWT_SECRET` to a long, random string — never reuse the dev value
 - Set `NEXT_PUBLIC_APP_URL` and `NEXT_PUBLIC_API_URL` to the public domain or IP (e.g. `http://yourdomain.com:8080`)
 - Set `CLOUD_PATH` to an absolute path that will be accessible inside the `nexdrive-app` container

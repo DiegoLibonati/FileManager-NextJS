@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile.development
     restart: unless-stopped
     env_file: .env
+    environment:
+      MONGO_HOST: nexdrive-db
+      WATCHPACK_POLLING: "true"
     volumes:
       - .:/home/app
       - /home/app/node_modules
